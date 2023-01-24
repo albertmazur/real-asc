@@ -17,12 +17,11 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->longText("contents");
+            $table->longText("content");
             $table->date("date");
             $table->time("time");
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
-            $table->timestamps();
         });
     }
 

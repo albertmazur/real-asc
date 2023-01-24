@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("number");
             $table->date("dateBuy");
             $table->time("timeBuy");
+            $table->enum("state", ["Kupiony", "Zwrócony"]);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
             $table->timestamps();

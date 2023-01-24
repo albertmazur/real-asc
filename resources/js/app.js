@@ -1,9 +1,21 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-window.Alpine = Alpine;
+let countTickets = document.getElementById("countTickets")
+if(countTickets !== null && countTickets !== 'undefined'){
+    countTickets.addEventListener("input", function(e){
+        let price = parseFloat(document.getElementById("priceEvent").textContent)
+        let sumPrice = parseInt(e.target.value)*price
+        document.getElementById("sumPrice").textContent = sumPrice.toFixed(2)
+    })
+}
 
-Alpine.plugin(focus);
+let reportButton = document.querySelectorAll(".reportButton")
+if(reportButton !== null && reportButton !== 'undefined'){
+    reportButton.forEach(element => {
+        element.addEventListener("click", function(e){
+            document.getElementById("registrationComment").style.display = "block"
+            document.getElementById("comment_id").value = e.target.value
+        })
+    });
+}
 
-Alpine.start();

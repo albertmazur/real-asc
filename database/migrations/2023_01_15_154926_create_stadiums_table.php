@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("city");
             $table->string("street");
-            $table->string("numberBuidling");
+            $table->string("numberBuilding");
             $table->integer("places");
             $table->timestamps();
         });

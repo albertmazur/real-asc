@@ -9,6 +9,8 @@ class Event extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'date', 'time', 'price', 'stadium_id'];
+
     public function stadium(){
         return $this->belongsTo(Stadium::class);
     }
@@ -17,7 +19,12 @@ class Event extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function commentsSort(){
+        return $this->comments()->orderByDesc("date")->orderByDesc("time")->get();
+    }
+
     public function tickets(){
         return $this->hasMany(Ticket::class);
     }
+
 }

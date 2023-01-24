@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env("APP_LOCALE", 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,9 +194,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
 
+
+        App\Providers\EventStadiumServiceProvider::class,
+        App\Providers\CommentServiceProvider::class,
+        App\Providers\TicketServiceProvider::class,
+        App\Providers\SubmissionServiceProvider::class,
+        App\Providers\StadiumServiceProvider::class,
     ],
 
     /*
