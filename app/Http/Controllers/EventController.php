@@ -135,7 +135,7 @@ class EventController extends Controller
     }
 
     public function welcome(){
-        return view("main", ["closestTimeEvent" => $this->eventRepository->orderByData(5), "mostComentEvent" => $this->eventRepository->mostComment(5)]);
+        return view("main", ["closestTimeEvent" => $this->eventRepository->orderByData(4), "mostComentEvent" => $this->eventRepository->mostComment(4)]);
     }
 
 }

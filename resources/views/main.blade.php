@@ -29,7 +29,7 @@
 
     <div class="mt-4 pt-4 bg-white shadow-sm rounded">
         <h4 class="text-center">Najblisze wydarzenia</h4>
-        <div class="d-flex">
+        <div class="d-flex flex-wrap justify-content-center">
             @foreach ($closestTimeEvent as $event)
             @include("events.card")
         @endforeach
@@ -38,7 +38,7 @@
 
     <div class="mt-4 pt-4 bg-white shadow-sm rounded">
         <h4 class="text-center">Najczęsciej komentowane wydarzenia</h4>
-        <div class="d-flex">
+        <div class="d-flex flex-wrap justify-content-center">
             @foreach ($mostComentEvent as $event)
             @include("events.card")
         @endforeach
