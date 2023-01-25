@@ -2,13 +2,17 @@
 
 @section('content')
     @include("elemnts.errors")
-    <div class="bg-primary bg-gradient p-2 rounded">
-        <h1 class="text-center">{{$event->name}}</h1>
-        <h2 class="text-center">{{$event->date}} {{$event->time}}</h2>
-        <p class="text-center">{{$event->description}}</p>
-        <div class="mt-2">
-            <p class="text-center">Stadion: {{$event->stadium->name}}</p>
-            <p class="text-center">Adres: {{$event->stadium->city}} ul.{{$event->stadium->street}}, {{$event->stadium->numberBuilding}}</p>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center">{{$event->name}}</h1>
+        </div>
+        <div class="card-body">
+            <h4 class="text-center">{{$event->date}} {{$event->time}}</h4>
+            <p class="text-center">{{$event->description}}</p>
+            <div class="mt-2">
+                <p class="text-center">Stadion: {{$event->stadium->name}}</p>
+                <p class="text-center">Adres: {{$event->stadium->city}} ul.{{$event->stadium->street}}, {{$event->stadium->numberBuilding}}</p>
+            </div>
         </div>
     </div>
 
