@@ -26,7 +26,7 @@ class TicketController extends Controller
      */
     public function index(Request $request){
         $sortEventSearch = $request->get("sortEventSearch") ?? -2;
-        $tickets = $this->ticketRepository->myTickets(Auth::id(), $sortEventSearch);
+        $tickets = $this->ticketRepository->myTickets($sortEventSearch, "Kupiony");
         return view("dashboard.client.ticket", ["sortEventSearch" => $sortEventSearch, "events" => Event::all(), "tickets" => $tickets, "now" => Carbon::now(), "option" => true]);
     }
 
@@ -103,7 +103,7 @@ class TicketController extends Controller
     public function history(Request $request){
         if (Gate::allows('client', Auth::user())) {
             $sortEventSearch = $request->get("sortEventSearch") ?? -2;
-            $tickets = $this->ticketRepository->myTickets(Auth::id(), $sortEventSearch);
+            $tickets = $this->ticketRepository->myTickets($sortEventSearch);
             return view("dashboard.client.historyTicket", ["sortEventSearch" => $sortEventSearch, "events" => Event::all(), "tickets" => $tickets, "option" => false]);
         }
         else abort(403);

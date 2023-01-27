@@ -86,7 +86,7 @@ class StadiumController extends Controller
         if (Gate::allows('admin', Auth::user())) {
             $date = $request->validated();
             $this->stadiumRepository->update($date["id"], $date["name"], $date["city"], $date["street"], $date["numberBuilding"], $date["places"],);
-            return redirect()->route("stadium.index");
+            return redirect()->route("stadium.index")->with("success", "Zapisano zmiany");;
         }
         else abort(403);
     }

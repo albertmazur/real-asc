@@ -32,9 +32,13 @@ class TicketRepository implements Repository{
         return $this->ticketModel->find($id);
     }
 
-    public function myTickets(int $idUser, $sortEventSearch): Collection{
-        $query = $this->ticketModel->where("user_id", "=", $idUser)->where("state", "=", "Kupiony");
+    public function myTickets(int $sortEventSearch, string $how = "All"): Collection{
+        $query = $this->ticketModel->where("user_id", "=", Auth::id());
+
         if($sortEventSearch != -2) $query = $query->where("event_id", "=", $sortEventSearch);
+
+        if($how == "Kupiony") $query = $query->where("state", "=", "Kupiony");
+        if($how == "Zwrócony") $query = $query->where("state", "=", "Zwrócony");
         return $query->get();
     }
 
