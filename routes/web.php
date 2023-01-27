@@ -68,7 +68,7 @@ Route::middleware(["auth"])->group(function (){
         Route::get('index', [TicketController::class, 'index'])->name("index");
         Route::post('store', [TicketController::class, 'store'])->name("store");
         Route::get('history', [TicketController::class, 'history'])->name("history");
-        Route::put('back', [TicketController::class, 'back'])->name("back");
+        Route::put('back', [TicketController::class, 'backTicket'])->name("back");
     });
 
     Route::group([
