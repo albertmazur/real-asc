@@ -9,7 +9,6 @@ use App\Repository\EventRepository;
 use App\Repository\StadiumRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -28,7 +27,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private function viewList(Request $request, string $r){
+    private function viewList(Request $request, string $link){
         $name = $request->get("nameSearch");
         $sort = $request->get("sortSearch") ?? "name";
 
@@ -44,8 +43,8 @@ class EventController extends Controller
         if($sort=="freeSet") $result = $result->sortBy('freeSet');
         $resultPaginator->setCollection($result);
         $resultPaginator->appends(["nameSearch" => $name, "sortSearch" => $sort]);
-        if($r=="dashboard.admin.event") return view($r, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort, "stadiums" => $this->stadiumRepository->all()]);
-        else return view($r, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort]);
+        if($link=="dashboard.admin.event") return view($link, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort, "stadiums" => $this->stadiumRepository->all()]);
+        else return view($link, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort]);
     }
 
     public function index(Request $request){

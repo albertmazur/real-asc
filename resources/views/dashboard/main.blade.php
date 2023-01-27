@@ -6,5 +6,9 @@
     @elseif (Auth::user()->role === "client") @include("dashboard.client.nav")
     @endif
 
-    @yield('dashboard.content')
+    @hasSection('dashboard.content')
+        @yield('dashboard.content')
+    @else
+        <h1 class="text-center">Witam w panelu {{ config('app.name', 'Club') }}</h1>
+    @endif
 @endsection

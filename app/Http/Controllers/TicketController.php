@@ -109,7 +109,7 @@ class TicketController extends Controller
         else abort(403);
     }
 
-    public function back(Request $request){
+    public function backTicket(Request $request){
         if(Gate::allows('client', Auth::user())){
             $id = $request->get("id");
             $f = $this->ticketRepository->backTicket($id);
