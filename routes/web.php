@@ -38,7 +38,8 @@ Route::group([
     Route::post('store', [SubmissionController::class, 'store'])->name("store");
 });
 
-Route::middleware(["auth"])->group(function (){
+Route::middleware(["auth", "verified"])->group(function (){
+
     Route::group([
         "prefix" => "event",
         "namespace" => "event",
@@ -104,4 +105,4 @@ Route::middleware(["auth"])->group(function (){
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
-Auth::routes();
+Auth::routes(["verify" => true]);
