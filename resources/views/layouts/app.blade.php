@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{asset("storage/icon.png")}}">
+    <link rel="icon" href="{{ asset("images/logo.ico") }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Club') }}
+                    <img src="{{ asset("images/logo.ico")}}" alt="Logo" width="80" />
                 </a>
                 <a class="nav-link" href="{{ route("event.index") }}">{{ __("Wydarzenia") }}</a>
 

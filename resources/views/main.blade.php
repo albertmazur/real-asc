@@ -7,13 +7,13 @@
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="{{ asset("stadium/stadium1.jpg") }}" class=" w-100 h-50 rounded object-fit-cover" alt="Stadium">
+                <img src="{{ asset("images/stadium/stadium1.webp") }}" class=" w-100 h-50 rounded object-fit-cover" alt="{{ __("Stadion") }}">
               </div>
               <div class="carousel-item">
-                <img src="{{ asset("stadium/stadium2.jpg") }}" class="d-block w-100 h-50 rounded object-fit-cover" alt="Stadium">
+                <img src="{{ asset("images/stadium/stadium2.webp") }}" class="d-block w-100 h-50 rounded object-fit-cover" alt="{{ __("Stadion") }}">
               </div>
               <div class="carousel-item">
-                <img src="{{ asset("stadium/stadium3.jpg") }}" class="d-block w-100 h-50 rounded object-fit-cover" alt="Stadium">
+                <img src="{{ asset("images/stadium/stadium3.webp") }}" class="d-block w-100 h-50 rounded object-fit-cover" alt="{{ __("Stadion") }}">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
