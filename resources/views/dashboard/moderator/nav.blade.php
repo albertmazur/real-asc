@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="{{ __("Przełącz nawigację") }}">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{route("submission.index")}}">Zgłoszenia</a>
+            <a class="nav-link" href="{{ route("submission.index") }}">{{ __("Zgłoszenia") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route("comment.index")}}">Komentarze</a>
+            <a class="nav-link" href="{{ route("comment.index") }}">{{ __("Komentarze") }}</a>
           </li>
         </ul>
       </div>
