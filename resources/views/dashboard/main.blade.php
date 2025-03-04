@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
     @if (Auth::user()->role === "admin") @include("dashboard.admin.nav")
