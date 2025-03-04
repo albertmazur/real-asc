@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="main">
-        <h1 class="text-center">{{ __('Witaj w klubie') }} {{ config('app.name', 'Club') }}</h1>
+        <h1 class="text-center mb-4">{{ __('Witaj w klubie') }} {{ config('app.name', 'Club') }}</h1>
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">

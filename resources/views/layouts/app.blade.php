@@ -74,7 +74,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             <div class="container">
                 @include("layouts.shaderd.messages")
                 @yield('content')
