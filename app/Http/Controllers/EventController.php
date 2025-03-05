@@ -48,7 +48,7 @@ class EventController extends Controller
     }
 
     public function index(Request $request){
-        return $this->viewList($request, "events.list");
+        return $this->viewList($request, "event.list");
     }
 
     /**
@@ -90,7 +90,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(int $eventId){
-        return view("events.show", ["event" => $this->eventRepository->get($eventId), "dateNotBuy" => Carbon::now()->addDays(3)]);
+        return view("event.show", ["event" => $this->eventRepository->get($eventId), "dateNotBuy" => Carbon::now()->addDays(3)]);
     }
 
     /**

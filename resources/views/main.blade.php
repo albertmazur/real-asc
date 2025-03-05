@@ -31,7 +31,7 @@
         <h4 class="text-center">{{ __("Najblisze wydarzenia") }}</h4>
         <div class="d-flex flex-wrap justify-content-center">
             @foreach ($closestTimeEvent as $event)
-            @include("events.card")
+            @include("event.card")
         @endforeach
         </div>
     </div>
@@ -40,7 +40,7 @@
         <h4 class="text-center">{{ __("Najczęsciej komentowane wydarzenia") }}</h4>
         <div class="d-flex flex-wrap justify-content-center">
             @foreach ($mostComentEvent as $event)
-            @include("events.card")
+            @include("event.card")
         @endforeach
         </div>
     </div>
