@@ -24,11 +24,11 @@ class StoreStadiumRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => ["required" , "string"],
-            "city" => ["required" , "string"],
-            "street" => ["required" , "string"],
-            "numberBuilding" => ["required" , "string"],
-            "places" => ["required" , "integer", "min:0"],
+            'name' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'numberBuilding' => ['required', 'string'],
+            'places' => ['required', 'integer', 'min:0'],
         ];
     }
 }

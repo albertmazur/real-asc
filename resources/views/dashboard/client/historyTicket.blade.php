@@ -2,7 +2,7 @@
 
 @section('dashboard.content')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <form action="{{ route("ticket.history") }}" method="get">
+        <form action="{{ route('ticket.history') }}" method="get">
             <div class="mb-3">
                 <label for="sortEventSearch" class="form-label">{{ __('app.event') }}</label>
                 <select name="sortEventSearch" class="form-select" aria-label="{{ __('dashboard.event.select') }}">

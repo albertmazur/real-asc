@@ -25,9 +25,15 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        $sortEventSearch = $request->get("sortEventSearch") ?? -2;
-        $tickets = $this->ticketRepository->myTickets($sortEventSearch, "Kupiony");
-        return view("dashboard.client.ticket", ["sortEventSearch" => $sortEventSearch, "events" => Event::all(), "tickets" => $tickets, "now" => Carbon::now(), "option" => true]);
+        $sortEventSearch = $request->get('sortEventSearch') ?? -2;
+        $tickets = $this->ticketRepository->myTickets($sortEventSearch, 'Kupiony');
+        return view('dashboard.client.ticket', [
+            'sortEventSearch' => $sortEventSearch,
+            'events' => Event::all(),
+            'tickets' => $tickets,
+            'now' => Carbon::now(),
+            'option' => true
+        ]);
     }
 
     /**
@@ -49,8 +55,8 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request){
         if (Gate::allows('client', Auth::user())) {
             $date = $request->validated();
-            $this->ticketRepository->add($date["countTickets"], $date["event_id"]);
-            return back()->with("success", "Udało się kupić");
+            $this->ticketRepository->add($date['countTickets'], $date['event_id']);
+            return back()->with('success', __('app.success_buy_ticket'));
         }
         else abort(403);
     }
@@ -102,27 +108,32 @@ class TicketController extends Controller
 
     public function history(Request $request){
         if (Gate::allows('client', Auth::user())) {
-            $sortEventSearch = $request->get("sortEventSearch") ?? -2;
+            $sortEventSearch = $request->get('sortEventSearch') ?? -2;
             $tickets = $this->ticketRepository->myTickets($sortEventSearch);
-            return view("dashboard.client.historyTicket", ["sortEventSearch" => $sortEventSearch, "events" => Event::all(), "tickets" => $tickets, "option" => false]);
+            return view('dashboard.client.historyTicket', [
+                'sortEventSearch' => $sortEventSearch,
+                'events' => Event::all(),
+                'tickets' => $tickets,
+                'option' => false
+            ]);
         }
         else abort(403);
     }
 
     public function backTicket(Request $request){
         if(Gate::allows('client', Auth::user())){
-            $id = $request->get("id");
+            $id = $request->get('id');
             $f = $this->ticketRepository->backTicket($id);
 
-            $p = "";
-            $message = "";
+            $p = '';
+            $message = '';
             if($f){
-                $p ="success";
-                $message = "Udało się zwróćić";
+                $p ='success';
+                $message = __('app.success_return_ticket');
             }
             else{
-                $p = "error";
-                $message = "Nie można zwrócić";
+                $p = 'error';
+                $message = __('app.error_return_ticket');
             }
 
             return back()->with($p, $message);

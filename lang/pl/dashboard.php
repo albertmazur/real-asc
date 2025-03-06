@@ -7,10 +7,12 @@ return [
     'event' => [
         'add' => "Dodaj wydarzenie",
         'edit' => "Edytuj wydarzenie",
+        'update' => "Zaktualizowano wydarzenie",
         'select' => "Wybierz wydarzenie"
     ],
     'stadium' => [
         'add' => "Dodaj station",
+        'added' => "Dodaj station",
         'edit' => "Edytuj stadion",
         'choose' => "Wybierz stadion",
     ],
@@ -20,14 +22,17 @@ return [
     ],
     'comment' => [
         'my' => "Moje komentarze",
+        'add' => "Dodaj komentarz",
         'delete' => "Usuń komentarz",
+        'deleted' => "Usunięto komentarz",
         'delete_comments_submission' => "Usuń komentarz i zgłoszenie",
+        'deleted_comments_submission' => "Usunięto komentarz i zgłoszenie",
         'which' => "Wybierz jaki to komentarz",
         'offensive' => "Obrażliwe",
         'vulgar' => "Wulgarne",
         'other' => "Inne"
     ],
     'user' => [
-        'select' => "Select user"
+        'select' => "Wybierz użytkownika"
     ]
 ];

@@ -3,7 +3,7 @@
     <div class="card-body">
         <h5 class="card-title">{{ $submission->forWhat }}</h5>
         <p class="card-text">{{ $submission->content }}</p>
-        <form method="POST" action="{{ route("submission.remove") }}">
+        <form method="POST" action="{{ route('submission.remove') }}">
             @method("delete")
             @csrf
             <input type="hidden" name="id" value="{{ $submission->id }}">

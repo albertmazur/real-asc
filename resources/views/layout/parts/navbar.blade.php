@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset("images/logo.ico")}}" alt="Logo" width="80" />
         </a>
-        <a class="nav-link" href="{{ route("event.index") }}">{{ __('app.events') }}</a>
+        <a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.nav_toggle') }}">
             <span class="navbar-toggler-icon"></span>

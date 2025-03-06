@@ -24,12 +24,12 @@ class StoreEventRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => ["required", "string"],
-            "description" => ["string"],
-            "date" => ["required", "date", "after:today"],
-            "time" => ["required", "date_format:H:i"],
-            "price" => ["required", "decimal:0,2"],
-            "stadium_id" => ["required", "integer"]
+            'name' => ['required', 'string'],
+            'description' => ['string'],
+            'date' => ['required', 'date', 'after:today'],
+            'time' => ['required', 'date_format:H:i'],
+            'price' => ['required', 'decimal:0,2'],
+            'stadium_id' => ['required', 'integer']
         ];
     }
 }

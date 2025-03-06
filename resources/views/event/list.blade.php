@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <form action="{{ route("event.index") }}" method="get">
+        <form action="{{ route('event.index') }}" method="get">
             <div class="mb-3">
                 <label for="nameSearch" class="form-label">{{ __('app.find') }}</label>
                 <input type="text" id="nameSearch" name="nameSearch" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $nameSearch ?? '' }}">
@@ -40,7 +40,7 @@
                             <td>{{ $event->date }} {{ $event->time }}</td>
                             <td>{{ $event->freeSet }}</td>
                             <td>{{ $event->price }}</td>
-                            <td><a class="btn btn-secondary" role="button" href="{{ route("event.show", ["eventId" =>$event->id]) }}">{{ __('app.details') }}</a></td>
+                            <td><a class="btn btn-secondary" role="button" href="{{ route('event.show', ["eventId" =>$event->id]) }}">{{ __('app.details') }}</a></td>
                         </tr>
                     @endforeach
                 </tbody>

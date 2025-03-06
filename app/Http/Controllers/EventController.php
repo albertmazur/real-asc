@@ -28,10 +28,10 @@ class EventController extends Controller
      */
 
     private function viewList(Request $request, string $link){
-        $name = $request->get("nameSearch");
-        $sort = $request->get("sortSearch") ?? "name";
+        $name = $request->get('nameSearch');
+        $sort = $request->get('sortSearch') ?? 'name';
 
-        if($sort=="freeSet") $resultPaginator = $this->eventRepository->filterBy($name, "name", 10);
+        if($sort == 'freeSet') $resultPaginator = $this->eventRepository->filterBy($name, 'name', 10);
         else $resultPaginator = $this->eventRepository->filterBy($name, $sort, 10);
 
         $result = $resultPaginator->getCollection();
@@ -40,15 +40,28 @@ class EventController extends Controller
             return $item;
         });
 
-        if($sort=="freeSet") $result = $result->sortBy('freeSet');
+        if($sort == 'freeSet') $result = $result->sortBy('freeSet');
         $resultPaginator->setCollection($result);
-        $resultPaginator->appends(["nameSearch" => $name, "sortSearch" => $sort]);
-        if($link=="dashboard.admin.event") return view($link, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort, "stadiums" => $this->stadiumRepository->all()]);
-        else return view($link, ["events" => $resultPaginator, "nameSearch" => $name, "sortSearch" => $sort]);
+        $resultPaginator->appends([
+            'nameSearch' => $name,
+            'sortSearch' => $sort
+        ]);
+        
+        if($link == 'dashboard.admin.event') return view($link, [
+            'events' => $resultPaginator,
+            'nameSearch' => $name,
+            'sortSearch' => $sort,
+            'stadiums' => $this->stadiumRepository->all()
+        ]);
+        else return view($link, [
+            'events' => $resultPaginator,
+            'nameSearch' => $name,
+            'sortSearch' => $sort
+        ]);
     }
 
     public function index(Request $request){
-        return $this->viewList($request, "event.list");
+        return $this->viewList($request, 'event.list');
     }
 
     /**
@@ -68,17 +81,17 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreEventRequest $request){
-        if (Gate::allows('admin', Auth::user())) {
+        if (Gate::allows('admin', Auth::user())){
             $data = $request->validated();
-            $this->eventRepository->add($data["name"], $data["description"], $data["date"], $data["time"], $data["price"], $data["stadium_id"]);
-            return back()->with("success", "Dodano wydarzenie");;
+            $this->eventRepository->add($data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
+            return back()->with('success', __('dashboard.event.add'));
         }
         else abort(403);
     }
 
     public function dashboard(Request $request){
         if (Gate::allows('admin', Auth::user())) {
-            return $this->viewList($request, "dashboard.admin.event");
+            return $this->viewList($request, 'dashboard.admin.event');
         }
         else abort(403);
     }
@@ -90,7 +103,10 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(int $eventId){
-        return view("event.show", ["event" => $this->eventRepository->get($eventId), "dateNotBuy" => Carbon::now()->addDays(3)]);
+        return view('event.show', [
+            'event' => $this->eventRepository->get($eventId),
+            'dateNotBuy' => Carbon::now()->addDays(3)
+        ]);
     }
 
     /**
@@ -101,7 +117,10 @@ class EventController extends Controller
      */
     public function edit(int $eventId){
         if (Gate::allows('admin', Auth::user())) {
-            return view("dashboard.admin.editEvent", ["event" => $this->eventRepository->get($eventId), "stadiums" => $this->stadiumRepository->all()]);
+            return view('dashboard.admin.editEvent', [
+                'event' => $this->eventRepository->get($eventId),
+                'stadiums' => $this->stadiumRepository->all()
+            ]);
         }
         else abort(403);
     }
@@ -116,8 +135,8 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request){
         if (Gate::allows('admin', Auth::user())) {
             $data = $request->validated();
-            $this->eventRepository->update($data["id"], $data["name"], $data["description"], $data["date"], $data["time"], $data["price"], $data["stadium_id"]);
-            return  redirect()->route("event.dashboard")->with("success", "Zaktualizowano wydarzenie");
+            $this->eventRepository->update($data['id'], $data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
+            return  redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
         }
         else abort(403);
     }
@@ -134,7 +153,10 @@ class EventController extends Controller
     }
 
     public function welcome(){
-        return view("layout.main", ["closestTimeEvent" => $this->eventRepository->orderByData(4), "mostComentEvent" => $this->eventRepository->mostComment(4)]);
+        return view('layout.main', [
+            'closestTimeEvent' => $this->eventRepository->orderByData(4),
+            'mostComentEvent' => $this->eventRepository->mostComment(4)
+        ]);
     }
 
 }

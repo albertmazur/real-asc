@@ -24,10 +24,13 @@ class StadiumController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->get("nameSearch");
+        $name = $request->get('nameSearch');
         $resultPaginator = $this->stadiumRepository->filterBy($name, 10);
 
-        return view("dashboard.admin.stadium", ["stadiums" => $resultPaginator, "nameSearch" => $name]);
+        return view('dashboard.admin.stadium', [
+            'stadiums' => $resultPaginator,
+            'nameSearch' => $name
+        ]);
     }
 
     /**
@@ -49,8 +52,8 @@ class StadiumController extends Controller
     public function store(StoreStadiumRequest $request)
     {
         $date = $request->validated();
-        $this->stadiumRepository->add($date["name"], $date["city"], $date["street"], $date["numberBuilding"], $date["places"]);
-        return back()->with("success", "Dodano stadion");
+        $this->stadiumRepository->add($date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places']);
+        return back()->with('success', __('dashboard.stadium.added'));
     }
 
     /**
@@ -72,7 +75,9 @@ class StadiumController extends Controller
      */
     public function edit(int $stadiumId)
     {
-        return view("dashboard.admin.editStadium", ["stadium" => $this->stadiumRepository->get($stadiumId)]);
+        return view('dashboard.admin.editStadium', [
+            'stadium' => $this->stadiumRepository->get($stadiumId)
+        ]);
     }
 
     /**
@@ -85,8 +90,8 @@ class StadiumController extends Controller
     public function update(UpdateStadiumRequest $request){
         if (Gate::allows('admin', Auth::user())) {
             $date = $request->validated();
-            $this->stadiumRepository->update($date["id"], $date["name"], $date["city"], $date["street"], $date["numberBuilding"], $date["places"],);
-            return redirect()->route("stadium.index")->with("success", "Zapisano zmiany");;
+            $this->stadiumRepository->update($date['id'], $date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'],);
+            return redirect()->route('stadium.index')->with('success', __('app.save_changes'));
         }
         else abort(403);
     }

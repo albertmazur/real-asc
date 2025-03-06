@@ -23,7 +23,7 @@
                     <h4>{{ __('app.buy_ticket') }}</h4>
                     <h5>{{ __('app.price') }} <span id="priceEvent">{{ $event->price }}</span></h5>
                     <p>{{ __('app.free_places') }}: {{ $set =(($event->stadium->places)-($event->tickets->count())) }}</p>
-                    <form method="POST" action="{{ route("ticket.store") }}" class="row g-2">
+                    <form method="POST" action="{{ route('ticket.store') }}" class="row g-2">
                         @csrf
                         <div style="width: 13rem" class="col-auto input-group mb-3">
                             <input type="number" id="countTickets" name="countTickets" min="0" max="{{$set}}" step="1" class="form-control" placeholder="{{ __('app.count_ticket') }}" aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2" >
@@ -63,7 +63,7 @@
                 <a href="{{ route('register') }}" class="btn btn-outline-primary">{{ __('app.sign_up') }}</a>
             @else
                 <h4>{{ __('app.comment_add') }}</h4>
-                <form method="POST" action="{{ route("comment.store") }}" class="row g-2">
+                <form method="POST" action="{{ route('comment.store') }}" class="row g-2">
                     @csrf
                       <div class="mb-3">
                         <label for="content" class="form-label">{{ __('app.description') }}</label>
@@ -76,7 +76,7 @@
         </div>
         <div style="display: none" id="registrationComment" class="mt-3">
             <h4>{{ __('app.submission_comment') }}</h4>
-            <form method="POST" action="{{ route("submission.store") }}" class="row g-2">
+            <form method="POST" action="{{ route('submission.store') }}" class="row g-2">
                 @csrf
                 <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
                     <option selected value="obrażliwe">{{ __('dashboard.comment.offensive') }}</option>

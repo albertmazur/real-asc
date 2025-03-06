@@ -24,8 +24,8 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            "content" => ["required", "string"],
-            "event_id" => ["required", "integer"]
+            'content' => ['required', 'string'],
+            'event_id' => ['required', 'integer']
         ];
     }
 }

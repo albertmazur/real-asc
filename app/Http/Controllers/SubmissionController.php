@@ -24,12 +24,14 @@ class SubmissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        $contentSearch = $request->get("contentSearch");
-        $sortSearch = $request->get("sortSearch") ?? "All";
+        $contentSearch = $request->get('contentSearch');
+        $sortSearch = $request->get('sortSearch') ?? 'All';
 
-        return view("dashboard.submission.submission", ["submissions" => $this->submissionRepository->filterBy($contentSearch, $sortSearch),
-        "nameSearch" => $contentSearch,
-        "sortSearch" => $sortSearch]);
+        return view('dashboard.submission.submission', [
+            'submissions' => $this->submissionRepository->filterBy($contentSearch, $sortSearch),
+            'nameSearch' => $contentSearch,
+            'sortSearch' => $sortSearch
+            ]);
     }
 
     /**
@@ -51,8 +53,8 @@ class SubmissionController extends Controller
     public function store(StoreSubmissionRequest $request)
     {
         $data = $request->validated();
-        $this->submissionRepository->add($data["forWhat"], $data["content"], $data["comment_id"],);
-        return back()->with("success", "Dodano zgłoszenie");;
+        $this->submissionRepository->add($data['forWhat'], $data['content'], $data['comment_id'],);
+        return back()->with('success', __('app.added_submission'));
     }
 
     /**
@@ -97,12 +99,12 @@ class SubmissionController extends Controller
      */
     public function destroy(Request $request){
         if (Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user())) {
-            $date = $request->validate(["id" => ["required", "integer"]]);
-            $submission = Submission::find($date["id"]);
+            $date = $request->validate(['id' => ['required', 'integer']]);
+            $submission = Submission::find($date['id']);
             $comment = Comment::find($submission->comment_id);
             if($comment) $comment->delete();
             $submission->delete();
-            return back()->with("success", "Usunięto komentarz i zgłoszenie");;
+            return back()->with('success', __('dashboard.comment.deleted_comments_submission'));
         }
         else abort(403);
     }

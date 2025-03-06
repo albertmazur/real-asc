@@ -24,9 +24,9 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            "forWhat" => ["required", "string"],
-            "content" => ["string"],
-            "comment_id" => ["required", "integer"]
+            'forWhat' => ['required', 'string'],
+            'content' => ['string'],
+            'comment_id' => ['required', 'integer']
         ];
     }
 }

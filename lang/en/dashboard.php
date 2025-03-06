@@ -7,10 +7,12 @@ return [
     'event' => [
         'add' => "Add event",
         'edit' => "Edit event",
+        'update' => "Updated event",
         'select' => "Select an event"
     ],
     'stadium' => [
-        'add' => "Add stadium",
+        'add' => "Stadium add",
+        'added' => "Added stadium",
         'edit' => "Edit stadium",
         'choose' => "Choose a stadium",
     ],
@@ -20,14 +22,17 @@ return [
     ],
     'comment' => [
         'my' => "My comments",
+        'add' => "Add comment",
         'delete' => "Delete comment",
+        'deleted' => "Comment deleted",
         'delete_comments_submission' => "Delete comment and submissions",
+        'deleted_comments_submission' => "Deleted comment and submissions",
         'which' => "Select what kind of comment it is",
         'offensive' => "Offensive",
         'vulgar' => "Vulgar",
         'other' => "Other"
     ],
     'user' => [
-        'select' => "Wybierz użytkownika"
+        'select' => "Select user"
     ]
 ];

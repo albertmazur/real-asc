@@ -2,7 +2,7 @@
 
 @section('dashboard.content')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <form action="{{ route("comment.my") }}" method="get">
+        <form action="{{ route('comment.my') }}" method="get">
             <div class="mb-3">
                 <label for="contentSearch" class="form-label">{{ __('app.find') }}</label>
                 <input type="text" id="contentSearch" name="contentSearch" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $nameSearch ?? '' }}">

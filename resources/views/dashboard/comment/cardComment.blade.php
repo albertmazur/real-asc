@@ -4,7 +4,7 @@
         <h5 class="card-title">{{ $comment->forWhat }}</h5>
         <p class="card-text">{{ $comment->content }}</p>
         <p class="card-text">{{ $comment->event->name }}</p>
-        <form method="POST" action="{{ route("comment.remove") }}">
+        <form method="POST" action="{{ route('comment.remove') }}">
             @method("delete")
             @csrf
             <input type="hidden" name="id" value="{{ $comment->id }}">

@@ -24,12 +24,12 @@ class UpdateStadiumRequest extends FormRequest
     public function rules()
     {
         return [
-            "id" => ["required" , "integer"],
-            "name" => ["required" , "string"],
-            "city" => ["required" , "string"],
-            "street" => ["required" , "string"],
-            "numberBuilding" => ["required" , "string"],
-            "places" => ["required" , "integer", "min:0"],
+            'id' => ['required', 'integer'],
+            'name' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'street' => ['required', 'string'],
+            'numberBuilding' => ['required', 'string'],
+            'places' => ['required', 'integer', 'min:0'],
         ];
     }
 }
