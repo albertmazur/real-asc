@@ -3,9 +3,9 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset("images/logo.ico")}}" alt="Logo" width="80" />
         </a>
-        <a class="nav-link" href="{{ route("event.index") }}">{{ __("Wydarzenia") }}</a>
+        <a class="nav-link" href="{{ route("event.index") }}">{{ __('app.events') }}</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __("Przełącz nawigację") }}">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.nav_toggle') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -19,13 +19,13 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Zaloguj się') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('app.login_in') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Zarejestruj się') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('app.sign_up') }}</a>
                         </li>
                     @endif
                 @else
@@ -35,12 +35,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home.dashboard') }}">{{ __('Panel') }}</a>
+                            <a class="dropdown-item" href="{{ route('home.dashboard') }}">{{ __('app.dashboard') }}</a>
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                {{ __('Wyloguj się') }}
+                                {{ __('app.login_out') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

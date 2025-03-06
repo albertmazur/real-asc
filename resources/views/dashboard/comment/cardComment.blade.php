@@ -8,7 +8,7 @@
             @method("delete")
             @csrf
             <input type="hidden" name="id" value="{{ $comment->id }}">
-            <input type="submit" class="btn btn-danger" value="{{ __("Usuń komentarz") }}">
+            <input type="submit" class="btn btn-danger" value="{{ __('dashboard.comment.delete') }}">
         </form>
     </div>
 </div>

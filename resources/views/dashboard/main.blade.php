@@ -9,6 +9,6 @@
     @hasSection('dashboard.content')
         @yield('dashboard.content')
     @else
-        <h1 class="text-center">{{ __("Witam w panelu") }} {{ config('app.name', 'Club') }}</h1>
+        <h1 class="text-center">{{ __('dashboard.welcome') }}</h1>
     @endif
 @endsection

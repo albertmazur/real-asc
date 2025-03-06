@@ -6,16 +6,16 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("stadium.index") }}">{{ __("Stadiony") }}</a>
+            <a class="nav-link" href="{{ route("stadium.index") }}">{{ __('app.stadiums') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("event.dashboard") }}">{{ __("Wydarzenia") }}</a>
+            <a class="nav-link" href="{{ route("event.dashboard") }}">{{ __('app.events') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("submission.index") }}">{{ __("Zgłoszenia") }}</a>
+            <a class="nav-link" href="{{ route("submission.index") }}">{{ __('app.submissions') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("comment.index") }}">{{ __("Komentarze") }}</a>
+            <a class="nav-link" href="{{ route("comment.index") }}">{{ __('app.comments') }}</a>
           </li>
         </ul>
       </div>

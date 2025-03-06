@@ -103,6 +103,4 @@ Route::middleware(["auth", "verified"])->group(function (){
     });
 });
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
-
 Auth::routes(["verify" => true]);

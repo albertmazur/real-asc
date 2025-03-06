@@ -6,13 +6,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("ticket.index") }}">{{ __("Moje bilety") }}</a>
+            <a class="nav-link" href="{{ route('ticket.index') }}">{{ __('dashboard.ticket.my') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("ticket.history") }}">{{ __("Historia biletów") }}</a>
+            <a class="nav-link" href="{{ route('ticket.history') }}">{{ __('dashboard.ticket.history') }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route("comment.my") }}">{{ __("Moje komentarze") }}</a>
+            <a class="nav-link" href="{{ route('comment.my') }}">{{ __('dashboard.comment.my') }}</a>
           </li>
         </ul>
       </div>
