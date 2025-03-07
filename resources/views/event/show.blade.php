@@ -23,8 +23,10 @@
                     <h4>{{ __('app.buy_ticket') }}</h4>
                     <h5>{{ __('app.price') }} <span id="priceEvent">{{ $event->price }}</span></h5>
                     <p>{{ __('app.free_places') }}: {{ $set = $event->stadium->places-$event->tickets->count() }}</p>
-                    <form method="POST" action="{{ route('ticket.store') }}" class="row g-2">
+                    <form method="POST" action="{{ route('ticket.store') }}" class="" id="payment-form">
                         @csrf
+                        <div id="card-element"></div>
+                        <input type="hidden" name="payment_method" id="payment-method">
                         <div style="width: 13rem" class="col-auto input-group mb-3">
                             <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" class="form-control" placeholder="{{ __('app.count_ticket') }}" aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2" >
                             <button class="btn btn-primary" type="submit" id="button-addon2">{{ __('app.buy') }}</button>
@@ -92,4 +94,31 @@
             </form>
         </div>
     </div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+<script>
+    let stripe = Stripe("{{ config('services.stripe.key') }}");
+
+    async function setupStripe() {
+        const response = await fetch("{{ route('ticket.create-payment-intent') }}");
+        const { clientSecret } = await response.json();
+
+        const elements = stripe.elements({ clientSecret });
+        const paymentElement = elements.create("payment");
+        paymentElement.mount("#payment-element");
+
+        document.getElementById("payment-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: { return_url: "{{ route('ticket.payment.status') }}" },
+            });
+
+            if (error) alert(error.message);
+        });
+    }
+
+    setupStripe();
+</script>
+✅ Podsu
 @endsection

@@ -67,8 +67,12 @@ Route::middleware(['auth', 'verified'])->group(function (){
     ], function (){
         Route::get('index', [TicketController::class, 'index'])->name('index');
         Route::post('store', [TicketController::class, 'store'])->name('store');
+        Route::get('store2', [TicketController::class, 'createPaymentIntent'])->name('create-payment-intent');
         Route::get('history', [TicketController::class, 'history'])->name('history');
         Route::put('back', [TicketController::class, 'backTicket'])->name('back');
+        Route::get('payment-status', function () {
+            return redirect()->back()->with('success', 'Płatność zakończona sukcesem!');
+        })->name('payment.status');
     });
 
     Route::group([

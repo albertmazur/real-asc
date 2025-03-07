@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
-use App\Http\Requests\Store\StoreTicketRequest;
-use App\Http\Requests\Update\UpdateTicketRequest;
-use App\Models\Event;
-use App\Repository\TicketRepository;
 use Carbon\Carbon;
+use Stripe\Stripe;
+use App\Models\Event;
+use App\Models\Ticket;
+use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
+use App\Repository\TicketRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\Store\StoreTicketRequest;
+use App\Http\Requests\Update\UpdateTicketRequest;
+use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class TicketController extends Controller
 {
@@ -59,10 +62,31 @@ class TicketController extends Controller
         if(Gate::allows('client', Auth::user()))
         {
             $date = $request->validated();
-            $this->ticketRepository->add($date['countTickets'], $date['event_id']);
-            return back()->with('success', __('app.success_buy_ticket'));
+            $user = auth()->user();
+            try
+            {
+                $user->charge(1000, $date['payment_method']); // Pobiera 10 PLN (1000 groszy)
+                $this->ticketRepository->add($date['countTickets'], $date['event_id']);
+                return back()->with('success', __('app.success_buy_ticket'));
+            }
+            catch (IncompletePayment $exception)
+            {
+                return back()->with('error', 'Wymagana autoryzacja 3D Secure');
+            }
         }
         else abort(403);
+    }
+
+    public function createPaymentIntent()
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+    
+        $paymentIntent = PaymentIntent::create([
+            'amount' => 1000, // 10 PLN (wartość w groszach)
+            'currency' => 'pln',
+        ]);
+    
+        return response()->json(['clientSecret' => $paymentIntent->client_secret]);
     }
 
     /**

@@ -25,6 +25,7 @@ class StoreTicketRequest extends FormRequest
     {
         return [
             'event_id' => ['required', 'integer'],
+            'payment_method' => ['required'],
             'countTickets' => ['required', 'integer']
         ];
     }
