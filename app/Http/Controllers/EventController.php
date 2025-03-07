@@ -17,7 +17,8 @@ class EventController extends Controller
     private EventRepository $eventRepository;
     private StadiumRepository $stadiumRepository;
 
-    public function __construct(EventRepository $eventRepository, StadiumRepository $stadiumRepository){
+    public function __construct(EventRepository $eventRepository, StadiumRepository $stadiumRepository)
+    {
         $this->eventRepository = $eventRepository;
         $this->stadiumRepository = $stadiumRepository;
     }
@@ -27,7 +28,8 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private function viewList(Request $request, string $link){
+    private function viewList(Request $request, string $link)
+    {
         $name = $request->get('nameSearch');
         $sort = $request->get('sortSearch') ?? 'name';
 
@@ -35,7 +37,8 @@ class EventController extends Controller
         else $resultPaginator = $this->eventRepository->filterBy($name, $sort, 10);
 
         $result = $resultPaginator->getCollection();
-        $result->map(function ($item) {
+        $result->map(function ($item)
+        {
             $item->freeSet = (($item->stadium->places)-($item->tickets->count()));
             return $item;
         });
@@ -60,7 +63,8 @@ class EventController extends Controller
         ]);
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return $this->viewList($request, 'event.list');
     }
 
@@ -80,8 +84,10 @@ class EventController extends Controller
      * @param  \App\Http\Requests\StoreEventRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEventRequest $request){
-        if (Gate::allows('admin', Auth::user())){
+    public function store(StoreEventRequest $request)
+    {
+        if(Gate::allows('admin', Auth::user()))
+        {
             $data = $request->validated();
             $this->eventRepository->add($data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
             return back()->with('success', __('dashboard.event.add'));
@@ -89,8 +95,10 @@ class EventController extends Controller
         else abort(403);
     }
 
-    public function dashboard(Request $request){
-        if (Gate::allows('admin', Auth::user())) {
+    public function dashboard(Request $request)
+    {
+        if(Gate::allows('admin', Auth::user()))
+        {
             return $this->viewList($request, 'dashboard.admin.event');
         }
         else abort(403);
@@ -102,7 +110,8 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(int $eventId){
+    public function show(int $eventId)
+    {
         return view('event.show', [
             'event' => $this->eventRepository->get($eventId),
             'dateNotBuy' => Carbon::now()->addDays(3)
@@ -115,8 +124,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $eventId){
-        if (Gate::allows('admin', Auth::user())) {
+    public function edit(int $eventId)
+    {
+        if(Gate::allows('admin', Auth::user()))
+        {
             return view('dashboard.admin.editEvent', [
                 'event' => $this->eventRepository->get($eventId),
                 'stadiums' => $this->stadiumRepository->all()
@@ -132,8 +143,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEventRequest $request){
-        if (Gate::allows('admin', Auth::user())) {
+    public function update(UpdateEventRequest $request)
+    {
+        if(Gate::allows('admin', Auth::user()))
+        {
             $data = $request->validated();
             $this->eventRepository->update($data['id'], $data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
             return  redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
@@ -152,7 +165,8 @@ class EventController extends Controller
         //
     }
 
-    public function welcome(){
+    public function welcome()
+    {
         return view('layout.main', [
             'closestTimeEvent' => $this->eventRepository->orderByData(4),
             'mostComentEvent' => $this->eventRepository->mostComment(4)

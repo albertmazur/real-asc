@@ -1,8 +1,9 @@
 @extends('dashboard.main')
+
 @section('dashboard.content')
-    @include("elemnts.errors")
+    @include('elemnts.errors')
         <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-            <form action="{{ route("stadium.index") }}" method="get">
+            <form action="{{ route('stadium.index') }}" method="EGT">
                 <div class="mb-3">
                     <label for="nameSearch" class="form-label">{{ __('app.find') }}</label>
                     <input type="text" id="nameSearch" name="nameSearch" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $nameSearch ?? '' }}">
@@ -12,7 +13,7 @@
             </div>
                 <table class="table table-striped">
                     <thead>
-                        @section("headerTable")
+                        @section('headerTable')
                         <tr>
                             <th>{{ __('app.lp') }}</th>
                             <th>{{ __('app.name') }}</th>
@@ -22,9 +23,9 @@
                         </tr>
                         @endsection
                     </thead>
-                    @yield("headerTable")
+                    @yield('headerTable')
                     <tbody>
-                        @foreach ($stadiums as $stadium)
+                        @foreach($stadiums as $stadium)
                             <tr>
                                 <td>{{ $loop->iteration+($stadiums->currentPage()-1)*$loop->count }}</td>
                                 <td>{{ $stadium->name }}</td>
@@ -35,13 +36,13 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                        @yield("headerTable")
+                        @yield('headerTable')
                     </tfoot>
                 </table>
         <div class="d-flex justify-content-center">{{ $stadiums->links() }}</div>
         <div class="mt-3">
             <h4>{{ __('app.stadium.add') }}</h4>
-            <form action="{{ route("stadium.store") }}" method="post">
+            <form action="{{ route('stadium.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">{{ __('app.name') }}</label>

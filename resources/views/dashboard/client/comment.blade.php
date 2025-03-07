@@ -2,7 +2,7 @@
 
 @section('dashboard.content')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-        <form action="{{ route('comment.my') }}" method="get">
+        <form action="{{ route('comment.my') }}" method="GET">
             <div class="mb-3">
                 <label for="contentSearch" class="form-label">{{ __('app.find') }}</label>
                 <input type="text" id="contentSearch" name="contentSearch" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $nameSearch ?? '' }}">
@@ -10,9 +10,9 @@
             <div class="mb-3">
                 <label for="sortEventSearch" class="form-label">{{ __('app.event') }}</label>
                 <select name="sortEventSearch" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
-                    <option @if ($sortEventSearch== -2) selected @endif value="-2">{{ __('app.all') }}</option>
-                    @foreach ($events as $event)
-                        <option @if ($sortEventSearch==$event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
+                    <option @if($sortEventSearch == -2) selected @endif value="-2">{{ __('app.all') }}</option>
+                    @foreach($events as $event)
+                        <option @if($sortEventSearch == $event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -20,8 +20,8 @@
         </form>
     </div>
     <div style="height: 40vh" class="overflow-auto">
-        @foreach ($comments as $comment)
-            @include("dashboard.comment.cardComment")
+        @foreach($comments as $comment)
+            @include('dashboard.comment.cardComment')
         @endforeach
     </div>
 @endsection

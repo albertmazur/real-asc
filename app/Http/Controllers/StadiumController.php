@@ -14,7 +14,8 @@ class StadiumController extends Controller
 {
     private StadiumRepository $stadiumRepository;
 
-    public function __construct(StadiumRepository $stadiumRepository){
+    public function __construct(StadiumRepository $stadiumRepository)
+    {
         $this->stadiumRepository = $stadiumRepository;
     }
     /**
@@ -87,8 +88,10 @@ class StadiumController extends Controller
      * @param  \App\Models\Stadium  $stadium
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStadiumRequest $request){
-        if (Gate::allows('admin', Auth::user())) {
+    public function update(UpdateStadiumRequest $request)
+    {
+        if(Gate::allows('admin', Auth::user()))
+        {
             $date = $request->validated();
             $this->stadiumRepository->update($date['id'], $date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'],);
             return redirect()->route('stadium.index')->with('success', __('app.save_changes'));

@@ -22,7 +22,7 @@ class EventFactory extends Factory
             'description' => fake()->text(),
             'date' => fake()->dateTimeThisDecade('+4 years'),
             'time' => fake()->time(),
-            "price" =>fake()->randomFloat(2, 20, 200),
+            'price' =>fake()->randomFloat(2, 20, 200),
             'stadium_id' => Stadium::factory()
         ];
     }

@@ -1,16 +1,17 @@
 @extends('dashboard.main')
+
 @section('dashboard.content')
-    @include("elemnts.errors")
+    @include('elemnts.errors')
         <h4>{{ __('dashboard.event.edit') }}</h4>
-        <form action="{{ route("event.update") }}" method="post">
-            @method("put")
+        <form action="{{ route('event.update') }}" method="POST">
+            @method('put')
             @csrf
             <input type="hidden" name="id" value="{{ $event->id }}" />
             <div class="mb-3">
                 <label for="stadium_id" class="form-label">{{ __('app.stadium') }}</label>
                 <select name="stadium_id" class="form-select" aria-label="{{ __('dashboard.stadium.choose') }}">
-                    @foreach ($stadiums as $stadium)
-                        <option @if ($stadium->id==$event->stadium_id) selected @endif value="{{$stadium->id}}">{{$stadium->name}}</option>
+                    @foreach($stadiums as $stadium)
+                        <option @if($stadium->id == $event->stadium_id) selected @endif value="{{ $stadium->id }}">{{ $stadium->name }}</option>
                     @endforeach
                 </select>
             </div>

@@ -13,25 +13,30 @@ class Comment extends Model
     protected $fillable = ['content','user_id', 'event_id'];
     public $timestamps = false;
 
-    protected static function boot(){
+    protected static function boot()
+    {
         parent::boot();
 
-        static::creating(function ($model) {
+        static::creating(function ($model)
+        {
             $mytime = Carbon::now();
             $model->date = $mytime->toDate();
-            $model->time = $mytime->setTimezone('Europe/Warsaw')->format("H:i:s");
+            $model->time = $mytime->setTimezone('Europe/Warsaw')->format('H:i:s');
         });
     }
 
-    public function event(){
+    public function event()
+    {
         return $this->belongsTo(Event::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function submissions(){
+    public function submissions()
+    {
         return $this->hasMany(Submission::class);
     }
 }

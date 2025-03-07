@@ -4,7 +4,7 @@
         <h5 class="card-title">{{ $submission->forWhat }}</h5>
         <p class="card-text">{{ $submission->content }}</p>
         <form method="POST" action="{{ route('submission.remove') }}">
-            @method("delete")
+            @method('delete')
             @csrf
             <input type="hidden" name="id" value="{{ $submission->id }}">
             <input type="submit" class="btn btn-danger" value="{{ __('dashboard.comment.delete_comments_submission') }}">

@@ -11,7 +11,8 @@ class Submission extends Model
 
     protected $fillable = ['content', 'forWhat', 'comment_id'];
 
-    public function comment(){
+    public function comment()
+    {
         return $this->belongsTo(Comment::class);
     }
 }

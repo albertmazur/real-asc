@@ -14,13 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table)
+        {
             $table->id();
-            $table->string("name");
-            $table->text("description")->nullable();
-            $table->date("date");
-            $table->time("time");
-            $table->float("price");
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->date('date');
+            $table->time('time');
+            $table->float('price');
             $table->foreignIdFor(Stadium::class);
             $table->timestamps();
         });

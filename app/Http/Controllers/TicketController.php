@@ -16,7 +16,8 @@ class TicketController extends Controller
 {
     private TicketRepository $ticketRepository;
 
-    public function __construct(TicketRepository $ticketRepository){
+    public function __construct(TicketRepository $ticketRepository)
+    {
         $this->ticketRepository = $ticketRepository;
     }
     /**
@@ -24,7 +25,8 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $sortEventSearch = $request->get('sortEventSearch') ?? -2;
         $tickets = $this->ticketRepository->myTickets($sortEventSearch, 'Kupiony');
         return view('dashboard.client.ticket', [
@@ -52,8 +54,10 @@ class TicketController extends Controller
      * @param  \App\Http\Requests\StoreTicketRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTicketRequest $request){
-        if (Gate::allows('client', Auth::user())) {
+    public function store(StoreTicketRequest $request)
+    {
+        if(Gate::allows('client', Auth::user()))
+        {
             $date = $request->validated();
             $this->ticketRepository->add($date['countTickets'], $date['event_id']);
             return back()->with('success', __('app.success_buy_ticket'));
@@ -106,8 +110,10 @@ class TicketController extends Controller
         //
     }
 
-    public function history(Request $request){
-        if (Gate::allows('client', Auth::user())) {
+    public function history(Request $request)
+    {
+        if(Gate::allows('client', Auth::user()))
+        {
             $sortEventSearch = $request->get('sortEventSearch') ?? -2;
             $tickets = $this->ticketRepository->myTickets($sortEventSearch);
             return view('dashboard.client.historyTicket', [
@@ -120,18 +126,22 @@ class TicketController extends Controller
         else abort(403);
     }
 
-    public function backTicket(Request $request){
-        if(Gate::allows('client', Auth::user())){
+    public function backTicket(Request $request)
+    {
+        if(Gate::allows('client', Auth::user()))
+        {
             $id = $request->get('id');
             $f = $this->ticketRepository->backTicket($id);
 
             $p = '';
             $message = '';
-            if($f){
+            if($f)
+            {
                 $p ='success';
                 $message = __('app.success_return_ticket');
             }
-            else{
+            else
+            {
                 $p = 'error';
                 $message = __('app.error_return_ticket');
             }

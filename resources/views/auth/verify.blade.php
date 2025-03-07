@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('app.verify.verify_e_mail') }}</div>
 
                 <div class="card-body">
-                    @if (session('resent'))
+                    @if(session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('app.verify.new_link') }}
                         </div>

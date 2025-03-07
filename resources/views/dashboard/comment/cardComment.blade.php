@@ -5,7 +5,7 @@
         <p class="card-text">{{ $comment->content }}</p>
         <p class="card-text">{{ $comment->event->name }}</p>
         <form method="POST" action="{{ route('comment.remove') }}">
-            @method("delete")
+            @method('delete')
             @csrf
             <input type="hidden" name="id" value="{{ $comment->id }}">
             <input type="submit" class="btn btn-danger" value="{{ __('dashboard.comment.delete') }}">

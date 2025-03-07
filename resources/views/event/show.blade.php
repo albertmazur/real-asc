@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    @include("elemnts.errors")
+    @include('elemnts.errors')
     <div class="card">
         <div class="card-header">
             <h1 class="text-center">{{ $event->name }}</h1>
@@ -18,15 +18,15 @@
 
     <div class="mt-3">
         <div>
-            @if ($event->date>$dateNotBuy && Auth::user()->role==="client")
+            @if($event->date>$dateNotBuy && Auth::user()->role === 'client')
                 @auth
                     <h4>{{ __('app.buy_ticket') }}</h4>
                     <h5>{{ __('app.price') }} <span id="priceEvent">{{ $event->price }}</span></h5>
-                    <p>{{ __('app.free_places') }}: {{ $set =(($event->stadium->places)-($event->tickets->count())) }}</p>
+                    <p>{{ __('app.free_places') }}: {{ $set = $event->stadium->places-$event->tickets->count() }}</p>
                     <form method="POST" action="{{ route('ticket.store') }}" class="row g-2">
                         @csrf
                         <div style="width: 13rem" class="col-auto input-group mb-3">
-                            <input type="number" id="countTickets" name="countTickets" min="0" max="{{$set}}" step="1" class="form-control" placeholder="{{ __('app.count_ticket') }}" aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2" >
+                            <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" class="form-control" placeholder="{{ __('app.count_ticket') }}" aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2" >
                             <button class="btn btn-primary" type="submit" id="button-addon2">{{ __('app.buy') }}</button>
                           </div>
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
@@ -44,7 +44,7 @@
 
         <h4 class="mt-3">{{ __('app.comments') }}</h4>
         <div style="height: 35vh" class="overflow-auto">
-            @foreach ($event->commentsSort() as $comment)
+            @foreach($event->commentsSort() as $comment)
             <div class="card m-2">
                 <div class="card-body">
                   <h5 class="card-title">{{ $comment->user->name}}</h5>

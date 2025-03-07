@@ -16,7 +16,8 @@ class EventRepository implements Repository{
         $this->eventModel = $event;
     }
 
-    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id){
+    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id)
+    {
         $event = new Event;
         $event->name = $name;
         $event->description = $description;
@@ -26,10 +27,11 @@ class EventRepository implements Repository{
         $event->price = $price;
         $event->stadium_id = $stadium_id;
         $event->save();
-        //$this->eventModel->creating(["name" => $name, "date" => $date, "time" => $time]);
+        //$this->eventModel->creating(['name' => $name, 'date' => $date, 'time' => $time]);
     }
 
-    public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id){
+    public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id)
+    {
         $event = $this->eventModel->find($id);
         $event->name = $name;
         $event->description = $description;
@@ -47,7 +49,7 @@ class EventRepository implements Repository{
 
     public function allPaginated(int $limit): LengthAwarePaginator
     {
-        return $this->eventModel->orderBy("name")->paginate($limit);
+        return $this->eventModel->orderBy('name')->paginate($limit);
     }
 
     public function all(): Collection{
@@ -55,20 +57,20 @@ class EventRepository implements Repository{
     }
 
     public function orderByData(int $limit): Collection{
-        return $this->eventModel->where("date", ">", Carbon::today())->orderBy("date")->orderBy('time')->limit($limit)->get();
+        return $this->eventModel->where('date', '>', Carbon::today())->orderBy('date')->orderBy('time')->limit($limit)->get();
     }
 
     public function mostComment(int $limit): Collection{
         return $this->eventModel->withCount('comments')->orderBy('comments_count', 'desc')->limit($limit)->get();
     }
 
-    public function filterBy(string $name = null, string $sort = "name", int $limit): LengthAwarePaginator{
+    public function filterBy(string $name = null, string $sort = 'name', int $limit): LengthAwarePaginator{
         $query = $this->eventModel;
 
-        if($sort == "name") $query =$query->orderBy($sort);
-        else $query =$query->orderByDesc($sort);
+        if($sort == 'name') $query =$query->orderBy($sort);
+        else $query = $query->orderByDesc($sort);
 
-        if($name) $query =$query->where("name", "like", $name."%");
+        if($name) $query = $query->where('name', 'like', $name.'%');
         return $query->paginate($limit);
     }
 }

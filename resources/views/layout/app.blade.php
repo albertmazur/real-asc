@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset("images/logo.ico") }}">
+    <link rel="icon" href="{{ asset('images/logo.ico') }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -18,13 +18,13 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="app" class="container flex-grow-1">
-        @include("layout.parts.navbar")
+        @include('layout.parts.navbar')
 
         <main>
-            @include("layout.shaderd.messages")
+            @include('layout.shaderd.messages')
             @yield('content')
         </main>
     </div>
-    @include("layout.parts.footer")
+    @include('layout.parts.footer')
 </body>
 </html>

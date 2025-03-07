@@ -12,7 +12,8 @@ class Stadium extends Model
     protected $table = 'stadiums';
     protected $fillable = ['name', 'city', 'street', 'numberBuilding', 'places'];
 
-    public function events(){
+    public function events()
+    {
         return $this->hasMany(Event::class);
     }
 }

@@ -16,10 +16,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('submissions', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table)
+        {
             $table->id();
-            $table->string("content");
-            $table->enum('forWhat', ["Obrażliwe", "Wulgarne", "Inne"]);
+            $table->string('content');
+            $table->enum('forWhat', ['Obrażliwe', 'Wulgarne', 'Inne']);
             $table->foreignIdFor(Comment::class);
             $table->timestamps();
         });

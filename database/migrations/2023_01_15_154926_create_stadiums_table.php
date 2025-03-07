@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stadiums', function (Blueprint $table) {
+        Schema::create('stadiums', function (Blueprint $table)
+        {
             $table->id();
-            $table->string("name");
-            $table->string("city");
-            $table->string("street");
-            $table->string("numberBuilding");
-            $table->integer("places");
+            $table->string('name');
+            $table->string('city');
+            $table->string('street');
+            $table->string('numberBuilding');
+            $table->integer('places');
             $table->timestamps();
         });
     }

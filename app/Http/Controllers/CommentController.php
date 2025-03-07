@@ -27,7 +27,8 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        if (Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user())) {
+        if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
+        {
             $contentSearch = $request->get('contentSearch');
             $sortWhoSearch = $request->get('sortWhoSearch') ?? -2;
             $sortEventSearch = $request->get('sortEventSearch') ?? -2;
@@ -40,9 +41,8 @@ class CommentController extends Controller
                 'users' => User::all(),
                 'events' => Event::all()
             ]);
-        } else {
-            abort(403);
-        }
+        } 
+        else abort(403);
     }
 
     /**
@@ -110,27 +110,30 @@ class CommentController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user())) {
+        if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
+        {
             $data = $request->validate(['id' => ['required', 'integer']]);
             $comment = Comment::find($data['id']);
             $comment->delete();
             return back()->with('success', __('dashboard.comment.deleted'));
-        } else {
-            abort(403);
         }
+        else abort(403);
     }
 
-    public function myComments(Request $request){
-        if (Gate::allows('client', Auth::user())) {
+    public function myComments(Request $request)
+    {
+        if(Gate::allows('client', Auth::user()))
+        {
             $contentSearch = $request->get('contentSearch');
             $sortEventSearch = $request->get('sortEventSearch') ?? -2;
 
             return view('dashboard.client.comment', [
-            'comments' => $this->commentRepository->filterBy($contentSearch, Auth::id(), $sortEventSearch),
-            'nameSearch' => $contentSearch,
-            'sortEventSearch' => $sortEventSearch,
-            'events' => Event::all()
-        ]);
-        } else abort(403);
+                'comments' => $this->commentRepository->filterBy($contentSearch, Auth::id(), $sortEventSearch),
+                'nameSearch' => $contentSearch,
+                'sortEventSearch' => $sortEventSearch,
+                'events' => Event::all()
+            ]);
+        }
+        else abort(403);
     }
 }

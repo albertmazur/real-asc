@@ -12,7 +12,7 @@ interface EventRepository{
     public function update(int $id, string $name, string $description = null, string $date, string $time, float $price, int $stadium_id);
     public function allPaginated(int $limit): LengthAwarePaginator;
     public function all(): Collection;
-    public function filterBy(string $name = null, string $sort = "name", int $limit):LengthAwarePaginator;
+    public function filterBy(string $name = null, string $sort = 'name', int $limit):LengthAwarePaginator;
     public function orderByData(int $limit): Collection;
     public function mostComment(int $limit): Collection;
     //public function filterBy(string $name): LengthAwarePaginator;

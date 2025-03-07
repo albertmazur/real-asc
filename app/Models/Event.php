@@ -11,19 +11,23 @@ class Event extends Model
 
     protected $fillable = ['name', 'description', 'date', 'time', 'price', 'stadium_id'];
 
-    public function stadium(){
+    public function stadium()
+    {
         return $this->belongsTo(Stadium::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function commentsSort(){
-        return $this->comments()->orderByDesc("date")->orderByDesc("time")->get();
+    public function commentsSort()
+    {
+        return $this->comments()->orderByDesc('date')->orderByDesc('time')->get();
     }
 
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 

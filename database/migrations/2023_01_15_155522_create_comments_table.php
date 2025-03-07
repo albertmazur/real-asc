@@ -15,11 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table)
+        {
             $table->id();
-            $table->longText("content");
-            $table->date("date");
-            $table->time("time");
+            $table->longText('content');
+            $table->date('date');
+            $table->time('time');
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
         });

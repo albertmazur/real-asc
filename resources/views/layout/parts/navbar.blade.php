@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset("images/logo.ico")}}" alt="Logo" width="80" />
+            <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="80" />
         </a>
         <a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a>
 
@@ -17,13 +17,13 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
-                    @if (Route::has('login'))
+                    @if(Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('app.login_in') }}</a>
                         </li>
                     @endif
 
-                    @if (Route::has('register'))
+                    @if(Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('app.sign_up') }}</a>
                         </li>

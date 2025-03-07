@@ -10,25 +10,29 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'dateBuy', 'timeBuy', 'event_id', 'user_id', "state"];
+    protected $fillable = ['number', 'dateBuy', 'timeBuy', 'event_id', 'user_id', 'state'];
 
-    protected static function boot(){
+    protected static function boot()
+    {
         parent::boot();
 
-        static::creating(function ($model) {
+        static::creating(function ($model)
+        {
             $model->number = fake()->randomNumber();
             $mytime = Carbon::now();
             $model->dateBuy = $mytime->toDate();
             $model->timeBuy = $mytime->toDateTimeString();
-            $model->state="Kupiony";
+            $model->state='Kupiony';
         });
     }
 
-    public function event(){
+    public function event()
+    {
         return $this->belongsTo(Event::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

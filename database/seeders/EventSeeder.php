@@ -16,6 +16,6 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        Event::factory()->count(20)->create(["stadium_id" => 1]);
+        Event::factory()->count(20)->create(['stadium_id' => 1]);
     }
 }

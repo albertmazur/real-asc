@@ -1,9 +1,10 @@
 @extends('dashboard.main')
+
 @section('dashboard.content')
-    @include("elemnts.errors")
+    @include('elemnts.errors')
     <h4>{{ __('dashboard.stadium.edit') }}</h4>
-    <form action="{{ route('stadium.update') }}" method="post">
-        @method("put")
+    <form action="{{ route('stadium.update') }}" method="POST">
+        @method('put')
         @csrf
         <input type="hidden" name="id" value="{{ $stadium->id }}" />
         <div class="mb-3">
@@ -26,7 +27,7 @@
             <label for="places" class="form-label">{{ __('app.capacity') }}</label>
             <input type="number" min="0" step="1" class="form-control" id="size" name="places" value="{{ $stadium->places }}">
           </div>
-          <button type="submit" class="btn btn-primary  me-auto">{{ __('app.save_changes') }}</button>
+          <button type="submit" class="btn btn-primary me-auto">{{ __('app.save_changes') }}</button>
     </form>
 </div>
 @endsection

@@ -15,12 +15,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table)
+        {
             $table->id();
-            $table->string("number");
-            $table->date("dateBuy");
-            $table->time("timeBuy");
-            $table->enum("state", ["Kupiony", "Zwrócony"]);
+            $table->string('number');
+            $table->date('dateBuy');
+            $table->time('timeBuy');
+            $table->enum('state', ['Kupiony', 'Zwrócony']);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
             $table->timestamps();
