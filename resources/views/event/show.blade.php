@@ -17,30 +17,77 @@
     </div>
 
     <div class="mt-3">
-        <div>
-            @if($event->date>$dateNotBuy && Auth::user()->role === 'client')
+        <div class="ticket-purchase-section p-4 bg-light rounded-3 shadow-sm mb-4 mx-5">
+            @if($event->date>$dateNotBuy && isset(Auth::user()->role) && Auth::user()->role === 'client')
                 @auth
-                    <h4>{{ __('app.buy_ticket') }}</h4>
-                    <h5>{{ __('app.price') }} <span id="priceEvent">{{ $event->price }}</span></h5>
-                    <p>{{ __('app.free_places') }}: {{ $set = $event->stadium->places-$event->tickets->count() }}</p>
-                    <form method="POST" action="{{ route('ticket.store') }}" class="" id="payment-form">
+                    <div class="ticket-info mb-4">
+                        <h4 class="text-primary mb-3">{{ __('app.buy_ticket') }}</h4>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold mb-0">{{ __('app.price') }}: <span id="priceEvent" class="text-primary">{{ $event->price }}</span> zł</h5>
+                            <span class="badge bg-info text-dark">{{ __('app.free_places') }}: {{ $set = $event->stadium->places-$event->tickets->count() }}</span>
+                        </div>
+                        <hr class="my-3">
+                    </div>
+                    
+                    <form method="POST" action="{{ route('ticket.store') }}" class="needs-validation" id="payment-form">
                         @csrf
-                        <div id="card-element"></div>
-                        <input type="hidden" name="payment_method" id="payment-method">
-                        <div style="width: 13rem" class="col-auto input-group mb-3">
-                            <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" class="form-control" placeholder="{{ __('app.count_ticket') }}" aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2" >
-                            <button class="btn btn-primary" type="submit" id="button-addon2">{{ __('app.buy') }}</button>
-                          </div>
+                        <h4 class="mb-4 text-center">Formularz płatności</h4>
+                        
+                        <div class="mb-3">
+                            <label for="card-number" class="form-label fw-bold">Numer karty</label>
+                            <div id="card-number" class="form-control py-3"></div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="card-expiry" class="form-label fw-bold">Data ważności</label>
+                                <div id="card-expiry" class="form-control py-3"></div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="card-cvc" class="form-label fw-bold">Kod CVC</label>
+                                <div id="card-cvc" class="form-control py-3"></div>
+                            </div>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="countTickets" class="form-label fw-bold">{{ __('app.count_ticket') }}</label>
+                            <div class="input-group">
+                                <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" 
+                                    class="form-control" placeholder="{{ __('app.count_ticket') }}" 
+                                    aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2">
+                                <span class="input-group-text">szt.</span>
+                            </div>
+                        </div>
+                    
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
+                    
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="fs-5 fw-bold">{{ __('app.sum') }}: <span id="sumPrice" class="text-primary">0.00</span> zł</div>
+                            <button class="btn btn-primary btn-lg px-4" type="submit" id="button-addon2">
+                                <i class="bi bi-credit-card me-2"></i>{{ __('app.buy') }}
+                            </button>
+                        </div>
                     </form>
-                    <h5>{{ __('app.sum') }}: <span id="sumPrice">0.00</span></h5>
                 @else
-                    <h4>{{ __('app.no_account_ticket') }}</h4>
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary">{{ __('app.login_in') }}</a>
-                    <a href="{{ route('register') }}" class="btn btn-outline-primary">{{ __('app.sign_up') }}</a>
+                    <div class="text-center py-4">
+                        <h4 class="mb-4">{{ __('app.no_account_ticket') }}</h4>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{{ route('login') }}" class="btn btn-primary">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>{{ __('app.login_in') }}
+                            </a>
+                            <a href="{{ route('register') }}" class="btn btn-outline-primary">
+                                <i class="bi bi-person-plus me-2"></i>{{ __('app.sign_up') }}
+                            </a>
+                        </div>
+                    </div>
                 @endauth
             @else
-                <h4>{{ __('app.no_buy_ticket') }}</h4>
+                <div class="alert alert-warning text-center py-4" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill fs-1 d-block mb-3"></i>
+                    <h4>{{ __('app.no_buy_ticket') }}</h4>
+                    <p class="mb-0 text-muted">Sprzedaż biletów na to wydarzenie została zamknięta lub nie jesteś zalogowany jako klient.</p>
+                </div>
             @endif
         </div>
 
@@ -65,7 +112,7 @@
                 <a href="{{ route('register') }}" class="btn btn-outline-primary">{{ __('app.sign_up') }}</a>
             @else
                 <h4>{{ __('app.comment_add') }}</h4>
-                <form method="POST" action="{{ route('comment.store') }}" class="row g-2">
+                <form method="POST" action="{{ route('comment.store') }}">
                     @csrf
                       <div class="mb-3">
                         <label for="content" class="form-label">{{ __('app.description') }}</label>
@@ -76,9 +123,9 @@
                 </form>
             @endguest
         </div>
-        <div style="display: none" id="registrationComment" class="mt-3">
+        <div id="registrationComment" class="mt-3 d-none">
             <h4>{{ __('app.submission_comment') }}</h4>
-            <form method="POST" action="{{ route('submission.store') }}" class="row g-2">
+            <form method="POST" action="{{ route('submission.store') }}">
                 @csrf
                 <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
                     <option selected value="obrażliwe">{{ __('dashboard.comment.offensive') }}</option>
@@ -94,31 +141,6 @@
             </form>
         </div>
     </div>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-<script>
-    let stripe = Stripe("{{ config('services.stripe.key') }}");
 
-    async function setupStripe() {
-        const response = await fetch("{{ route('ticket.create-payment-intent') }}");
-        const { clientSecret } = await response.json();
-
-        const elements = stripe.elements({ clientSecret });
-        const paymentElement = elements.create("payment");
-        paymentElement.mount("#payment-element");
-
-        document.getElementById("payment-form").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const { error } = await stripe.confirmPayment({
-                elements,
-                confirmParams: { return_url: "{{ route('ticket.payment.status') }}" },
-            });
-
-            if (error) alert(error.message);
-        });
-    }
-
-    setupStripe();
-</script>
-✅ Podsu
+    @include('event.script')
 @endsection
