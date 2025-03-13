@@ -1,4 +1,4 @@
-# Real ASC
+<h1 align="center">Real ASC</h1>
 
 <p align="center">
     <img  src="storage/images/logo.ico"/>
