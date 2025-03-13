@@ -31,21 +31,21 @@
                     
                     <form method="POST" action="{{ route('ticket.store') }}" class="needs-validation" id="payment-form">
                         @csrf
-                        <h4 class="mb-4 text-center">Formularz płatności</h4>
+                        <h4 class="mb-4 text-center">{{ __('event.form') }}</h4>
                         
                         <div class="mb-3">
-                            <label for="card-number" class="form-label fw-bold">Numer karty</label>
+                            <label for="card-number" class="form-label fw-bold">{{ __('event.number_card') }}</label>
                             <div id="card-number" class="form-control py-3"></div>
                         </div>
                         
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="card-expiry" class="form-label fw-bold">Data ważności</label>
+                                <label for="card-expiry" class="form-label fw-bold">{{ __('event.date') }}</label>
                                 <div id="card-expiry" class="form-control py-3"></div>
                             </div>
                             
                             <div class="col-md-6">
-                                <label for="card-cvc" class="form-label fw-bold">Kod CVC</label>
+                                <label for="card-cvc" class="form-label fw-bold">{{ __('event.cvc') }}</label>
                                 <div id="card-cvc" class="form-control py-3"></div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                 <div class="alert alert-warning text-center py-4" role="alert">
                     <i class="bi bi-exclamation-triangle-fill fs-1 d-block mb-3"></i>
                     <h4>{{ __('app.no_buy_ticket') }}</h4>
-                    <p class="mb-0 text-muted">Sprzedaż biletów na to wydarzenie została zamknięta lub nie jesteś zalogowany jako klient.</p>
+                    <p class="mb-0 text-muted">{{ __('event.not_login') }}</p>
                 </div>
             @endif
         </div>
