@@ -16,7 +16,7 @@ return [
     'buy' => "Kup",
     'sum' => "Sum",
     'ticket' => "Ticket",
-    'buy_ticket' => "Buy a ticket",
+    'buy_ticket' => "Buy a ticket/s",
     'success_buy_ticket' => "Successfully buy",
     'no_buy_ticket' => "Tickets are no longer available for purchase",
     'count_ticket' => "Number of tickets",

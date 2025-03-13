@@ -52,7 +52,7 @@
                     
                         <div class="mb-3">
                             <label for="countTickets" class="form-label fw-bold">{{ __('app.count_ticket') }}</label>
-                            <div class="input-group">
+                            <div class="input-group w-25">
                                 <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" 
                                     class="form-control" placeholder="{{ __('app.count_ticket') }}" 
                                     aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2">
