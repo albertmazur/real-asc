@@ -17,7 +17,7 @@ return [
     'sum' => "Suma",
     'ticket' => "Bilet",
     'buy_ticket' => "Kup bilet/y",
-    'success_buy_ticket' => "Udało się kupić",
+    'success_buy_ticket' => "Płatność zakończona sukcesem!",
     'no_buy_ticket' => "Nie można już kupić biletów",
     'count_ticket' => "Ilość biletów",
     'no_account_ticket' => "Aby kupić bilet musisz mieć konto",
@@ -60,6 +60,11 @@ return [
     'close' => "Zamknij",
     'nav_toggle' => "Przełącz nawigację",
     'dashboard' => "Panel",
+    '3D_secure' => "Wymagana autoryzacja 3D Secure",
+    'lang' => [
+        'en' => "Angielski",
+        'pl' => "Polski"
+    ],
     'main' => [
         'welcome_in_club' => "Witaj w klubie",
         'upcoming_events' => "Najbliższe wydarzenia",

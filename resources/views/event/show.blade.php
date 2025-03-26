@@ -34,7 +34,7 @@
                         <h4 class="mb-4 text-center">{{ __('event.form') }}</h4>
                         
                         <div class="mb-3">
-                            <label for="card-number" class="form-label fw-bold">{{ __('event.number_card') }}</label>
+                            <label for="card-number" class="form-label fw-bold p-0">{{ __('event.number_card') }}</label>
                             <div id="card-number" class="form-control py-3"></div>
                         </div>
                         
@@ -50,9 +50,9 @@
                             </div>
                         </div>
                     
-                        <div class="mb-3">
+                        <div class="col-12 col-md-6 mb-3">
                             <label for="countTickets" class="form-label fw-bold">{{ __('app.count_ticket') }}</label>
-                            <div class="input-group w-25">
+                            <div class="input-group">
                                 <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $set }}" step="1" 
                                     class="form-control" placeholder="{{ __('app.count_ticket') }}" 
                                     aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2">
@@ -60,6 +60,7 @@
                             </div>
                         </div>
                     
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
                     
                         <div class="d-flex justify-content-between align-items-center mb-3">

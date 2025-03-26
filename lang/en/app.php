@@ -13,11 +13,11 @@ return [
     'sign_up' => "Sign up",
     'registration' => "Registration",
     'login_out' => "Log out",
-    'buy' => "Kup",
+    'buy' => "Buy",
     'sum' => "Sum",
     'ticket' => "Ticket",
     'buy_ticket' => "Buy a ticket/s",
-    'success_buy_ticket' => "Successfully buy",
+    'success_buy_ticket' => "Payment completed successfully!",
     'no_buy_ticket' => "Tickets are no longer available for purchase",
     'count_ticket' => "Number of tickets",
     'no_account_ticket' => "To buy a ticket you need to have an account",
@@ -60,6 +60,11 @@ return [
     'close' => "Close",
     'nav_toggle' => "Toggle navigation",
     'dashboard' => "Dashboard",
+    '3D_secure' => "3D Secure authorization required",
+    'lang' => [
+        'en' => "English",
+        'pl' => "Polish"
+    ],
     'main' => [
         'welcome_in_club' => "Welcome in the club",
         'upcoming_events' => "Upcoming events",

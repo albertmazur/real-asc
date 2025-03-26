@@ -19,12 +19,12 @@
                 <!-- Authentication Links -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lang.switch', 'en') }}">
-                        <img width="25" src="{{ asset('images/gb.svg') }}" alt="English"/>
+                        <img width="25" src="{{ asset('images/gb.svg') }}" alt="{{ __('app.lang.en') }}"/>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lang.switch', 'pl') }}">
-                        <img width="25" src="{{ asset('images/pl.svg') }}" alt="Poland"/>
+                        <img width="25" src="{{ asset('images/pl.svg') }}" alt="{{ __('app.lang.pl') }}"/>
                     </a>
                 </li>
 

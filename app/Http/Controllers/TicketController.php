@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Stripe\Stripe;
 use App\Models\Event;
 use App\Models\Ticket;
-use Stripe\PaymentIntent;
 use Illuminate\Http\Request;
 use App\Repository\TicketRepository;
 use Illuminate\Support\Facades\Auth;
@@ -59,34 +57,25 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        if(Gate::allows('client', Auth::user()))
+        if(!Gate::allows('client', Auth::user()))
         {
-            $date = $request->validated();
-            $user = auth()->user();
-            try
-            {
-                $user->charge(1000, $date['payment_method']); // Pobiera 10 PLN (1000 groszy)
-                $this->ticketRepository->add($date['countTickets'], $date['event_id']);
-                return back()->with('success', __('app.success_buy_ticket'));
-            }
-            catch (IncompletePayment $exception)
-            {
-                return back()->with('error', 'Wymagana autoryzacja 3D Secure');
-            }
+            return response()->json(['success' => false, 'error' => __('page.no_permissions')], 403);
         }
-        else abort(403);
-    }
 
-    public function createPaymentIntent()
-    {
-        Stripe::setApiKey(config('services.stripe.secret'));
-    
-        $paymentIntent = PaymentIntent::create([
-            'amount' => 1000, // 10 PLN (wartość w groszach)
-            'currency' => 'pln',
-        ]);
-    
-        return response()->json(['clientSecret' => $paymentIntent->client_secret]);
+        $data = $request->validated();
+        $user = auth()->user();
+        $event = Event::findOrFail($data['event_id']);
+        $amount = $event->price * 100;
+        try
+        {
+            $user->charge($amount, $data['payment_method']);
+            $this->ticketRepository->add($data['countTickets'], $data['event_id']);
+            return response()->json(['success' => true, 'message' => __('app.success_buy_ticket')]);
+        }
+        catch (IncompletePayment $exception)
+        {
+            return response()->json(['success' => false, 'error' => __('app.3D_secure')], 400);
+        }
     }
 
     /**
@@ -173,5 +162,9 @@ class TicketController extends Controller
             return back()->with($p, $message);
         }
         else abort(403);
+    }
+
+    public function paymentStatus(){
+        return redirect()->back()->with('success', __('app.success_buy_ticket'));
     }
 }

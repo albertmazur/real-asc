@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'welcome' => "Welcome to the panel",
+    'welcome' => "Witamy w panelu",
     'choose_topic' => "Wybierz temat",
     'sort_choice' => "Wybierz po czym sortować",
     'event' => [
