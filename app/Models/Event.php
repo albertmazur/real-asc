@@ -31,4 +31,8 @@ class Event extends Model
         return $this->hasMany(Ticket::class);
     }
 
+    public function freeSet()
+    {
+        return $this->stadium->places - $this->tickets->where('state', '=', "Kupiony")->count();
+    }
 }

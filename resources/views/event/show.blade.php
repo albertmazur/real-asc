@@ -24,7 +24,7 @@
                         <h4 class="text-primary mb-3">{{ __('app.buy_ticket') }}</h4>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h5 class="fw-bold mb-0">{{ __('app.price') }}: <span id="priceEvent" class="text-primary">{{ $event->price }}</span> zł</h5>
-                            <span class="badge bg-info text-dark">{{ __('app.free_places') }}: {{ $set = $event->stadium->places-$event->tickets->count() }}</span>
+                            <span class="badge bg-info text-dark">{{ __('app.free_places') }}: {{ $set = $event->freeSet() }}</span>
                         </div>
                         <hr class="my-3">
                     </div>
