@@ -97,11 +97,17 @@ Route::middleware(['auth', 'verified'])->group(function (){
     });
 
     Route::group([
-        'prefix' => 'home',
-        'namespace' => 'home',
-        'as' => 'home.'
+        'prefix' => 'user',
+        'namespace' => 'user',
+        'as' => 'user.'
     ], function (){
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+        Route::get('settings', [UserController::class, 'edit'])->name('settings');
+        Route::post('settings/profile', [UserController::class, 'updateProfile'])->name('update.profile');
+        Route::post('settings/email', [UserController::class, 'changeEmail'])->name('change.email');
+        Route::post('settings/password', [UserController::class, 'changePassword'])->name('change.password');
+        Route::post('settings/language', [UserController::class, 'setLanguage'])->name('change.language');
+        Route::delete('settings/account', [UserController::class, 'deleteAccount'])->name('delete.account');
     });
 });
 

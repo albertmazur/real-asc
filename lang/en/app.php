@@ -59,6 +59,7 @@ return [
     'save_update' => "Changes saved",
     'close' => "Close",
     'nav_toggle' => "Toggle navigation",
+    'setting' => "Setting",
     'dashboard' => "Dashboard",
     '3D_secure' => "3D Secure authorization required",
     'lang' => [

@@ -59,6 +59,7 @@ return [
     'save_update' => "Zapisano zmiany",
     'close' => "Zamknij",
     'nav_toggle' => "Przełącz nawigację",
+    'setting' => "Ustawienia",
     'dashboard' => "Panel",
     '3D_secure' => "Wymagana autoryzacja 3D Secure",
     'lang' => [
