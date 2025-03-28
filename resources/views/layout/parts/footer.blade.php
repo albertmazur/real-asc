@@ -7,17 +7,17 @@
     </div>
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
-            <a class="text-body-secondary" href="#">
+            <a class="icon text-body-secondary" href="#">
                 <i class="bi bi-twitter-x fs-3"></i>
             </a>
         </li>
         <li class="ms-3">
-            <a class="text-body-secondary" href="#">
+            <a class="icon text-body-secondary" href="#">
                 <i class="bi bi-instagram fs-3"></i>
             </a>
         </li>
         <li class="ms-3">
-            <a class="text-body-secondary" href="#">
+            <a class="icon text-body-secondary" href="#">
                 <i class="bi bi-facebook fs-3"></i>
             </a>
         </li>

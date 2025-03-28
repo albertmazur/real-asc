@@ -9,3 +9,7 @@
 
 // Bootstrap Icons
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.icon:hover{
+    color: var(--bs-primary) !important;
+}
