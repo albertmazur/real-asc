@@ -59,7 +59,7 @@ class TicketController extends Controller
     {
         if(!Gate::allows('client', Auth::user()))
         {
-            return response()->json(['success' => false, 'error' => __('page.no_permissions')], 403);
+            return response()->json(['success' => false, 'error' => __('error.no_permissions')], 403);
         }
 
         $data = $request->validated();
