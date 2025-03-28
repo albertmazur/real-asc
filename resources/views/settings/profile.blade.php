@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">{{ __('settings.personal_info') }}</div>
+    <p class="card-header">{{ __('settings.personal_info') }}</p>
     <div class="card-body">
         <form method="POST" action="{{ route('user.update.profile') }}">
             @csrf

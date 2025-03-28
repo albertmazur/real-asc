@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">{{ __('settings.change_email') }}</div>
+    <p class="card-header">{{ __('settings.change_email') }}</p>
     <div class="card-body">
         <form method="POST" action="{{ route('user.change.email') }}">
             @csrf

@@ -6,8 +6,8 @@
             <div class="mb-3">
                 <label for="contentSearch" class="form-label">{{ __('app.find') }}</label>
                 <input type="text" id="contentSearch" name="contentSearch" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $nameSearch ?? '' }}">
-              </div>
-              <div class="mb-3">
+            </div>
+            <div class="mb-3">
                 <label for="sortWhoSearch" class="form-label">{{ __('app.user') }}</label>
                 <select name="sortWhoSearch" class="form-select" aria-label="{{ __('dashboard.user.select') }}">
                     <option @if($sortWhoSearch == -2) selected @endif value="-2">{{ __('app.all') }}</option>

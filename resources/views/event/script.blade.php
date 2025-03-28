@@ -41,7 +41,6 @@
                 if (data.success) {
                     window.location.href = "{{ route('ticket.payment.status') }}"
                 } else {
-                    console.error('Błąd:', error)
                     showErrorAlert(data.error)
                 }
             })

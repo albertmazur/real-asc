@@ -1,5 +1,5 @@
 <div class="card border-danger">
-    <div class="card-header bg-danger text-white">{{ __('settings.delete_account') }}</div>
+    <p class="card-header bg-danger text-white">{{ __('settings.delete_account') }}</p>
     <div class="card-body">
         <p class="text-danger">{{ __('settings.delete_account_warning') }}</p>
         <form method="POST" action="{{ route('user.delete.account') }}">

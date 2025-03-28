@@ -67,10 +67,21 @@ class EventRepository implements Repository{
     public function filterBy(string $name = null, string $sort = 'name', int $limit): LengthAwarePaginator{
         $query = $this->eventModel;
 
-        if($sort == 'name') $query =$query->orderBy($sort);
-        else $query = $query->orderByDesc($sort);
-
+        if($sort === 'freeSet')
+        {
+            $query = $query->selectRaw('events.*, (stadiums.places - COUNT(tickets.id)) AS freeSet')
+                ->join('stadiums', 'events.stadium_id', '=', 'stadiums.id')
+                ->leftJoin('tickets', function ($join) {
+                    $join->on('events.id', '=', 'tickets.event_id')
+                         ->where('tickets.state', '=', 'Kupiony');
+                })
+                ->groupBy('events.id', 'stadiums.places')
+                ->orderBy('freeSet');
+        }
+        else $query = $query->orderBy($sort);
+        
         if($name) $query = $query->where('name', 'like', $name.'%');
+        
         return $query->paginate($limit);
     }
 }

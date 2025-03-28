@@ -9,6 +9,5 @@
             <input type="hidden" name="id" value="{{ $submission->id }}">
             <input type="submit" class="btn btn-danger" value="{{ __('dashboard.comment.delete_comments_submission') }}">
         </form>
-
     </div>
 </div>

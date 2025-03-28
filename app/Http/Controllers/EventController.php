@@ -25,7 +25,7 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
 
     private function viewList(Request $request, string $link)
@@ -33,34 +33,24 @@ class EventController extends Controller
         $name = $request->get('nameSearch');
         $sort = $request->get('sortSearch') ?? 'name';
 
-        if($sort == 'freeSet') $resultPaginator = $this->eventRepository->filterBy($name, 'name', 10);
-        else $resultPaginator = $this->eventRepository->filterBy($name, $sort, 10);
+        $resultPaginator = $this->eventRepository->filterBy($name, $sort, 10);
 
-        $result = $resultPaginator->getCollection();
-        $result->map(function ($item)
-        {
-            $item->freeSet = (($item->stadium->places)-($item->tickets->count()));
-            return $item;
-        });
-
-        if($sort == 'freeSet') $result = $result->sortBy('freeSet');
-        $resultPaginator->setCollection($result);
         $resultPaginator->appends([
             'nameSearch' => $name,
             'sortSearch' => $sort
         ]);
-        
-        if($link == 'dashboard.admin.event') return view($link, [
-            'events' => $resultPaginator,
-            'nameSearch' => $name,
-            'sortSearch' => $sort,
-            'stadiums' => $this->stadiumRepository->all()
-        ]);
-        else return view($link, [
+
+        $viewData = [
             'events' => $resultPaginator,
             'nameSearch' => $name,
             'sortSearch' => $sort
-        ]);
+        ];
+        
+        if ($link === 'dashboard.admin.event.main') {
+            $viewData['stadiums'] = $this->stadiumRepository->all();
+        }
+        
+        return view($link, $viewData);
     }
 
     public function index(Request $request)
@@ -81,8 +71,8 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreEventRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\Store\StoreEventRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreEventRequest $request)
     {
@@ -99,7 +89,7 @@ class EventController extends Controller
     {
         if(Gate::allows('admin', Auth::user()))
         {
-            return $this->viewList($request, 'dashboard.admin.event');
+            return $this->viewList($request, 'dashboard.admin.event.main');
         }
         else abort(403);
     }
@@ -108,7 +98,7 @@ class EventController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(int $eventId)
     {
@@ -122,13 +112,13 @@ class EventController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(int $eventId)
     {
         if(Gate::allows('admin', Auth::user()))
         {
-            return view('dashboard.admin.editEvent', [
+            return view('dashboard.admin.event.edit', [
                 'event' => $this->eventRepository->get($eventId),
                 'stadiums' => $this->stadiumRepository->all()
             ]);
@@ -139,7 +129,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateEventRequest  $request
+     * @param  \App\Http\Requests\Update\UpdateEventRequest  $request
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
@@ -149,7 +139,7 @@ class EventController extends Controller
         {
             $data = $request->validated();
             $this->eventRepository->update($data['id'], $data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
-            return  redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
+            return  redirect('event.dashboard')->with('success', __('dashboard.event.update'));
         }
         else abort(403);
     }

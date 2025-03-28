@@ -49,7 +49,7 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSubmissionRequest  $request
+     * @param  \App\Http\Requests\Store\StoreSubmissionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSubmissionRequest $request)
@@ -84,7 +84,7 @@ class SubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSubmissionRequest  $request
+     * @param  \App\Http\Requests\Update\UpdateSubmissionRequest  $request
      * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Http\Response
      */

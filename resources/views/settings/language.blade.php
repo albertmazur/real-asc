@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">{{ __('settings.language_settings') }}</div>
+    <p class="card-header">{{ __('settings.language_settings') }}</p>
     <div class="card-body">
         <form method="POST" action="{{ route('user.change.language') }}">
             @csrf

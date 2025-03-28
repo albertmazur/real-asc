@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-header">{{ __('settings.change_password') }}</div>
+    <p class="card-header">{{ __('settings.change_password') }}</p>
     <div class="card-body">
         <form method="POST" action="{{ route('user.change.password') }}">
             @csrf

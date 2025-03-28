@@ -52,7 +52,7 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTicketRequest  $request
+     * @param  \App\Http\Requests\Store\StoreTicketRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTicketRequest $request)
@@ -103,7 +103,7 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTicketRequest  $request
+     * @param  \App\Http\Requests\Update\UpdateTicketRequest  $request
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
