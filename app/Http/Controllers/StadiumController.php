@@ -86,7 +86,7 @@ class StadiumController extends Controller
      *
      * @param  \App\Http\Requests\Update\UpdateStadiumRequest  $request
      * @param  \App\Models\Stadium  $stadium
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateStadiumRequest $request)
     {
@@ -94,7 +94,7 @@ class StadiumController extends Controller
         {
             $date = $request->validated();
             $this->stadiumRepository->update($date['id'], $date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'],);
-            return redirect('stadium.index')->with('success', __('app.save_changes'));
+            return redirect()->route('stadium.index')->with('success', __('app.save_changes'));
         }
         else abort(403);
     }

@@ -23,6 +23,8 @@ return [
     'no_account_ticket' => "Aby kupić bilet musisz mieć konto",
     'success_return_ticket' => "Udało się zwróćić",
     'error_return_ticket' => "Nie można zwrócić",
+    'image' => "Zdjęcie",
+    'current_image' => "Obecne zdjęcie",
     'user' => "Użytkownik",
     'stadium' => "Stadion",
     'stadiums' => "Stadiony",

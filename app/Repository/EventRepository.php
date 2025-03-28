@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface EventRepository{
     public function get(int $id): Event;
-    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id);
-    public function update(int $id, string $name, string $description = null, string $date, string $time, float $price, int $stadium_id);
+    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null);
+    public function update(int $id, string $name, string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null);
     public function allPaginated(int $limit): LengthAwarePaginator;
     public function all(): Collection;
     public function filterBy(string $name = null, string $sort = 'name', int $limit):LengthAwarePaginator;

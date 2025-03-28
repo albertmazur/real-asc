@@ -23,6 +23,8 @@ return [
     'no_account_ticket' => "To buy a ticket you need to have an account",
     'success_return_ticket' => "Successfully returned",
     'error_return_ticket' => "It is not possible to return",
+    'image' => "Image",
+    'current_image' => "Current image",
     'user' => "User",
     'stadium' => "Stadium",
     'stadiums' => "Stadiums",

@@ -16,7 +16,7 @@ class EventRepository implements Repository{
         $this->eventModel = $event;
     }
 
-    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id)
+    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
     {
         $event = new Event;
         $event->name = $name;
@@ -26,11 +26,11 @@ class EventRepository implements Repository{
         $event->price = $price;
         $event->price = $price;
         $event->stadium_id = $stadium_id;
+        $event->image = $imagePath;
         $event->save();
-        //$this->eventModel->creating(['name' => $name, 'date' => $date, 'time' => $time]);
     }
 
-    public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id)
+    public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
     {
         $event = $this->eventModel->find($id);
         $event->name = $name;
@@ -40,6 +40,7 @@ class EventRepository implements Repository{
         $event->price = $price;
         $event->price = $price;
         $event->stadium_id = $stadium_id;
+        $event->image = $imagePath;
         $event->save();
     }
 

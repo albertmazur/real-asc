@@ -79,7 +79,22 @@ class EventController extends Controller
         if(Gate::allows('admin', Auth::user()))
         {
             $data = $request->validated();
-            $this->eventRepository->add($data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
+
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('events', 'public');
+            }
+
+            $this->eventRepository->add(
+                $data['name'],
+                $data['description'],
+                $data['date'],
+                $data['time'],
+                $data['price'],
+                $data['stadium_id'],
+                $imagePath
+            );
+
             return back()->with('success', __('dashboard.event.add'));
         }
         else abort(403);
@@ -131,15 +146,31 @@ class EventController extends Controller
      *
      * @param  \App\Http\Requests\Update\UpdateEventRequest  $request
      * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse 
      */
     public function update(UpdateEventRequest $request)
     {
         if(Gate::allows('admin', Auth::user()))
         {
             $data = $request->validated();
-            $this->eventRepository->update($data['id'], $data['name'], $data['description'], $data['date'], $data['time'], $data['price'], $data['stadium_id']);
-            return  redirect('event.dashboard')->with('success', __('dashboard.event.update'));
+
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('events', 'public');
+            }
+
+            $this->eventRepository->update(
+                $data['id'],
+                $data['name'],
+                $data['description'],
+                $data['date'],
+                $data['time'],
+                $data['price'],
+                $data['stadium_id'],
+                $imagePath
+            );
+
+            return  redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
         }
         else abort(403);
     }

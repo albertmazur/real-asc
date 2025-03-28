@@ -29,7 +29,8 @@ class StoreEventRequest extends FormRequest
             'date' => ['required', 'date', 'after:today'],
             'time' => ['required', 'date_format:H:i'],
             'price' => ['required', 'decimal:0,2'],
-            'stadium_id' => ['required', 'integer']
+            'stadium_id' => ['required', 'integer'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,gif', 'max:2048']
         ];
     }
 }

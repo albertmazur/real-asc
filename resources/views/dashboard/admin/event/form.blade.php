@@ -1,4 +1,4 @@
-<form action="{{ isset($event) ? route('event.update') : route('event.store') }}" method="POST">
+<form action="{{ isset($event) ? route('event.update') : route('event.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if(isset($event))
         @method('PUT')
@@ -42,6 +42,17 @@
     <div class="mb-3">
         <label for="price" class="form-label">{{ __('app.price') }}</label>
         <input type="number" min="0" step="0.01" class="form-control" id="price" name="price" value="{{ $event->price ?? '' }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">{{ __('app.image') }}</label>
+        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        @if(isset($event) && $event->image)
+            <div class="mt-2">
+                <img src="{{ Storage::url($event->image) }}" alt="{{ $event->name }}" style="max-width: 200px;">
+                <small class="d-block">{{ __('app.current_image') }}</small>
+            </div>
+        @endif
     </div>
 
     <button type="submit" class="btn btn-primary  me-auto">

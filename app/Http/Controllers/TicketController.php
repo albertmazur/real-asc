@@ -165,6 +165,6 @@ class TicketController extends Controller
     }
 
     public function paymentStatus(){
-        return redirect()->back()->with('success', __('app.success_buy_ticket'));
+        return back()->with('success', __('app.success_buy_ticket'));
     }
 }
