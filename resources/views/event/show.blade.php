@@ -7,6 +7,12 @@
             <h1 class="text-center">{{ $event->name }}</h1>
         </div>
         <div class="card-body">
+            @if($event->image)
+                <div class="text-center mb-4">
+                    <img src="{{ Storage::url($event->image) }}" class="img-fluid rounded" alt="{{ $event->name }}" style="max-height: 400px;">
+                </div>
+            @endif
+            
             <h4 class="text-center">{{ $event->date }} {{ $event->time }}</h4>
             <p class="text-center">{{ $event->description }}</p>
             <div class="mt-2">
