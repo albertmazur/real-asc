@@ -23,8 +23,8 @@ Real ASC is a web application designed to manage a sports club. It allows users 
 
 ### Clone the Repository
 ```bash
-git clone <repo-url>
-cd <repo-folder>
+git clone https://github.com/albertmazur/real-asc.git
+cd real-asc
 ```
 
 ### Install Dependencies
