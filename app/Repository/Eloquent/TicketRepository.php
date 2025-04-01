@@ -2,12 +2,14 @@
 
 namespace App\Repository\Eloquent;
 
+use Stripe\Refund;
+use Stripe\Stripe;
 use App\Models\Ticket;
-use App\Repository\TicketRepository as Repository;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Repository\TicketRepository as Repository;
 
 class TicketRepository implements Repository{
     private Ticket $ticketModel;
@@ -17,13 +19,14 @@ class TicketRepository implements Repository{
         $this->ticketModel = $ticket;
     }
 
-    public function add(int $count, int $event_id)
+    public function add(int $count, int $event_id, string $stripe_payment_id)
     {
         for($i = 0; $i < $count; $i++)
         {
             $ticket = new Ticket();
             $ticket->user_id = Auth::id();
             $ticket->event_id = $event_id;
+            $ticket->stripe_payment_id = $stripe_payment_id;
             $ticket->save();
         }
 
@@ -72,11 +75,23 @@ class TicketRepository implements Repository{
         $ticket = $this->ticketModel->find($id);
         $ticket->state = 'Zwrócony';
 
-        if($ticket->event->date>(Carbon::now()->addDays(3)))
+        try
         {
-            $ticket->update();
-            return true;
+            Stripe::setApiKey(config('services.stripe.secret')); 
+            Refund::create([
+                'payment_intent' => $ticket->stripe_payment_id,
+            ]);
+
+            if($ticket->event->date>(Carbon::now()->addDays(3)))
+            {
+                $ticket->update();
+                return true;
+            }
+            else return false;
         }
-        else return false;
+        catch (\Exception $e)
+        {
+            return false;
+        }
     }
 }

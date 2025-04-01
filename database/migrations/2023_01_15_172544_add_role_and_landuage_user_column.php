@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table)
         {
             $table->enum('role', ['admin', 'moderator', 'client']);
+            $table->enum('language', ['pl', 'en'])->default('pl');
         });
     }
 
@@ -30,6 +31,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table)
         {
             $table->dropColumn('role');
+            $table->dropColumn('language');
         });
     }
 };

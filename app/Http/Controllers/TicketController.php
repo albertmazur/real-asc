@@ -68,8 +68,8 @@ class TicketController extends Controller
         $amount = $event->price * 100;
         try
         {
-            $user->charge($amount, $data['payment_method']);
-            $this->ticketRepository->add($data['countTickets'], $data['event_id']);
+            $paymentIntent = $user->charge($amount, $data['payment_method']);
+            $this->ticketRepository->add($data['countTickets'], $data['event_id'], $paymentIntent->id);
             return response()->json(['success' => true, 'message' => __('app.success_buy_ticket')]);
         }
         catch (IncompletePayment $exception)

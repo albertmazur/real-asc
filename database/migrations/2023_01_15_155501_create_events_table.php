@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->float('price');
+            $table->string('image')->nullable();
             $table->foreignIdFor(Stadium::class);
             $table->timestamps();
         });
