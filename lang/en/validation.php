@@ -174,5 +174,7 @@ return [
     |
     */
 
+    'language_required' => 'The language field is required.',
+    'language_invalid' => 'The selected language is invalid.',
     'attributes' => [],
 ];

@@ -103,7 +103,7 @@
             @foreach($event->commentsSort() as $comment)
                 <div class="card m-2">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $comment->user->name}}</h5>
+                        <h5 class="card-title">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $comment->date }} {{ $comment->time }}</h6>
                         <p class="card-text">{{ $comment->content }}</p>
                         <button class="reportButton btn btn-danger" value="{{ $comment->id }}">{{ __('app.submission_comment') }}</button>

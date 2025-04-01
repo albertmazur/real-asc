@@ -1,5 +1,5 @@
 <div class="card mb-3">
-    <h5 class="card-header">{{ $comment->user->name }}</h5>
+    <p class="card-header h5">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</p>
     <div class="card-body">
         <h5 class="card-title">{{ $comment->forWhat }}</h5>
         <p class="card-text">{{ $comment->content }}</p>

@@ -3,8 +3,10 @@
 return [
     'lp' => "Lp",
     'name' => "Name",
-    'first_name' => "Name",
+    'first_name' => "Fist name",
+    'last_name' => "Last name",
     'e_mail' => "E-mail",
+    'tel' => "Phone",
     'description' => "Description",
     'enter_description' => "Enter description",
     'address' => "Address",

@@ -12,7 +12,7 @@
                 <select name="sortWhoSearch" class="form-select" aria-label="{{ __('dashboard.user.select') }}">
                     <option @if($sortWhoSearch == -2) selected @endif value="-2">{{ __('app.all') }}</option>
                     @foreach($users as $user)
-                        <option @if($sortWhoSearch == $user->id) selected @endif value="{{ $user->id }}">{{ $user->name }}</option>
+                        <option @if($sortWhoSearch == $user->id) selected @endif value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                     @endforeach
                 </select>
             </div>

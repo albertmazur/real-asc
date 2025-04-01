@@ -8,7 +8,6 @@ return [
     'language_settings' => "Language Settings",
     'delete_account' => "Delete Account",
     'personal_info' => "Personal Information",
-    'name' => "Name",
     'save_changes' => "Save Changes",
     'current_email' => "Current Email",
     'new_email' => "New Email",

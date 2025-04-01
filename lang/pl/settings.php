@@ -8,7 +8,6 @@ return [
     'language_settings' => "Ustawienia języka",
     'delete_account' => "Usuń konto",
     'personal_info' => "Informacje osobiste",
-    'name' => "Imię i nazwisko",
     'save_changes' => "Zapisz zmiany",
     'current_email' => "Aktualny e-mail",
     'new_email' => "Nowy e-mail",

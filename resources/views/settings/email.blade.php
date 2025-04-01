@@ -9,11 +9,21 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">{{ __('settings.new_email') }}</label>
-                <input type="email" class="form-control" name="email" required>
+                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" required>
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label">{{ __('settings.confirm_password') }}</label>
-                <input type="password" class="form-control" name="current_password" required>
+                <input type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" required>
+                @error('current_password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">{{ __('settings.update_email') }}</button>
         </form>

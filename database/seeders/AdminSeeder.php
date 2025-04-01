@@ -18,10 +18,12 @@ class AdminSeeder extends Seeder
     public function run()
     {
         User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'admin@example.com',
-            'role' => 'admin',
-            'password'=> bcrypt('Admin123'),
+            'first_name' => "Admin",
+            'last_name' => "Admin",
+            'email' => "admin@example.com",
+            'role' => "admin",
+            'tel' => "99988777",
+            'password'=> bcrypt("Admin123"),
             'email_verified_at' => Carbon::now(),
             'remember_token' => Str::random(10),
             'created_at' => Carbon::now(),

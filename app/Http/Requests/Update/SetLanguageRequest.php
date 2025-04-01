@@ -14,7 +14,7 @@ class SetLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'language' => 'required|in:pl,en'
+            'language' => ['required', 'in:pl,en']
         ];
     }
 

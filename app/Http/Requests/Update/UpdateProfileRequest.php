@@ -14,16 +14,18 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|min:2'
+            'first_name' => ['required', 'string', 'max:255', 'min:2'],
+            'last_name' => ['required', 'string', 'max:255', 'min:2'],
+            'tel' => ['required', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/'],
+            'language' => ['required', 'in:pl,en']
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => __('validation.name_required'),
-            'name.min' => __('validation.name_min'),
-            'name.max' => __('validation.name_max')
+            'language.required' => __('validation.language_required'),
+            'language.in' => __('validation.language_invalid')
         ];
     }
 }

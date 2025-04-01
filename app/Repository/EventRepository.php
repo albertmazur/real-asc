@@ -15,5 +15,4 @@ interface EventRepository{
     public function filterBy(string $name = null, string $sort = 'name', int $limit):LengthAwarePaginator;
     public function orderByData(int $limit): Collection;
     public function mostComment(int $limit): Collection;
-    //public function filterBy(string $name): LengthAwarePaginator;
 }

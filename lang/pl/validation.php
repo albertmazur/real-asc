@@ -174,5 +174,7 @@ return [
     |
     */
 
+    'language_required' => 'Pole języka jest wymagane.',
+    'language_invalid' => 'Wybrany język jest nieprawidłowy.',
     'attributes' => [],
 ];

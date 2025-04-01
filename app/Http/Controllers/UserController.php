@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Update\ChangeEmailRequest;
 use App\Http\Requests\Update\SetLanguageRequest;
@@ -11,14 +12,17 @@ use App\Http\Requests\Update\ChangePasswordRequest;
 
 class UserController extends Controller
 {
+    private UserRepository $userRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('auth');
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -39,33 +43,26 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request)
     {
-        $user = Auth::user();
-        $user->name = $request->input('name');
-        $user->save();
+        $firstName = $request->input('first_name');
+        $lastName = $request->input('last_name');
+        $tel = $request->input('tel');
+        $language = $request->input('language');
 
+        $this->userRepository->updateDate(Auth::id(), $firstName, $lastName, $tel, $language);
         return back()->with('success', __('settings.profile_updated'));
     }
 
     public function changeEmail(ChangeEmailRequest $request)
     {
-        $user = Auth::user();
-        $user->email = $request->input('email');
-        $user->email_verified_at = null;
-        $user->save();
-
-        $user->sendEmailVerificationNotification();
-
+        $email = $request->input('email');
+        $this->userRepository->changeEmail(Auth::id(), $email);
         return back()->with('success', __('settings.email_changed'));
     }
 
     public function changePassword(ChangePasswordRequest $request)
     {
-        $user = Auth::user();
-        $user->password = bcrypt($request->input('password'));
-        $user->save();
-
-        Auth::logoutOtherDevices($request->input('password'));
-
+        $password = $request->input('password');
+        $this->userRepository->changePassword(Auth::id(), $password);
         return back()->with('success', __('settings.password_changed'));
     }
 
@@ -76,16 +73,12 @@ class UserController extends Controller
         $user->save();
 
         session()->put('language', $request->input('language'));
-
         return back()->with('success', __('settings.language_updated'));
     }
 
     public function deleteAccount(DeleteAccountRequest $request)
     {
-        $user = Auth::user();
-        Auth::logout();
-        $user->delete();
-
+        $this->userRepository->delete(Auth::id());
         return redirect()->route('home')->with('success', __('settings.account_deleted'));
     }
 }

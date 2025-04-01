@@ -2,9 +2,11 @@
 
 return [
     'lp' => "Lp",
-    'name' => "Nazwa",
+    'fist_name' => "Imię",
+    'last_name' => "Nazwisko",
     'first_name' => "Imię",
     'e_mail' => "E-mail",
+    'tel' => "Telefon",
     'description' => "Opis",
     'enter_description' => "Wpisz opis",
     'address' => "Adres",

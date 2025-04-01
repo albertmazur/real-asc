@@ -16,6 +16,9 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table)
         {
+            $table->renameColumn('name', 'first_name');
+            $table->string('last_name');
+            $table->string('tel');
             $table->enum('role', ['admin', 'moderator', 'client']);
             $table->enum('language', ['pl', 'en'])->default('pl');
         });
@@ -30,8 +33,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table)
         {
-            $table->dropColumn('role');
-            $table->dropColumn('language');
+            $table->renameColumn('first_name', 'name');
+            $table->dropColumn(['last_name', 'tel', 'role', 'language']);
         });
     }
 };

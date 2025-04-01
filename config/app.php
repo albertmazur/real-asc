@@ -201,6 +201,7 @@ return [
         App\Providers\TicketServiceProvider::class,
         App\Providers\SubmissionServiceProvider::class,
         App\Providers\StadiumServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
     ],
 
     /*
