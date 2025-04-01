@@ -59,7 +59,7 @@ php artisan storage:link
 php artisan serve
 ```
 
-The application will be available at: `http://127.0.0.1:8000`
+The application will be available at: `http://localhost`
 
 ## Payment System
 The application integrates with [Stripe](https://stripe.com/) to handle event payments. Ensure you have a valid Stripe API key configured in your `.env` file:
