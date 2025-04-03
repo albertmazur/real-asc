@@ -17,9 +17,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <div id="app" class="container flex-grow-1">
-        @include('layout.parts.navbar')
-
+    @include('layout.parts.navbar')
+    <div id="app" class="container flex-grow-1 my-5">
         <main>
             @include('layout.shaderd.messages')
             @yield('content')

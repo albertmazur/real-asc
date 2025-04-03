@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="80" />
+            <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="50" />
         </a>
         <a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a>
 
