@@ -6,7 +6,7 @@
     @endif
 
     <div class="mb-3">
-        <label for="name" class="form-label">{{ __('app.name') }}</label>
+        <label for="name" class="form-label">{{ __('dashboard.stadium.name') }}</label>
         <input type="text" class="form-control" id="name" name="name" value="{{ $stadium->name ?? '' }}">
     </div>
 

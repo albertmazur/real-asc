@@ -11,6 +11,7 @@ return [
         'select' => "Wybierz wydarzenie"
     ],
     'stadium' => [
+        'name' => "Nazwa",
         'add' => "Dodaj stadion",
         'added' => "Dodano stadion",
         'edit' => "Edytuj stadion",

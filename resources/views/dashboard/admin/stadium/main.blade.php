@@ -41,7 +41,7 @@
     </table>
     <div class="d-flex justify-content-center">{{ $stadiums->links() }}</div>
     <div class="mt-3">
-        <h4>{{ __('app.stadium.add') }}</h4>
+        <h4>{{ __('dashboard.stadium.add') }}</h4>
         @include('dashboard.admin.stadium.form', ['stadium' => null])
     </div>
 @endsection
