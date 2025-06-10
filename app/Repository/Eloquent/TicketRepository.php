@@ -34,7 +34,7 @@ class TicketRepository implements Repository{
     }
 
     public function get(int $id): Ticket{
-        return $this->ticketModel->find($id);
+        return $this->ticketModel->firstOrFail($id);
     }
 
     public function myTickets(int $sortEventSearch, string $how = 'All'): Collection{
@@ -72,12 +72,12 @@ class TicketRepository implements Repository{
     }
 
     public function backTicket(int $id): bool{
-        $ticket = $this->ticketModel->find($id);
+        $ticket = $this->ticketModel->firstOrFail($id);
         $ticket->state = 'Zwrócony';
 
         try
         {
-            Stripe::setApiKey(config('services.stripe.secret')); 
+            Stripe::setApiKey(config('services.stripe.secret'));
             Refund::create([
                 'payment_intent' => $ticket->stripe_payment_id,
             ]);

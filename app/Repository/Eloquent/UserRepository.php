@@ -16,7 +16,7 @@ class UserRepository implements Repository{
 
     public function get(int $id): User
     {
-        return $this->userModel->find($id);
+        return $this->userModel->firstOrFail($id);
     }
 
     public function delete(int $id)
@@ -28,13 +28,13 @@ class UserRepository implements Repository{
 
     public function updateDate(int $id, string $first_name, string $last_name, string $tel, string $language = 'pl', string $role = null)
     {
-        $user = $this->userModel->find($id);
+        $user = $this->userModel->firstOrFail($id);
         $user->first_name = $first_name;
         $user->last_name = $last_name;
         $user->tel = $tel;
         $user->language = $language;
         if($role) $user->role = $role;
-        
+
         return $user->save();
     }
 
@@ -50,7 +50,7 @@ class UserRepository implements Repository{
 
     public function changeEmail(int $id, string $email)
     {
-        $user = $this->userModel->find($id);
+        $user = $this->userModel->firstOrFail($id);
         $user->email = $email;
         $user->email_verified_at = null;
 

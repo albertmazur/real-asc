@@ -28,7 +28,7 @@ class CommentRepository implements Repository{
 
     public function get(int $id): Comment{
 
-        return $this->commentModel->find($id);
+        return $this->commentModel->firstOrFail($id);
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator

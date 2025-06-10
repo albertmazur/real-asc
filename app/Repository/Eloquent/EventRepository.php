@@ -32,7 +32,7 @@ class EventRepository implements Repository{
 
     public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
     {
-        $event = $this->eventModel->find($id);
+        $event = $this->eventModel->firstOrFail($id);
         $event->name = $name;
         $event->description = $description;
         $event->date = $date;
@@ -45,7 +45,7 @@ class EventRepository implements Repository{
     }
 
     public function get(int $id): Event{
-        return $this->eventModel->find($id);
+        return $this->eventModel->firstOrFail($id);
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator
@@ -80,9 +80,9 @@ class EventRepository implements Repository{
                 ->orderBy('freeSet');
         }
         else $query = $query->orderBy($sort);
-        
+
         if($name) $query = $query->where('name', 'like', $name.'%');
-        
+
         return $query->paginate($limit);
     }
 }

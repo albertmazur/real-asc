@@ -104,8 +104,8 @@ class SubmissionController extends Controller
         if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
         {
             $date = $request->validate(['id' => ['required', 'integer']]);
-            $submission = Submission::find($date['id']);
-            $comment = Comment::find($submission->comment_id);
+            $submission = Submission::firstOrFail($date['id']);
+            $comment = Comment::firstOrFail($submission->comment_id);
             if($comment) $comment->delete();
             $submission->delete();
             return back()->with('success', __('dashboard.comment.deleted_comments_submission'));
