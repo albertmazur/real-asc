@@ -12,7 +12,7 @@
                     <img src="{{ Storage::url($event->image) }}" class="img-fluid rounded" alt="{{ $event->name }}" style="max-height: 400px;">
                 </div>
             @endif
-            
+
             <h4 class="text-center">{{ $event->date }} {{ $event->time }}</h4>
             <p class="text-center">{{ $event->description }}</p>
             <div class="mt-2">
@@ -34,7 +34,7 @@
                         </div>
                         <hr class="my-3">
                     </div>
-                    
+
                     <form method="POST" action="{{ route('ticket.store') }}" class="needs-validation" id="payment-form">
                         @csrf
                         <h4 class="mb-4 text-center">{{ __('event.form') }}</h4>
@@ -59,8 +59,8 @@
                         <div class="col-12 col-md-6 mb-3">
                             <label for="countTickets" class="form-label fw-bold">{{ __('app.count_ticket') }}</label>
                             <div class="input-group">
-                                <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $event->freePlaces() }}" step="1" 
-                                    class="form-control" placeholder="{{ __('app.count_ticket') }}" 
+                                <input type="number" id="countTickets" name="countTickets" min="0" max="{{ $event->freePlaces() }}" step="1"
+                                    class="form-control" placeholder="{{ __('app.count_ticket') }}"
                                     aria-label="{{ __('app.count_ticket') }}" aria-describedby="button-addon2">
                                 <span class="input-group-text">szt.</span>
                             </div>
@@ -99,7 +99,7 @@
         </div>
 
         <h4 class="mt-3">{{ __('app.comments') }}</h4>
-        <div style="height: 35vh" class="overflow-auto">
+        <div style="max-height: 35vh" class="overflow-auto mb-5">
             @foreach($event->commentsSort() as $comment)
                 <div class="card m-2">
                     <div class="card-body">
@@ -111,6 +111,25 @@
                 </div>
             @endforeach
         </div>
+        @auth
+            <div id="registrationComment" class="mt-3 mb-5 d-none">
+                <h4>{{ __('app.submission_comment') }}</h4>
+                <form method="POST" action="{{ route('submission.store') }}">
+                    @csrf
+                    <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
+                        <option selected value="obrażliwe">{{ __('dashboard.comment.offensive') }}</option>
+                        <option value="wulgarne">{{ __('dashboard.comment.vulgar') }}</option>
+                        <option value="inne">{{ __('dashboard.comment.other') }}</option>
+                    </select>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">{{ __('app.description') }}</label>
+                        <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                    </div>
+                    <input type="hidden" id="comment_id" name="comment_id">
+                    <input class="btn btn-primary" type="submit" value="{{ __('app.add') }}">
+                </form>
+            </div>
+        @endauth
 
         <div class="mt-3">
             @guest
@@ -130,23 +149,7 @@
                 </form>
             @endguest
         </div>
-        <div id="registrationComment" class="mt-3 d-none">
-            <h4>{{ __('app.submission_comment') }}</h4>
-            <form method="POST" action="{{ route('submission.store') }}">
-                @csrf
-                <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
-                    <option selected value="obrażliwe">{{ __('dashboard.comment.offensive') }}</option>
-                    <option value="wulgarne">{{ __('dashboard.comment.vulgar') }}</option>
-                    <option value="inne">{{ __('dashboard.comment.other') }}</option>
-                </select>
-                <div class="mb-3">
-                    <label for="content" class="form-label">{{ __('app.description') }}</label>
-                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-                </div>
-                <input type="hidden" id="comment_id" name="comment_id">
-                <input class="btn btn-primary" type="submit" value="{{ __('app.add') }}">
-            </form>
-        </div>
+
     </div>
     @include('event.script')
 @endsection
