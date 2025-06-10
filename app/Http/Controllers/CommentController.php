@@ -113,7 +113,7 @@ class CommentController extends Controller
         if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
         {
             $data = $request->validate(['id' => ['required', 'integer']]);
-            $comment = Comment::firstOrFail($data['id']);
+            $comment = Comment::findOrFail($data['id']);
             $comment->delete();
             return back()->with('success', __('dashboard.comment.deleted'));
         }

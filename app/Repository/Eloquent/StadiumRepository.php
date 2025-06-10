@@ -17,7 +17,7 @@ class StadiumRepository implements Repository{
     }
 
     public function get(int $id): Stadium{
-        return $this->stadiumModel->firstOrFail($id);
+        return $this->stadiumModel->findOrFail($id);
     }
 
     public function add(string $name, string $city, string $street, string $numberBuilding, int $places)
@@ -33,7 +33,7 @@ class StadiumRepository implements Repository{
 
     public function update(int $id, string $name, string $city, string $street, string $numberBuilding, int $places)
     {
-        $stadium = $this->stadiumModel->firstOrFail($id);
+        $stadium = $this->stadiumModel->findOrFail($id);
         $stadium->name = $name;
         $stadium->city = $city;
         $stadium->street = $street;

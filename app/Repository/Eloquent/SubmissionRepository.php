@@ -26,7 +26,7 @@ class SubmissionRepository implements Repository{
 
     public function get(int $id): Submission{
 
-        return $this->submissionModel->firstOrFail($id);
+        return $this->submissionModel->findOrFail($id);
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator

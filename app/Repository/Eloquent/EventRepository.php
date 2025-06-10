@@ -32,7 +32,7 @@ class EventRepository implements Repository{
 
     public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
     {
-        $event = $this->eventModel->firstOrFail($id);
+        $event = $this->eventModel->findOrFail($id);
         $event->name = $name;
         $event->description = $description;
         $event->date = $date;
@@ -45,7 +45,7 @@ class EventRepository implements Repository{
     }
 
     public function get(int $id): Event{
-        return $this->eventModel->firstOrFail($id);
+        return $this->eventModel->findOrFail($id);
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator
