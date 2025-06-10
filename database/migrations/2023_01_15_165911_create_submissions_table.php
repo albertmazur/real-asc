@@ -20,7 +20,7 @@ return new class extends Migration
         {
             $table->id();
             $table->string('content');
-            $table->enum('forWhat', ['Obrażliwe', 'Wulgarne', 'Inne']);
+            $table->enum('forWhat', ['offensive', 'vulgar', 'other']);
             $table->foreignIdFor(Comment::class);
             $table->timestamps();
         });

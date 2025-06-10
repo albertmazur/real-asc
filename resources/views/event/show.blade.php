@@ -117,9 +117,9 @@
                 <form method="POST" action="{{ route('submission.store') }}">
                     @csrf
                     <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
-                        <option selected value="obrażliwe">{{ __('dashboard.comment.offensive') }}</option>
-                        <option value="wulgarne">{{ __('dashboard.comment.vulgar') }}</option>
-                        <option value="inne">{{ __('dashboard.comment.other') }}</option>
+                        <option selected value="offensive">{{ __('dashboard.comment.offensive') }}</option>
+                        <option value="vulgar">{{ __('dashboard.comment.vulgar') }}</option>
+                        <option value="other">{{ __('dashboard.comment.other') }}</option>
                     </select>
                     <div class="mb-3">
                         <label for="content" class="form-label">{{ __('app.description') }}</label>

@@ -13,13 +13,13 @@
                     <option @if($sortSearch == 'All') selected @endif  value="All">
                         {{ __('app.all') }}
                     </option>
-                    <option @if($sortSearch == 'Obrażliwe') selected @endif value="Obrażliwe">
+                    <option @if($sortSearch == 'offensive') selected @endif value="offensive">
                         {{ __('dashboard.comment.offensive') }}
                     </option>
-                    <option @if($sortSearch == 'Wulgarne') selected @endif value="Wulgarne">
+                    <option @if($sortSearch == 'vulgar') selected @endif value="vulgar">
                         {{ __('dashboard.comment.vulgar') }}
                     </option>
-                    <option @if($sortSearch == 'Inne') selected @endif value="Inne">
+                    <option @if($sortSearch == 'other') selected @endif value="other">
                         {{ __('dashboard.comment.other') }}
                     </option>
                 </select>

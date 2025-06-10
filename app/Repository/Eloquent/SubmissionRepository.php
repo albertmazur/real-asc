@@ -22,7 +22,6 @@ class SubmissionRepository implements Repository{
         $submission->content = $content;
         $submission->comment_id = $comment_id;
         $submission->save();
-        //Submission::create(['forWhat' => $forWhat, 'content' => $content, 'comment_id' => $comment_id]);
     }
 
     public function get(int $id): Submission{

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Store;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreSubmissionRequest extends FormRequest
 {
@@ -24,9 +25,16 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'forWhat' => ['required', 'string'],
+            'forWhat' => ['required', 'string', Rule::in(['offensive', 'vulgar', 'other'])],
             'content' => ['string'],
             'comment_id' => ['required', 'integer']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'forWhat.in' => 'Pole „forWhat” musi mieć jedną z wartości: Obrażliwe, Wulgarne lub Inne.',
         ];
     }
 }
