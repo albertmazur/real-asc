@@ -22,7 +22,7 @@ class Ticket extends Model
             $mytime = Carbon::now();
             $model->dateBuy = $mytime->toDate();
             $model->timeBuy = $mytime->toDateTimeString();
-            $model->state='Kupiony';
+            $model->state='bought';
         });
     }
 

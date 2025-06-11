@@ -74,7 +74,7 @@ class EventRepository implements Repository{
                 ->join('stadiums', 'events.stadium_id', '=', 'stadiums.id')
                 ->leftJoin('tickets', function ($join) {
                     $join->on('events.id', '=', 'tickets.event_id')
-                         ->where('tickets.state', '=', 'Kupiony');
+                         ->where('tickets.state', '=', 'bought');
                 })
                 ->groupBy('events.id', 'stadiums.places')
                 ->orderBy('freeSet');

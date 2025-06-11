@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('dateBuy');
             $table->time('timeBuy');
             $table->string('stripe_payment_id');
-            $table->enum('state', ['Kupiony', 'Zwrócony']);
+            $table->enum('state', ['bought', 'returned']);
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
             $table->timestamps();

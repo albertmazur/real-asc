@@ -29,7 +29,7 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $sortEventSearch = $request->get('sortEventSearch') ?? -2;
-        $tickets = $this->ticketRepository->myTickets($sortEventSearch, 'Kupiony');
+        $tickets = $this->ticketRepository->myTickets($sortEventSearch, 'bought');
         return view('dashboard.client.ticket', [
             'sortEventSearch' => $sortEventSearch,
             'events' => Event::all(),

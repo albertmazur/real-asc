@@ -42,8 +42,8 @@ class TicketRepository implements Repository{
 
         if($sortEventSearch != -2) $query = $query->where('event_id', '=', $sortEventSearch);
 
-        if($how == 'Kupiony') $query = $query->where('state', '=', 'Kupiony');
-        if($how == 'Zwrócony') $query = $query->where('state', '=', 'Zwrócony');
+        if($how == 'bought') $query = $query->where('state', '=', 'bought');
+        if($how == 'returned') $query = $query->where('state', '=', 'returned');
         return $query->get();
     }
 
@@ -73,7 +73,7 @@ class TicketRepository implements Repository{
 
     public function backTicket(int $id): bool{
         $ticket = $this->ticketModel->findOrFail($id);
-        $ticket->state = 'Zwrócony';
+        $ticket->state = 'returned';
 
         try
         {

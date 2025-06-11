@@ -33,6 +33,6 @@ class Event extends Model
 
     public function freePlaces()
     {
-        return $this->stadium->places - $this->tickets->where('state', '=', "Kupiony")->count();
+        return $this->stadium->places - $this->tickets->where('state', '=', "bought")->count();
     }
 }
