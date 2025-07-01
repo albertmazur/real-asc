@@ -25,7 +25,7 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'forWhat' => ['required', 'string', Rule::in(['offensive', 'vulgar', 'other'])],
+            'reason' => ['required', 'string', Rule::in(['offensive', 'vulgar', 'other'])],
             'content' => ['string'],
             'comment_id' => ['required', 'integer']
         ];
@@ -34,7 +34,7 @@ class StoreSubmissionRequest extends FormRequest
     public function messages()
     {
         return [
-            'forWhat.in' => 'Pole „forWhat” musi mieć jedną z wartości: Obrażliwe, Wulgarne lub Inne.',
+            'reason.in' => 'Pole reason musi mieć jedną z wartości: Obrażliwe, Wulgarne lub Inne.',
         ];
     }
 }

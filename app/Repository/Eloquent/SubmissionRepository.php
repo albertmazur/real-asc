@@ -15,10 +15,10 @@ class SubmissionRepository implements Repository{
         $this->submissionModel = $submission;
     }
 
-    public function add(string $forWhat, string $content, int $comment_id)
+    public function add(string $reason, string $content, int $comment_id)
     {
         $submission = new Submission();
-        $submission->forWhat = $forWhat;
+        $submission->reason = $reason;
         $submission->content = $content;
         $submission->comment_id = $comment_id;
         $submission->save();
@@ -40,7 +40,7 @@ class SubmissionRepository implements Repository{
 
     public function filterBy(string $contentSearch = null, string $sortSearch): Collection{
         $query = $this->submissionModel->where('content', 'like', $contentSearch.'%');
-        if($sortSearch!='All') $query = $query->where('forWhat', '=', $sortSearch);
+        if($sortSearch!='All') $query = $query->where('reason', '=', $sortSearch);
         return $query->get();
     }
 }

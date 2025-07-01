@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Comment;
+use App\Enums\Language;
+use App\Enums\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +20,8 @@ return new class extends Migration
             $table->renameColumn('name', 'first_name');
             $table->string('last_name');
             $table->string('tel');
-            $table->enum('role', ['admin', 'moderator', 'client']);
-            $table->enum('language', ['pl', 'en'])->default('pl');
+            $table->enum('role', array_column(UserRole::cases(), 'value'))->default(UserRole::USER->value);
+            $table->enum('language', array_column(Language::cases(), 'value'))->default(Language::PL->value);
         });
     }
 

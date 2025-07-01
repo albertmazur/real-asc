@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -41,7 +42,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        $language = $user->language ?? 'pl';
+        $language = $user->language ?? Language::PL->value;
         session()->put('language', $language);
     }
 }

@@ -24,7 +24,7 @@
 
     <div class="mt-3">
         <div class="ticket-purchase-section p-4 bg-light rounded-3 shadow-sm mb-4 mx-5">
-            @if($event->date>$dateNotBuy && isset(Auth::user()->role) && Auth::user()->role === 'client')
+            @if($event->date>$dateNotBuy && isset(Auth::user()->role) && Auth::user()->role === $userRoleClient)
                 @auth
                     <div class="ticket-info mb-4">
                         <h4 class="text-primary mb-3">{{ __('app.buy_ticket') }}</h4>
@@ -116,7 +116,7 @@
                 <h4>{{ __('app.submission_comment') }}</h4>
                 <form method="POST" action="{{ route('submission.store') }}">
                     @csrf
-                    <select name="forWhat" class="form-select" aria-label="{{ __('app.registration') }}">
+                    <select name="reason" class="form-select" aria-label="{{ __('app.registration') }}">
                         <option selected value="offensive">{{ __('dashboard.comment.offensive') }}</option>
                         <option value="vulgar">{{ __('dashboard.comment.vulgar') }}</option>
                         <option value="other">{{ __('dashboard.comment.other') }}</option>
@@ -149,7 +149,24 @@
                 </form>
             @endguest
         </div>
-
+        <div id="registrationComment" class="mt-3 d-none">
+            <h4>{{ __('app.submission_comment') }}</h4>
+            <form method="POST" action="{{ route('submission.store') }}">
+                @csrf
+                @foreach($reasons as $reason)
+                    <option value="{{ $reason->value }}" 
+                        {{ (old('reason') == $reason->value) ? 'selected' : '' }}>
+                        {{ __('dashboard.comment.' . strtolower($reason->name)) }}
+                    </option>
+                @endforeach
+                <div class="mb-3">
+                    <label for="content" class="form-label">{{ __('app.description') }}</label>
+                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                </div>
+                <input type="hidden" id="comment_id" name="comment_id">
+                <input class="btn btn-primary" type="submit" value="{{ __('app.add') }}">
+            </form>
+        </div>
     </div>
     @include('event.script')
 @endsection

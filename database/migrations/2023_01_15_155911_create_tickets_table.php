@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TicketStatus;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->date('dateBuy');
             $table->time('timeBuy');
             $table->string('stripe_payment_id');
-            $table->enum('state', ['bought', 'returned']);
+            $table->enum('state',  array_column(TicketStatus::cases(), 'value'));
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
             $table->timestamps();

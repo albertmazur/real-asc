@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TicketStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,7 @@ class Ticket extends Model
             $mytime = Carbon::now();
             $model->dateBuy = $mytime->toDate();
             $model->timeBuy = $mytime->toDateTimeString();
-            $model->state='bought';
+            $model->state=TicketStatus::PURCHASED->value;
         });
     }
 

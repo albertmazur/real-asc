@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketStatus;
+use App\Enums\UserRole;
 use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\Ticket;
@@ -24,12 +26,13 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
         $sortEventSearch = $request->get('sortEventSearch') ?? -2;
-        $tickets = $this->ticketRepository->myTickets($sortEventSearch, 'bought');
+        $tickets = $this->ticketRepository->myTickets($sortEventSearch, TicketStatus::PURCHASED->value);
+
         return view('dashboard.client.ticket', [
             'sortEventSearch' => $sortEventSearch,
             'events' => Event::all(),
@@ -57,7 +60,7 @@ class TicketController extends Controller
      */
     public function store(StoreTicketRequest $request)
     {
-        if(!Gate::allows('client', Auth::user()))
+        if(!Gate::allows(UserRole::USER->value, Auth::user()))
         {
             return response()->json(['success' => false, 'error' => __('error.no_permissions')], 403);
         }
@@ -125,7 +128,7 @@ class TicketController extends Controller
 
     public function history(Request $request)
     {
-        if(Gate::allows('client', Auth::user()))
+        if(Gate::allows(UserRole::USER->value, Auth::user()))
         {
             $sortEventSearch = $request->get('sortEventSearch') ?? -2;
             $tickets = $this->ticketRepository->myTickets($sortEventSearch);
@@ -141,7 +144,7 @@ class TicketController extends Controller
 
     public function backTicket(Request $request)
     {
-        if(Gate::allows('client', Auth::user()))
+        if(Gate::allows(UserRole::USER->value, Auth::user()))
         {
             $id = $request->get('id');
             $f = $this->ticketRepository->backTicket($id);

@@ -20,5 +20,5 @@ return [
     '500_message' => "Wystąpił błąd serwera. Spróbuj ponownie później.",
     '503_message' => "Usługa jest tymczasowo niedostępna. Spróbuj ponownie później.",
     'back_home' => "Powrót na stronę główną",
-    'no_permissions' => "Brak uprawnieńs",
+    'no_permissions' => "Brak uprawnień",
 ];

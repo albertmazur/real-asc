@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ReasonSubmission;
+use App\Enums\UserRole;
 use App\Models\Event;
 use App\Http\Requests\Store\StoreEventRequest;
 use App\Http\Requests\Update\UpdateEventRequest;
@@ -119,7 +121,9 @@ class EventController extends Controller
     {
         return view('event.show', [
             'event' => $this->eventRepository->get($eventId),
-            'dateNotBuy' => Carbon::now()->addDays(3)
+            'reasons' => ReasonSubmission::cases(),
+            'dateNotBuy' => Carbon::now()->addDays(3),
+            'userRoleClient' => UserRole::USER->value
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\Comment;
 use App\Http\Requests\Store\StoreCommentRequest;
 use App\Http\Requests\Update\UpdateCommentRequest;
@@ -123,7 +124,7 @@ class CommentController extends Controller
 
     public function myComments(Request $request)
     {
-        if(Gate::allows('client', Auth::user()))
+        if(Gate::allows(UserRole::USER->value, Auth::user()))
         {
             $contentSearch = $request->get('contentSearch');
             $sortEventSearch = $request->get('sortEventSearch') ?? -2;

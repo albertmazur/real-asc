@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TicketStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,6 @@ class Event extends Model
 
     public function freePlaces()
     {
-        return $this->stadium->places - $this->tickets->where('state', '=', "bought")->count();
+        return $this->stadium->places - $this->tickets->where('state', '=', TicketStatus::PURCHASED->value)->count();
     }
 }

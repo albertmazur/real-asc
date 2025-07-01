@@ -55,7 +55,7 @@ class SubmissionController extends Controller
     public function store(StoreSubmissionRequest $request)
     {
         $data = $request->validated();
-        $this->submissionRepository->add($data['forWhat'], $data['content'], $data['comment_id'],);
+        $this->submissionRepository->add($data['reason'], $data['content'], $data['comment_id'],);
         return back()->with('success', __('app.added_submission'));
     }
 

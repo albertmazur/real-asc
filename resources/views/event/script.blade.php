@@ -14,8 +14,15 @@
         cardExpiry.mount('#card-expiry')
         cardCvc.mount('#card-cvc')
 
-        document.getElementById("payment-form").addEventListener("submit", async function(event) {
+        const form = document.getElementById("payment-form")
+        const submitButton = form.querySelector("button[type='submit']")
+
+        form.addEventListener("submit", async function(event) {
             event.preventDefault()
+
+            submitButton.disabled = true
+            const originalText = submitButton.innerHTML
+            submitButton.innerHTML = @json(__('stripe.processing_payment'))
 
             const { paymentMethod, error } = await stripe.createPaymentMethod({
                 type: "card",
@@ -23,11 +30,13 @@
             })
 
             if (error) {
-                showErrorAlert(data.error)
+                showErrorAlert(error.message)
+                submitButton.disabled = false
+                submitButton.innerHTML = originalText
                 return
             }
 
-            let formData = new FormData(document.getElementById("payment-form"))
+            let formData = new FormData(form)
             formData.append("payment_method", paymentMethod.id)
 
             fetch("{{ route('ticket.store') }}", {
@@ -43,6 +52,11 @@
                 } else {
                     showErrorAlert(data.error)
                 }
+            })
+            .catch(error => {
+                showErrorAlert(error.message)
+                submitButton.disabled = false
+                submitButton.innerHTML = originalText
             })
         })
     }

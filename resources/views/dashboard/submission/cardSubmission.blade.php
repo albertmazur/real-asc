@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <h5 class="card-header">{{ __('app.submission') }}</h5>
     <div class="card-body">
-        <h5 class="card-title">{{ $submission->forWhat }}</h5>
+        <h5 class="card-title">{{ $submission->reason }}</h5>
         <p class="card-text">{{ $submission->content }}</p>
         <form method="POST" action="{{ route('submission.remove') }}">
             @method('delete')

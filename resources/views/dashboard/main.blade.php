@@ -1,9 +1,10 @@
+@use('App\Enums\UserRole;')
 @extends('layout.app')
 
 @section('content')
-    @if(Auth::user()->role === 'admin') @include('dashboard.admin.nav')
-    @elseif(Auth::user()->role === 'moderator') @include('dashboard.moderator.nav')
-    @elseif(Auth::user()->role === 'client') @include('dashboard.client.nav')
+    @if(Auth::user()->role === UserRole::ADMIN->value) @include('dashboard.admin.nav')
+    @elseif(Auth::user()->role === UserRole::MODERATOR->value) @include('dashboard.moderator.nav')
+    @elseif(Auth::user()->role === UserRole::USER->value) @include('dashboard.client.nav')
     @endif
 
     @hasSection('dashboard.content')

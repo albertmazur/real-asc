@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Enums\TicketStatus;
 use App\Models\Event;
 use App\Repository\EventRepository as Repository;
 use Carbon\Carbon;
@@ -74,7 +75,7 @@ class EventRepository implements Repository{
                 ->join('stadiums', 'events.stadium_id', '=', 'stadiums.id')
                 ->leftJoin('tickets', function ($join) {
                     $join->on('events.id', '=', 'tickets.event_id')
-                         ->where('tickets.state', '=', 'bought');
+                         ->where('tickets.state', '=', TicketStatus::PURCHASED->value);
                 })
                 ->groupBy('events.id', 'stadiums.places')
                 ->orderBy('freeSet');
