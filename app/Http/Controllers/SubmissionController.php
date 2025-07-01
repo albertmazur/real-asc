@@ -7,9 +7,11 @@ use App\Http\Requests\Store\StoreSubmissionRequest;
 use App\Http\Requests\Update\UpdateSubmissionRequest;
 use App\Models\Comment;
 use App\Repository\SubmissionRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class SubmissionController extends Controller
 {
@@ -24,7 +26,7 @@ class SubmissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $contentSearch = $request->get('contentSearch');
         $sortSearch = $request->get('sortSearch') ?? 'All';
@@ -33,7 +35,7 @@ class SubmissionController extends Controller
             'submissions' => $this->submissionRepository->filterBy($contentSearch, $sortSearch),
             'nameSearch' => $contentSearch,
             'sortSearch' => $sortSearch
-            ]);
+        ]);
     }
 
     /**
@@ -52,7 +54,7 @@ class SubmissionController extends Controller
      * @param  \App\Http\Requests\Store\StoreSubmissionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSubmissionRequest $request)
+    public function store(StoreSubmissionRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->submissionRepository->add($data['reason'], $data['content'], $data['comment_id'],);
@@ -99,13 +101,13 @@ class SubmissionController extends Controller
      * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
         if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
         {
             $date = $request->validate(['id' => ['required', 'integer']]);
             $submission = Submission::findOrFail($date['id']);
-            $comment = Comment::findOrFail($submission->comment_id);
+            $comment = Comment::find($submission->comment_id);
             if($comment) $comment->delete();
             $submission->delete();
             return back()->with('success', __('dashboard.comment.deleted_comments_submission'));

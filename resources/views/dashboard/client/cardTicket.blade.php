@@ -1,20 +1,45 @@
-<div class="card mb-3">
-    <h5 class="card-header">{{ __('app.ticket') }}</h5>
+<div class="card mb-4 shadow-sm border-0 rounded">
+    <h5 class="card-header bg-primary text-white">{{ __('app.ticket') }}</h5>
     <div class="card-body">
-        <h5 class="card-title">{{ $ticket->event->name }}</h5>
-        <p class="card-text">{{ __('app.date').' '. __('app.event') }}: {{ $ticket->event->date }} {{ $ticket->event->time }}<br>
-        {{ __('app.date_purchase') }}: {{ $ticket->dateBuy }} {{ $ticket->timeBuy }}<br>
-        {{ __("dashboard.ticket.".$ticket->state) }}<br>
-        <span class="h6">{{ __('app.price') }}: {{ $ticket->event->price }}</span></p>
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h5 class="card-title mb-2">{{ $ticket->event->name }}</h5>
+                <p class="card-text text-muted mb-1">
+                    {{ __('app.date').' '. __('app.event') }}: 
+                    <strong>{{ $ticket->event->date }} {{ $ticket->event->time }}</strong>
+                </p>
+                <p class="card-text text-muted mb-1">
+                    {{ __('app.date_purchase') }}: 
+                    <strong>{{ $ticket->dateBuy }} {{ $ticket->timeBuy }}</strong>
+                </p>
+                <p class="card-text mb-1">
+                    {{ __('dashboard.ticket.' . $ticket->state) }}
+                </p>
+                <p class="card-text h6">
+                    {{ __('app.price') }}: <strong>{{ $ticket->event->price }}</strong>
+                </p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <div class="p-2">
+                    {!! $ticket->qr_code !!}
+                </div>
+            </div>
+        </div>
+
         @if($option)
-            <div class="d-flex flex-row">
-                <form class="m-1" method="POST" action="{{ route('ticket.back') }}">
-                    @method('put')
+            <div class="d-flex justify-content-center mt-3">
+                <form method="POST" action="{{ route('ticket.back') }}" class="me-2">
                     @csrf
+                    @method('put')
                     <input type="hidden" name="id" value="{{ $ticket->id }}">
-                    <input type="submit" class="btn btn-danger" value="{{ __('app.return') }}">
+                    <button type="submit" class="btn btn-outline-danger">
+                        {{ __('app.return') }}
+                    </button>
                 </form>
-                <button class="btn btn-secondary m-1">{{ __('app.print') }}</button>
+                <button class="btn btn-outline-secondary">
+                    {{ __('app.print') }}
+                </button>
             </div>
         @endif
     </div>

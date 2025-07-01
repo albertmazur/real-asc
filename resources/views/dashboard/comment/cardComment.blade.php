@@ -1,9 +1,12 @@
 <div class="card mb-3">
     <p class="card-header h5">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</p>
     <div class="card-body">
-        <h5 class="card-title">{{ __("dashboard.comment.".$comment->reason) }}</h5>
-        <p class="card-text">{{ $comment->content }}</p>
-        <p class="card-text">{{ $comment->event->name }}</p>
+        <p class="card-text">{{ __('dashboard.comment.event_name') }}:
+            <br>{{ $comment->event->name }}
+        </p>
+        <p class="card-text">{{ __('dashboard.comment.content') }}:
+            <br>{{ $comment->content }}
+        </p>
         <form method="POST" action="{{ route('comment.remove') }}">
             @method('delete')
             @csrf

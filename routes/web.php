@@ -72,6 +72,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('history', [TicketController::class, 'history'])->name('history');
         Route::put('back', [TicketController::class, 'backTicket'])->name('back');
         Route::get('payment-status', [TicketController::class, 'paymentStatus'])->name('payment.status');
+        Route::get('validate/{token}', [TicketController::class, 'validateQr'])->name('validate');
+
     });
 
     Route::group([

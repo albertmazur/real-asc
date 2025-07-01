@@ -32,10 +32,17 @@ return [
         'deleted' => "Comment deleted",
         'delete_comments_submission' => "Delete comment and submissions",
         'deleted_comments_submission' => "Deleted comment and submissions",
+        'event_name' => "Event name",
+        'content' => "Content",
         'which' => "Select what kind of comment it is",
         'offensive' => "Offensive",
         'vulgar' => "Vulgar",
         'other' => "Other"
+    ],
+    'submission' => [
+        'kind' => "Kind",
+        'content' => "Content submission",
+        'not_comment' => "No comment available"
     ],
     'user' => [
         'select' => "Select user"

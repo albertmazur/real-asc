@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use Str;
 use Stripe\Refund;
 use Stripe\Stripe;
 use App\Models\Ticket;
@@ -27,6 +28,7 @@ class TicketRepository implements Repository{
             $ticket->user_id = Auth::id();
             $ticket->event_id = $event_id;
             $ticket->stripe_payment_id = $stripe_payment_id;
+            $ticket->qr_token = Str::uuid();
             $ticket->save();
         }
 

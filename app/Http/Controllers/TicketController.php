@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Store\StoreTicketRequest;
 use App\Http\Requests\Update\UpdateTicketRequest;
 use Laravel\Cashier\Exceptions\IncompletePayment;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TicketController extends Controller
 {
@@ -32,6 +33,10 @@ class TicketController extends Controller
     {
         $sortEventSearch = $request->get('sortEventSearch') ?? -2;
         $tickets = $this->ticketRepository->myTickets($sortEventSearch, TicketStatus::PURCHASED->value);
+
+        foreach ($tickets as $ticket) {
+            $ticket->qr_code = QrCode::size(150)->generate(route('ticket.validate', $ticket->qr_token));
+        }
 
         return view('dashboard.client.ticket', [
             'sortEventSearch' => $sortEventSearch,
@@ -169,5 +174,9 @@ class TicketController extends Controller
 
     public function paymentStatus(){
         return back()->with('success', __('app.success_buy_ticket'));
+    }
+
+    public function validateQr(){
+
     }
 }
