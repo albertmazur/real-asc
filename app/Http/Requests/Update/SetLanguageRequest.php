@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Update;
 
+use App\Enums\Language;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SetLanguageRequest extends FormRequest
 {
@@ -14,7 +16,7 @@ class SetLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'language' => ['required', 'in:pl,en']
+            'language' => ['required', Rule::in(array_column(Language::cases(), 'value'))]
         ];
     }
 

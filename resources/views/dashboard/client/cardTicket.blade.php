@@ -4,7 +4,7 @@
         <h5 class="card-title">{{ $ticket->event->name }}</h5>
         <p class="card-text">{{ __('app.date').' '. __('app.event') }}: {{ $ticket->event->date }} {{ $ticket->event->time }}<br>
         {{ __('app.date_purchase') }}: {{ $ticket->dateBuy }} {{ $ticket->timeBuy }}<br>
-        {{ $ticket->state }}<br>
+        {{ __("dashboard.ticket.".$ticket->state) }}<br>
         <span class="h6">{{ __('app.price') }}: {{ $ticket->event->price }}</span></p>
         @if($option)
             <div class="d-flex flex-row">

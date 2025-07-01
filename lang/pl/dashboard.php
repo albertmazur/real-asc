@@ -19,7 +19,11 @@ return [
     ],
     'ticket' => [
         'my' => "Moje bilety",
-        'history' => "Historia biletów"
+        'history' => "Historia biletów",
+        'pending' => "Oczekujący",
+        'canceled' => "Anulowany",
+        'purchased' => "Zakupiony",
+        'returned' => "Zwrócony",
     ],
     'comment' => [
         'my' => "Moje komentarze",

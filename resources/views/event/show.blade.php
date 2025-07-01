@@ -117,9 +117,9 @@
                 <form method="POST" action="{{ route('submission.store') }}">
                     @csrf
                     <select name="reason" class="form-select" aria-label="{{ __('app.registration') }}">
-                        <option selected value="offensive">{{ __('dashboard.comment.offensive') }}</option>
-                        <option value="vulgar">{{ __('dashboard.comment.vulgar') }}</option>
-                        <option value="other">{{ __('dashboard.comment.other') }}</option>
+                    @foreach(\App\Enums\ReasonSubmission::cases() as $reason)
+                        <option value="{{ $reason->value }}" {{ old('reason') === $reason->value ? 'selected' : '' }}>{{ __('dashboard.comment.' . $reason->value) }}</option>
+                    @endforeach
                     </select>
                     <div class="mb-3">
                         <label for="content" class="form-label">{{ __('app.description') }}</label>

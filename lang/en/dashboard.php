@@ -19,7 +19,11 @@ return [
     ],
     'ticket' => [
         'my' => "My tickets",
-        'history' => "Ticket history"
+        'history' => "Ticket history",
+        'pending' => "Pending",
+        'canceled' => "Canceled",
+        'purchased' => "Purchased",
+        'returned' => "Returned",
     ],
     'comment' => [
         'my' => "My comments",

@@ -16,13 +16,14 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
+                @use('App\Enums\Language')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lang.switch', 'en') }}">
+                    <a class="nav-link" href="{{ route('lang.switch', Language::EN->value) }}">
                         <img width="25" src="{{ asset('images/gb.svg') }}" alt="{{ __('app.lang.en') }}"/>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lang.switch', 'pl') }}">
+                    <a class="nav-link" href="{{ route('lang.switch', Language::PL->value) }}">
                         <img width="25" src="{{ asset('images/pl.svg') }}" alt="{{ __('app.lang.pl') }}"/>
                     </a>
                 </li>

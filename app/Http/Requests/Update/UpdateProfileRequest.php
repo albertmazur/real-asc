@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Update;
 
+use App\Enums\Language;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -17,7 +19,7 @@ class UpdateProfileRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255', 'min:2'],
             'last_name' => ['required', 'string', 'max:255', 'min:2'],
             'tel' => ['required', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/'],
-            'language' => ['required', 'in:pl,en']
+            'language' => ['required', Rule::in(array_column(Language::cases(), 'value'))]
         ];
     }
 

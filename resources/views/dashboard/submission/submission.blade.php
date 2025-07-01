@@ -13,15 +13,9 @@
                     <option @if($sortSearch == 'All') selected @endif  value="All">
                         {{ __('app.all') }}
                     </option>
-                    <option @if($sortSearch == 'offensive') selected @endif value="offensive">
-                        {{ __('dashboard.comment.offensive') }}
-                    </option>
-                    <option @if($sortSearch == 'vulgar') selected @endif value="vulgar">
-                        {{ __('dashboard.comment.vulgar') }}
-                    </option>
-                    <option @if($sortSearch == 'other') selected @endif value="other">
-                        {{ __('dashboard.comment.other') }}
-                    </option>
+                    @foreach(\App\Enums\ReasonSubmission::cases() as $reason)
+                        <option value="{{ $reason->value }}" {{ $sortSearch === $reason->value ? 'selected' : '' }}>{{ __('dashboard.comment.' . $reason->value) }}</option>
+                    @endforeach
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">{{ __('app.find') }}</button>

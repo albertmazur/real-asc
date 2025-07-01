@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Store;
 
+use App\Enums\ReasonSubmission;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,7 +26,7 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'reason' => ['required', 'string', Rule::in(['offensive', 'vulgar', 'other'])],
+            'reason' => ['required', 'string', Rule::in(array_column(ReasonSubmission::cases(), 'value'))],
             'content' => ['string'],
             'comment_id' => ['required', 'integer']
         ];

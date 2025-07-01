@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum Language: string
 {
-    case EN = 'english';
-    case PL = 'polish';
+    case EN = 'en';
+    case PL = 'pl';
 }

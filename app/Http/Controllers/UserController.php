@@ -49,7 +49,9 @@ class UserController extends Controller
         $language = $request->input('language');
 
         $this->userRepository->updateDate(Auth::id(), $firstName, $lastName, $tel, $language);
-        return back()->with('success', __('settings.profile_updated'));
+        session()->put('language', $language);
+
+        return back()->with('success', __('settings.profile_updated', [], $language));
     }
 
     public function changeEmail(ChangeEmailRequest $request)
