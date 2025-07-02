@@ -22,4 +22,8 @@
             @endif
         @endforeach
     </div>
+    <script>
+        const cssUrl = @json(asset('css/app.css'));
+    </script>
+    @vite(['resources/js/printTicket.js'])
 @endsection
