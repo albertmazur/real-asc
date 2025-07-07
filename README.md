@@ -9,12 +9,14 @@ Real ASC is a web application designed to manage a sports club. It allows users 
 ## Features
 - Manage stadiums (add, edit, delete)
 - Create and manage events
+- Manage users (add, edit, delete)
 - Comment on events
 - Role-based access control (admin, user)
 - Payment system integrated with [Stripe](https://stripe.com/)
 
 ## Technologies
-- [Laravel 9](https://laravel.com/)
+- [PHP 8.2](https://www.php.net/)
+- [Laravel 10](https://laravel.com/)
 - [Bootstrap 5](https://getbootstrap.com/)
 - [MySQL](https://www.mysql.com/) (or other supported databases)
 - [Stripe](https://stripe.com/) for payments
