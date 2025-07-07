@@ -177,4 +177,6 @@ return [
     'language_required' => 'The language field is required.',
     'language_invalid' => 'The selected language is invalid.',
     'attributes' => [],
+
+    'at_least_one_admin' => 'At least one administrator must remain in the system.',
 ];

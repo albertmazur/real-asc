@@ -45,6 +45,12 @@ return [
         'not_comment' => "Komentarz już nie jest dostępny"
     ],
     'user' => [
-        'select' => "Wybierz użytkownika"
+        'select' => "Wybierz użytkownika",
+        'add' => "Dodaj użytkownika",
+        'added' => "Dodano użytkownika",
+        'edit' => "Edycja użytkownika",
+        'update' => "Zaktualizowano użytkownika",
+        'deleted' => "Usunięto użytkownika",
+        'new_password' => "Wymuś zmianę hasła przez użytkownika"
     ]
 ];

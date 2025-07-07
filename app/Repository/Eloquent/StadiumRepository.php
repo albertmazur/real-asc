@@ -6,7 +6,6 @@ use App\Models\Stadium;
 use App\Repository\StadiumRepository as Repository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class StadiumRepository implements Repository{
     private Stadium $stadiumModel;

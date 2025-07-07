@@ -19,12 +19,12 @@
                 @use('App\Enums\Language')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lang.switch', Language::EN->value) }}">
-                        <img width="25" src="{{ asset('images/gb.svg') }}" alt="{{ __('app.lang.en') }}"/>
+                        <img width="25" src="{{ asset('images/gb.svg') }}" alt="{{ __('app.langs.en') }}"/>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lang.switch', Language::PL->value) }}">
-                        <img width="25" src="{{ asset('images/pl.svg') }}" alt="{{ __('app.lang.pl') }}"/>
+                        <img width="25" src="{{ asset('images/pl.svg') }}" alt="{{ __('app.langs.pl') }}"/>
                     </a>
                 </li>
 
@@ -47,7 +47,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('user.dashboard') }}">{{ __('app.dashboard') }}</a>
+                            <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('app.dashboard') }}</a>
                             <a class="dropdown-item" href="{{ route('user.settings') }}">{{ __('app.setting') }}</a>
 
                             <a class="dropdown-item" href="{{ route('logout') }}"

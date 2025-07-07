@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('dateBuy');
             $table->time('timeBuy');
             $table->string('stripe_payment_id');
-            $table->enum('state',  array_column(TicketStatus::cases(), 'value'));
+            $table->enum('state', array_column(TicketStatus::cases(), 'value'));
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
             $table->timestamps();

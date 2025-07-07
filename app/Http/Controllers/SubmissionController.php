@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\Submission;
 use App\Http\Requests\Store\StoreSubmissionRequest;
 use App\Http\Requests\Update\UpdateSubmissionRequest;
@@ -51,7 +52,7 @@ class SubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Store\StoreSubmissionRequest  $request
+     * @param  \App\Http\Requests\Store\StoreSubmissionRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSubmissionRequest $request): RedirectResponse
@@ -64,7 +65,7 @@ class SubmissionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param  \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function show(Submission $submission)
@@ -75,7 +76,7 @@ class SubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param  \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function edit(Submission $submission)
@@ -86,8 +87,8 @@ class SubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Update\UpdateSubmissionRequest  $request
-     * @param  \App\Models\Submission  $submission
+     * @param  \App\Http\Requests\Update\UpdateSubmissionRequest $request
+     * @param  \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSubmissionRequest $request, Submission $submission)
@@ -98,12 +99,12 @@ class SubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Submission  $submission
+     * @param  \App\Models\Submission $submission
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request): RedirectResponse
     {
-        if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()) || Gate::allows(UserRole::MODERATOR->value, Auth::user()))
         {
             $date = $request->validate(['id' => ['required', 'integer']]);
             $submission = Submission::findOrFail($date['id']);

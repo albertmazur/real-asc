@@ -1,7 +1,7 @@
 <h1 align="center">Real ASC</h1>
 
 <p align="center">
-    <img  src="storage/images/logo.ico"/>
+    <img src="storage/images/logo.ico"/>
 </p>
 
 Real ASC is a web application designed to manage a sports club. It allows users to add stadiums, create and manage events, comment on events, and handle payments using Stripe.

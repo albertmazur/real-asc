@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\Stadium;
 use App\Http\Requests\Store\StoreStadiumRequest;
 use App\Http\Requests\Update\UpdateStadiumRequest;
@@ -47,7 +48,7 @@ class StadiumController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Store\StoreStadiumRequest  $request
+     * @param  \App\Http\Requests\Store\StoreStadiumRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreStadiumRequest $request)
@@ -84,13 +85,13 @@ class StadiumController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Update\UpdateStadiumRequest  $request
+     * @param  \App\Http\Requests\Update\UpdateStadiumRequest $request
      * @param  \App\Models\Stadium  $stadium
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateStadiumRequest $request)
     {
-        if(Gate::allows('admin', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             $date = $request->validated();
             $this->stadiumRepository->update($date['id'], $date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'],);

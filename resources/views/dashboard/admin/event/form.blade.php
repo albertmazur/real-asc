@@ -9,12 +9,7 @@
         <label for="stadium_id" class="form-label">{{ __('app.stadium') }}</label>
         <select name="stadium_id" class="form-select" aria-label="{{ __('dashboard.stadium.choose') }}">
             @foreach($stadiums as $stadium)
-                <option 
-                    value="{{ $stadium->id }}" 
-                    @if(isset($event) && $stadium->id == $event->stadium_id) selected @endif
-                >
-                    {{ $stadium->name }}
-                </option>
+                <option value="{{ $stadium->id }}" @if(isset($event) && $stadium->id == $event->stadium_id) selected @endif>{{ $stadium->name }}</option>
             @endforeach
         </select>
     </div>
@@ -55,7 +50,7 @@
         @endif
     </div>
 
-    <button type="submit" class="btn btn-primary  me-auto">
+    <button type="submit" class="btn btn-primary me-auto">
         {{ isset($event) ? __('app.save_changes') : __('app.add') }}
     </button>
 </form>

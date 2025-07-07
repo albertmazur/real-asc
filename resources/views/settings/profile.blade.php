@@ -34,8 +34,8 @@
                 <label class="form-label">{{ __('settings.select_language') }}</label>
                 @use('App\Enums\Language')
                 <select class="form-select @error('language') is-invalid @enderror" name="language">
-                    <option value="{{ Language::PL->value }}" {{ auth()->user()->language == Language::PL->value ? 'selected' : '' }}>{{ __('app.lang.pl') }}</option>
-                    <option value="{{ Language::EN->value }}" {{ auth()->user()->language == Language::EN->value ? 'selected' : '' }}>{{ __('app.lang.en') }}</option>
+                    <option value="{{ Language::PL->value }}" {{ auth()->user()->language == Language::PL->value ? 'selected' : '' }}>{{ __('app.langs.pl') }}</option>
+                    <option value="{{ Language::EN->value }}" {{ auth()->user()->language == Language::EN->value ? 'selected' : '' }}>{{ __('app.langs.en') }}</option>
                 </select>
                 @error('language')
                     <span class="invalid-feedback" role="alert">

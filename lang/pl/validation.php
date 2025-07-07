@@ -177,4 +177,6 @@ return [
     'language_required' => 'Pole języka jest wymagane.',
     'language_invalid' => 'Wybrany język jest nieprawidłowy.',
     'attributes' => [],
+
+    'at_least_one_admin' => 'W systemie musi pozostać przynajmniej jeden administrator.',
 ];

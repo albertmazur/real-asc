@@ -1,5 +1,11 @@
 <div class="card mb-3">
-    <p class="card-header h5">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</p>
+        <p class="card-header h5">
+            @if ($comment->user)
+                {{ $comment->user->first_name }} {{ $comment->user->last_name }}
+            @else
+                {{ __("app.deleted_user") }}
+            @endif
+        </p>
     <div class="card-body">
         <p class="card-text">{{ __('dashboard.comment.event_name') }}:
             <br>{{ $comment->event->name }}

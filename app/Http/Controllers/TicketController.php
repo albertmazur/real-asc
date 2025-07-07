@@ -60,7 +60,7 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Store\StoreTicketRequest  $request
+     * @param  \App\Http\Requests\Store\StoreTicketRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTicketRequest $request)
@@ -89,7 +89,7 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\Ticket $ticket
      * @return \Illuminate\Http\Response
      */
     public function show(Ticket $ticket)
@@ -100,7 +100,7 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\Ticket $ticket
      * @return \Illuminate\Http\Response
      */
     public function edit(Ticket $ticket)
@@ -111,8 +111,8 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Update\UpdateTicketRequest  $request
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Http\Requests\Update\UpdateTicketRequest $request
+     * @param  \App\Models\Ticket $ticket
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
@@ -123,7 +123,7 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ticket  $ticket
+     * @param  \App\Models\Ticket $ticket
      * @return \Illuminate\Http\Response
      */
     public function destroy(Ticket $ticket)

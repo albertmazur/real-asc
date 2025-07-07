@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -40,7 +41,7 @@ Route::group([
     Route::post('store', [SubmissionController::class, 'store'])->name('store');
 });
 
-Route::middleware(['auth', 'verified'])->group(function (){
+Route::middleware(['auth', 'verified', 'force_password_change'])->group(function (){
     Route::group([
         'prefix' => 'event',
         'namespace' => 'event',
@@ -98,13 +99,20 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('my', [CommentController::class, 'myComments'])->name('my');
     });
 
+    Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::group([
         'prefix' => 'user',
         'namespace' => 'user',
         'as' => 'user.'
     ], function (){
-        Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-        Route::get('settings', [UserController::class, 'edit'])->name('settings');
+        // Admin
+        Route::get('users', [UserController::class, 'index'])->name('users');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('update', [UserController::class, 'update'])->name('update');
+        Route::delete('delete', [UserController::class, 'delete'])->name('delete');
+        // Setting
+        Route::get('settings', [UserController::class, 'editProfile'])->name('settings');
         Route::post('settings/profile', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::post('settings/email', [UserController::class, 'changeEmail'])->name('change.email');
         Route::post('settings/password', [UserController::class, 'changePassword'])->name('change.password');
@@ -113,3 +121,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
 });
 
 Auth::routes(['verify' => true]);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/password/change', [PasswordChangeController::class, 'showForm'])->name('password.change.form');
+    Route::post('/password/change', [PasswordChangeController::class, 'update'])->name('password.change.update');
+});

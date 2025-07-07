@@ -28,7 +28,7 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-        if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()) || Gate::allows(UserRole::MODERATOR->value, Auth::user()))
         {
             $contentSearch = $request->get('contentSearch');
             $sortWhoSearch = $request->get('sortWhoSearch') ?? -2;
@@ -59,7 +59,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Store\StoreCommentRequest  $request
+     * @param  \App\Http\Requests\Store\StoreCommentRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreCommentRequest $request)
@@ -72,7 +72,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function show(Comment $comment)
@@ -83,7 +83,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function edit(Comment $comment)
@@ -94,8 +94,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Update\UpdateCommentRequest  $request
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Http\Requests\Update\UpdateCommentRequest $request
+     * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
@@ -106,7 +106,7 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Models\Comment $comment
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
@@ -114,7 +114,7 @@ class CommentController extends Controller
         $data = $request->validate(['id' => ['required', 'integer']]);
         $comment = Comment::findOrFail($data['id']);
 
-        if(Gate::allows('admin', Auth::user()) || Gate::allows('moderator', Auth::user()) || Auth::id() == $comment->user->id)
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()) || Gate::allows(UserRole::MODERATOR->value, Auth::user()) || Auth::id() == $comment->user->id)
         {
             $comment->delete();
             return back()->with('success', __('dashboard.comment.deleted'));

@@ -27,7 +27,7 @@
 
     <div class="mb-3">
         <label for="places" class="form-label">{{ __('app.capacity') }}</label>
-        <input type="number" min="0" step="1" class="form-control" id="size" name="places" value="{{ $stadium->places ?? '' }}">
+        <input type="number" min="0" step="1" class="form-control" id="places" name="places" value="{{ $stadium->places ?? '' }}">
     </div>
 
     <button type="submit" class="btn btn-primary me-auto">

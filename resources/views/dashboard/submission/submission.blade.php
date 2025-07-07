@@ -10,7 +10,7 @@
             <div class="mb-3">
                 <label for="sortSearch" class="form-label">{{ __('dashboard.choose_topic') }}</label>
                 <select name="sortSearch" class="form-select" aria-label="{{ __('dashboard.comment.which') }}">
-                    <option @if($sortSearch == 'All') selected @endif  value="All">
+                    <option @if($sortSearch == 'All') selected @endif value="All">
                         {{ __('app.all') }}
                     </option>
                     @foreach(\App\Enums\ReasonSubmission::cases() as $reason)

@@ -45,6 +45,12 @@ return [
         'not_comment' => "No comment available"
     ],
     'user' => [
-        'select' => "Select user"
+        'select' => "Select user",
+        'add' => "Add user",
+        'added' => "User added",
+        'edit' => "Edit user",
+        'update' => "User updated",
+        'deleted' => "User deleted",
+        'new_password' => "Force user to change password"
     ]
 ];

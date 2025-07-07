@@ -18,5 +18,5 @@ return [
     'throttled' => 'Proszę czekać przed ponowną próbą.',
     'token' => 'Ten token resetowania hasła jest nieprawidłowy.',
     'user' => "Nie możemy znaleźć użytkownika o tym adresie e-mail.",
-
+    'changed' => "Hasło zostało zmienione.",
 ];

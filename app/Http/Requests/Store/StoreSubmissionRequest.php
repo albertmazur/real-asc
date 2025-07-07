@@ -26,7 +26,7 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'reason' => ['required', 'string', Rule::in(array_column(ReasonSubmission::cases(), 'value'))],
+            'reason' => ['required', 'string', Rule::enum(ReasonSubmission::class)],
             'content' => ['string'],
             'comment_id' => ['required', 'integer']
         ];

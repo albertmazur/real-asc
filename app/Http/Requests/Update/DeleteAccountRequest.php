@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Update;
 
+use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -26,7 +27,7 @@ class DeleteAccountRequest extends FormRequest
             if(!Hash::check($this->input('password'), auth()->user()->password)) {
                 $validator->errors()->add('password', __('settings.invalid_password'));
             }
-            if(auth()->user()->role == 'admin') {
+            if(auth()->user()->role == UserRole::ADMIN->value) {
                 $validator->errors()->add('password', __('settings.invalid_password'));
             }
         });

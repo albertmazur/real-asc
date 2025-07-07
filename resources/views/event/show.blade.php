@@ -103,7 +103,13 @@
             @foreach($event->commentsSort() as $comment)
                 <div class="card m-2">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h5>
+                            <h5 class="card-title">
+                                @if ($comment->user) 
+                                    {{ $comment->user->first_name }} {{ $comment->user->last_name }} 
+                                @else 
+                                    {{ __("app.deleted_user") }} 
+                                @endif
+                            </h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $comment->date }} {{ $comment->time }}</h6>
                         <p class="card-text">{{ $comment->content }}</p>
                         <button class="reportButton btn btn-danger" value="{{ $comment->id }}">{{ __('app.submission_comment') }}</button>
@@ -122,7 +128,7 @@
                     @endforeach
                     </select>
                     <div class="mb-3">
-                        <label for="content" class="form-label">{{ __('app.description') }}</label>
+                        <label for="content" class="form-label">{{ __('app.comments') }}</label>
                         <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                     </div>
                     <input type="hidden" id="comment_id" name="comment_id">
@@ -141,7 +147,7 @@
                 <form method="POST" action="{{ route('comment.store') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="content" class="form-label">{{ __('app.description') }}</label>
+                        <label for="content" class="form-label">{{ __('app.comment') }}</label>
                         <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                     </div>
                     <input type="hidden" name="event_id" value="{{ $event->id}} ">

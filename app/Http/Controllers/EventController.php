@@ -73,12 +73,12 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Store\StoreEventRequest  $request
+     * @param  \App\Http\Requests\Store\StoreEventRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreEventRequest $request)
     {
-        if(Gate::allows('admin', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             $data = $request->validated();
 
@@ -104,7 +104,7 @@ class EventController extends Controller
 
     public function dashboard(Request $request)
     {
-        if(Gate::allows('admin', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             return $this->viewList($request, 'dashboard.admin.event.main');
         }
@@ -114,7 +114,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Event $event
      * @return \Illuminate\Contracts\View\View
      */
     public function show(int $eventId)
@@ -130,12 +130,12 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Event $event
      * @return \Illuminate\Contracts\View\View
      */
     public function edit(int $eventId)
     {
-        if(Gate::allows('admin', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             return view('dashboard.admin.event.edit', [
                 'event' => $this->eventRepository->get($eventId),
@@ -148,13 +148,13 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Update\UpdateEventRequest  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Http\Requests\Update\UpdateEventRequest $request
+     * @param  \App\Models\Event $event
      * @return \Illuminate\Http\RedirectResponse 
      */
     public function update(UpdateEventRequest $request)
     {
-        if(Gate::allows('admin', Auth::user()))
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             $data = $request->validated();
 
@@ -174,7 +174,7 @@ class EventController extends Controller
                 $imagePath
             );
 
-            return  redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
+            return redirect()->route('event.dashboard')->with('success', __('dashboard.event.update'));
         }
         else abort(403);
     }
@@ -182,7 +182,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Event $event
      * @return \Illuminate\Http\Response
      */
     public function destroy(Event $event)

@@ -16,7 +16,7 @@ class SetLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'language' => ['required', Rule::in(array_column(Language::cases(), 'value'))]
+            'language' => ['required', Rule::enum(Language::class)]
         ];
     }
 
