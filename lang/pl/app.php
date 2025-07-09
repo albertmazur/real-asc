@@ -39,6 +39,7 @@ return [
     'stadiums' => "Stadiony",
     'event' => "Wydarzenie",
     'events' => "Wydarzenia",
+    'see_details' => "Zobacz szczegóły",
     'submission' => "Zgłoszenie",
     'submissions' => "Zgłoszenia",
     'submission_comment' => "Zgłoś komentarz",

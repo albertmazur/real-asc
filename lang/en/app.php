@@ -39,6 +39,7 @@ return [
     'stadiums' => "Stadiums",
     'event' => "Event",
     'events' => "Events",
+    'see_details' => "See details",
     'submission' => "Submission",
     'submissions' => "Submissions",
     'submission_comment' => "Report a comment",

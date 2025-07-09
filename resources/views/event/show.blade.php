@@ -150,7 +150,7 @@
                         <label for="content" class="form-label">{{ __('app.comment') }}</label>
                         <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                     </div>
-                    <input type="hidden" name="event_id" value="{{ $event->id}} ">
+                    <input type="hidden" name="event_id" value="{{ $event->id}}">
                     <input class="btn btn-primary" type="submit" value="{{ __('app.add') }}">
                 </form>
             @endguest

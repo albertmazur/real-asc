@@ -18,39 +18,12 @@
             <button type="submit" class="btn btn-primary">{{ __('app.find') }}</button>
         </form>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                @section('headerTable')
-                <tr>
-                    <th>{{ __('app.lp') }}</th>
-                    <th>{{ __('app.name') }}</th>
-                    <th>{{ __('app.date') }}</th>
-                    <th>{{ __('app.free_places') }}</th>
-                    <th>{{ __('app.price') }}</th>
-                    <th></th>
-                </tr>
-                @endsection
-            </thead>
-            @yield('headerTable')
-            <tbody>
-                @foreach($events as $event)
-                    <tr>
-                        <td>{{ $loop->iteration+(($events->currentPage()-1)*10) }}</td>
-                        <td>{{ $event->name }}</td>
-                        <td>{{ $event->date }} {{ $event->time }}</td>
-                        <td>{{ $event->freePlaces() }}</td>
-                        <td>{{ $event->price }}</td>
-                        <td>
-                            <a class="btn btn-secondary" role="button" href="{{ route('event.show', ['eventId' =>$event->id]) }}">{{ __('app.details') }}</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                @yield('headerTable')
-            </tfoot>
-        </table>
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            @foreach($events as $event)
+                @include('event.card')
+            @endforeach
+        </div>
     </div>
     <div class="d-flex justify-content-center">{{ $events->links() }}</div>
 @endsection

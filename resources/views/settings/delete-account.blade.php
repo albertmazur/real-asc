@@ -6,7 +6,7 @@
             @csrf
             @method('DELETE')
             <div class="mb-3">
-                <label class="form-label ">{{ __('settings.confirm_password') }}</label>
+                <label class="form-label">{{ __('settings.confirm_password') }}</label>
                 <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
                 @error('password')
                     <span class="invalid-feedback" role="alert">
