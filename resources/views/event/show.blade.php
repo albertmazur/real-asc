@@ -23,14 +23,14 @@
     </div>
 
     <div class="mt-3">
-        <div class="ticket-purchase-section p-4 bg-light rounded-3 shadow-sm mb-4 mx-5">
+        <div class="p-4 bg-body text-body rounded-3 shadow-sm mb-4 mx-5">
             @if($event->date>$dateNotBuy && isset(Auth::user()->role) && Auth::user()->role === $userRoleClient)
                 @auth
                     <div class="ticket-info mb-4">
                         <h4 class="text-primary mb-3">{{ __('app.buy_ticket') }}</h4>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h5 class="fw-bold mb-0">{{ __('app.price') }}: <span id="priceEvent" class="text-primary">{{ $event->price }}</span> zł</h5>
-                            <span class="badge bg-info text-dark">{{ __('app.free_places') }}: {{ $event->freePlaces() }}</span>
+                            <span class="badge bg-info text-body">{{ __('app.free_places') }}: {{ $event->freePlaces() }}</span>
                         </div>
                         <hr class="my-3">
                     </div>

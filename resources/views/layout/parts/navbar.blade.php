@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="50" />
@@ -14,20 +14,27 @@
             <ul class="navbar-nav me-auto"></ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
-                <!-- Authentication Links -->
+            <ul class="navbar-nav">
+                <li class="nav-link">
+                    <input type="checkbox" class="dark-mode" id="dark-mode">
+                    <label for="dark-mode" class="dark-mode-label">
+                        <i class="bi bi-moon"></i>
+                        <i class="bi bi-sun"></i>
+                        <span class="ball"></span>
+                    </label>
+                </li>
+
                 @use('App\Enums\Language')
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lang.switch', Language::EN->value) }}">
+                <li class="nav-link">
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 me-1" href="{{ route('lang.switch', Language::EN->value) }}">
                         <img width="25" src="{{ asset('images/gb.svg') }}" alt="{{ __('app.langs.en') }}"/>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('lang.switch', Language::PL->value) }}">
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 ms-1" href="{{ route('lang.switch', Language::PL->value) }}">
                         <img width="25" src="{{ asset('images/pl.svg') }}" alt="{{ __('app.langs.pl') }}"/>
                     </a>
                 </li>
 
+                <!-- Authentication Links -->
                 @guest
                     @if(Route::has('login'))
                         <li class="nav-item">
@@ -65,4 +72,5 @@
             </ul>
         </div>
     </div>
+    @vite('resources/js/darkMode.js')
 </nav>

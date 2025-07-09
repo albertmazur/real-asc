@@ -27,8 +27,8 @@
             </div>
         </div>
 
-        <div class="mt-4 pt-4 bg-white shadow-sm rounded">
-            <h4 class="text-center">{{ __('app.main.upcoming_events') }}</h4>
+        <div class="mt-4 pt-4 bg-body shadow-sm rounded">
+            <h4 class="text-center text-body">{{ __('app.main.upcoming_events') }}</h4>
             <div class="d-flex flex-wrap justify-content-center">
                 @foreach($closestTimeEvent as $event)
                     @include('event.card')
@@ -36,8 +36,8 @@
             </div>
         </div>
 
-        <div class="mt-4 pt-4 bg-white shadow-sm rounded">
-            <h4 class="text-center">{{ __('app.main.most_commented_events') }}</h4>
+        <div class="mt-4 pt-4 bg-body shadow-sm rounded">
+            <h4 class="text-center text-body">{{ __('app.main.most_commented_events') }}</h4>
             <div class="d-flex flex-wrap justify-content-center">
                 @foreach($mostComentEvent as $event)
                     @include('event.card')

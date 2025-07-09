@@ -7,6 +7,9 @@
 // Bootstrap Icons
 @use 'bootstrap-icons/font/bootstrap-icons.css';
 
+@use 'icon-dark-mode.scss';
+
 .icon:hover{
     color: var(--bs-primary) !important;
 }
+
