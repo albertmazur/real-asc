@@ -62,6 +62,7 @@ return [
     'st'=> "ul.",
     'street' => "Ulica",
     'capacity' => "Pojemność",
+    'places' => "places",
     'free_places' => "Wolne miejsca",
     'find' => "Szukaj",
     'sort' => "Sortuj",
