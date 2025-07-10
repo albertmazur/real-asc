@@ -33,7 +33,7 @@ class CommentRepository implements Repository{
 
     public function allPaginated(int $limit): LengthAwarePaginator
     {
-        return $this->commentModel->orderBy(['date', 'time'])->paginate($limit);
+        return $this->commentModel->orderBy('date')->orderBy('time')->paginate($limit);
     }
 
     public function all(): Collection{

@@ -16,7 +16,7 @@
             <span @if ($event->freePlaces()<=10) class="text-danger" @endif >{{ __('app.free_places') }}: {{ $event->freePlaces() }}</span> 
         </p>
         <div class="d-flex mt-auto">
-            <a class="btn btn-primary ms-auto" href="#" role="button">{{ __('app.see_details') }}</a>
+            <a class="btn btn-primary ms-auto" href="{{ route('event.show', $event->id) }}" role="button">{{ __('app.see_details') }}</a>
         </div>
     </div>
 </div>

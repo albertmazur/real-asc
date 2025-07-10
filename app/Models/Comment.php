@@ -10,7 +10,12 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content','user_id', 'event_id'];
+    protected $fillable = [
+        'content',
+        'user_id',
+        'event_id'
+    ];
+
     public $timestamps = false;
 
     protected static function boot()

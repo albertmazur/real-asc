@@ -11,7 +11,14 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'dateBuy', 'timeBuy', 'event_id', 'user_id', 'state'];
+    protected $fillable = [
+        'number',
+        'dateBuy',
+        'timeBuy',
+        'event_id',
+        'user_id', 
+        'state'
+    ];
 
     protected static function boot()
     {

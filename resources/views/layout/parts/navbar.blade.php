@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand-md shadow-sm">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="50" />
         </a>
-        <a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a>
-
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('stadium.list') }}">{{ __('app.stadiums') }}</a></li>
+        </ul>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.nav_toggle') }}">
             <span class="navbar-toggler-icon"></span>
         </button>

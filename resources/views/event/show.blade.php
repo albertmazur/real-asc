@@ -23,7 +23,7 @@
     </div>
 
     <div class="mt-3">
-        <div class="p-4 bg-body text-body rounded-3 shadow-sm mb-4 mx-5">
+        <div class="p-4 bg-body text-body rounded-3 border shadow-lg mb-4 mx-5">
             @if($event->date>$dateNotBuy && isset(Auth::user()->role) && Auth::user()->role === $userRoleClient)
                 @auth
                     <div class="ticket-info mb-4">

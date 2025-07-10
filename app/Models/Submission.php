@@ -9,7 +9,11 @@ class Submission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content', 'reason', 'comment_id'];
+    protected $fillable = [
+        'content',
+        'reason',
+        'comment_id'
+    ];
 
     public function comment()
     {
