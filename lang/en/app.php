@@ -89,6 +89,31 @@ return [
         'upcoming_events' => "Upcoming events",
         'most_commented_events' => "Most commented events"
     ],
+    'about' => [
+        'title' => "About us",
+        'description1' => "Welcome to our website! We are a team of football and technology enthusiasts.",
+        'description2' => "Our application allows you to browse stadium information, purchase tickets, and offers interesting facts and a photo gallery.",
+        'description3' => "If you want to learn more about our team or mission, please contact us via the Contact page.",
+        'location_title' => "Our headquarters",
+        'location_description' => "Below you will find a map showing the location of our main headquarters and the stadium.",
+        'map_title' => "Map of our headquarters and stadium",
+    ],
+    'contact' => [
+        'title' => "Contact",
+        'intro' => "Have questions? Write to us:",
+        'thanks' => "Thank you for your message! We will get back to you shortly.",
+        'signature' => 'Regards',
+        'email_subject' => "New message from contact form",
+        'form'  => [
+            'name_label' => "Name and surname",
+            'name_placeholder' => "Your name",
+            'email_label' => "Email",
+            'email_placeholder' => "you@mail.com",
+            'message_label' => "Message",
+            'message_placeholder' => "Your message…",
+            'button' => "Send",
+        ],
+    ],
     'login' => [
         'remember_me' => "Remember me",
         'forgot_password' => "Forgot your password?"

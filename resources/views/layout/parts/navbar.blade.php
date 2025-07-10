@@ -3,17 +3,19 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.ico') }}" alt="Logo" width="50" />
         </a>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('stadium.list') }}">{{ __('app.stadiums') }}</a></li>
-        </ul>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('app.nav_toggle') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto"></ul>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('event.index') }}">{{ __('app.events') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('stadium.list') }}">{{ __('app.club_facilities') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">{{ __('app.about.title') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">{{ __('app.contact.title') }}</a></li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav">

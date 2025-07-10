@@ -89,6 +89,31 @@ return [
         'upcoming_events' => "Najbliższe wydarzenia",
         'most_commented_events' => "Najczęsciej komentowane wydarzenia"
     ],
+    'about' => [
+        'title' => "O nas",
+        'description1' => "Witamy na naszej stronie! Jesteśmy zespołem pasjonatów futbolu i technologii.",
+        'description2' => "Nasza aplikacja pozwala na przeglądanie informacji o stadionach, zakup biletów, oraz udostępnia ciekawe fakty i galerię zdjęć.",
+        'description3' => "Jeśli chcesz dowiedzieć się więcej o naszym zespole lub naszej misji, skontaktuj się z nami przez stronę Kontakt.",
+        'location_title' => "Nasza siedziba",
+        'location_description'=> "Poniżej znajdziesz mapę z lokalizacją naszej głównej siedziby oraz punkt na stadionie.",
+        'map_title' => "Mapa siedziby i stadionu",
+    ],
+    'contact' => [
+        'title' => "Kontakt",
+        'intro' => "Masz pytania? Napisz do nas:",
+        'thanks' => "Dziękujemy za wiadomość! Odpowiemy najszybciej jak to możliwe.",
+        'signature' => 'Pozdrawiamy',
+        'email_subject' => "Nowa wiadomość z formularza kontaktowego",
+        'form'  => [
+            'name_label' => "Imię i nazwisko",
+            'name_placeholder' => "Twoje imię",
+            'email_label' => "E-mail",
+            'email_placeholder' => "you@mail.pl",
+            'message_label' => "Wiadomość",
+            'message_placeholder'=> "Twoja wiadomość…",
+            'button' => "Wyślij",
+        ],
+    ],
     'login' => [
         'remember_me' => "Zapamiętaj mnie",
         'forgot_password' => "Przypomnij hasło?"

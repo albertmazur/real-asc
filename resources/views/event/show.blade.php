@@ -107,7 +107,7 @@
                                 @if ($comment->user) 
                                     {{ $comment->user->first_name }} {{ $comment->user->last_name }} 
                                 @else 
-                                    {{ __("app.deleted_user") }} 
+                                    {{ __('app.deleted_user') }} 
                                 @endif
                             </h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $comment->date }} {{ $comment->time }}</h6>

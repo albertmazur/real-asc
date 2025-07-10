@@ -22,6 +22,9 @@ use App\Http\Controllers\SubmissionController;
 */
 
 Route::get('/', [EventController::class, 'welcome'])->name('home');
+Route::get('/about',   [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact', [HomeController::class, 'sendContact'])->name('contact.send');
 Route::get('/lang/{lang}', [HomeController::class, 'changeLanguage'])->name('lang.switch');
 
 Route::group([
