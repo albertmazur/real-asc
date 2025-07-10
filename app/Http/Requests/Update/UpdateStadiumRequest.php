@@ -26,10 +26,12 @@ class UpdateStadiumRequest extends FormRequest
         return [
             'id' => ['required', 'integer'],
             'name' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'city' => ['required', 'string'],
             'street' => ['required', 'string'],
             'numberBuilding' => ['required', 'string'],
             'places' => ['required', 'integer', 'min:0'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,gif', 'max:2048']
         ];
     }
 }

@@ -19,6 +19,15 @@ class StadiumController extends Controller
     {
         $this->stadiumRepository = $stadiumRepository;
     }
+
+    public function list(){
+        $stadiums = $this->stadiumRepository->allPaginated(5);
+
+        return view('stadium.list', [
+            'stadiums' => $stadiums,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +63,14 @@ class StadiumController extends Controller
     public function store(StoreStadiumRequest $request)
     {
         $date = $request->validated();
-        $this->stadiumRepository->add($date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places']);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('stadium', 'public');
+        }
+        // dd($imagePath);
+        $this->stadiumRepository->add($date['name'], $date['description'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'], $imagePath);
+
         return back()->with('success', __('dashboard.stadium.added'));
     }
 
@@ -94,7 +110,13 @@ class StadiumController extends Controller
         if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {
             $date = $request->validated();
-            $this->stadiumRepository->update($date['id'], $date['name'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'],);
+            $imagePath = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('stadium', 'public');
+            }
+
+            $this->stadiumRepository->update($date['id'], $date['name'], $date['description'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'], $imagePath);
+
             return redirect()->route('stadium.index')->with('success', __('app.save_changes'));
         }
         else abort(403);

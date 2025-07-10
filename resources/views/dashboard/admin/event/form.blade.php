@@ -44,7 +44,7 @@
         <input type="file" class="form-control" id="image" name="image" accept="image/*">
         @if(isset($event) && $event->image)
             <div class="mt-2">
-                <img src="{{ Storage::url($event->image) }}" alt="{{ $event->name }}" style="max-width: 200px;">
+                <img src="{{ assert($event->image) }}" alt="{{ $event->name }}" style="max-width: 200px;">
                 <small class="d-block">{{ __('app.current_image') }}</small>
             </div>
         @endif

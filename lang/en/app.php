@@ -37,6 +37,8 @@ return [
     'admin' => "Administrator",
     'stadium' => "Stadium",
     'stadiums' => "Stadiums",
+    'club_facilities' => "Club facilities",
+    'not_facilities' => "No stadiums to display.",
     'event' => "Event",
     'events' => "Events",
     'see_details' => "See details",

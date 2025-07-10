@@ -37,6 +37,8 @@ return [
     'admin' => "Administrator",
     'stadium' => "Stadion",
     'stadiums' => "Stadiony",
+    'club_facilities' => "Obiekty klubu",
+    'not_facilities' => "Brak stadionów do wyświetlenia.",
     'event' => "Wydarzenie",
     'events' => "Wydarzenia",
     'see_details' => "Zobacz szczegóły",

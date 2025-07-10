@@ -19,32 +19,36 @@ class StadiumRepository implements Repository{
         return $this->stadiumModel->findOrFail($id);
     }
 
-    public function add(string $name, string $city, string $street, string $numberBuilding, int $places)
+    public function add(string $name, string $description = null, string $city, string $street, string $numberBuilding, int $places, $imagePath = null)
     {
         $this->stadiumModel->create([
             'name' => $name,
+            'description' => $description,
             'city' => $city,
             'street' => $street,
             'numberBuilding' => $numberBuilding,
-            'places'=>$places
+            'places' => $places,
+            'image' => $imagePath
         ]);
     }
 
-    public function update(int $id, string $name, string $city, string $street, string $numberBuilding, int $places)
+    public function update(int $id, string $name, string $description = null, string $city, string $street, string $numberBuilding, int $places, $imagePath = null)
     {
         $stadium = $this->stadiumModel->findOrFail($id);
         $stadium->name = $name;
+        $stadium->description = $description;
         $stadium->city = $city;
         $stadium->street = $street;
         $stadium->numberBuilding = $numberBuilding;
         $stadium->places = $places;
+        $stadium->image = $imagePath;
         $stadium->save();
     }
 
 
     public function allPaginated(int $limit): LengthAwarePaginator
     {
-        return $this->stadiumModel->orderBy(['date', 'time'])->paginate($limit);
+        return $this->stadiumModel->orderBy('date')->orderBy('time')->paginate($limit);
     }
 
     public function all(): Collection{

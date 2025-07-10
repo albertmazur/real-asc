@@ -41,6 +41,14 @@ Route::group([
     Route::post('store', [SubmissionController::class, 'store'])->name('store');
 });
 
+Route::group([
+    'prefix' => 'stadium',
+    'namespace' => 'stadium',
+    'as' => 'stadium.'
+], function (){
+    Route::get('list', [StadiumController::class, 'list'])->name('list');
+});
+
 Route::middleware(['auth', 'verified', 'force_password_change'])->group(function (){
     Route::group([
         'prefix' => 'event',

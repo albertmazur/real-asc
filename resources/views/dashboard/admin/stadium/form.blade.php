@@ -1,4 +1,4 @@
-<form action="{{ isset($stadium) ? route('stadium.update') : route('stadium.store') }}" method="POST">
+<form action="{{ isset($stadium) ? route('stadium.update') : route('stadium.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if(isset($stadium))
         @method('PUT')
@@ -8,6 +8,11 @@
     <div class="mb-3">
         <label for="name" class="form-label">{{ __('dashboard.stadium.name') }}</label>
         <input type="text" class="form-control" id="name" name="name" value="{{ $stadium->name ?? '' }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">{{ __('app.description') }}</label>
+        <textarea class="form-control" name="description" id="description" rows="3">{{ $stadium->description ?? '' }}</textarea>
     </div>
 
     <div class="mb-3">
@@ -28,6 +33,17 @@
     <div class="mb-3">
         <label for="places" class="form-label">{{ __('app.capacity') }}</label>
         <input type="number" min="0" step="1" class="form-control" id="places" name="places" value="{{ $stadium->places ?? '' }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">{{ __('app.image') }}</label>
+        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        @if(isset($stadium) && $stadium->image)
+            <div class="mt-2">
+                <img src="{{ Storage::url($stadium->image) }}" alt="{{ $stadium->name }}" style="max-width: 200px;">
+                <small class="d-block">{{ __('app.current_image') }}</small>
+            </div>
+        @endif
     </div>
 
     <button type="submit" class="btn btn-primary me-auto">
