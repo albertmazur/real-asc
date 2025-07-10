@@ -4,7 +4,7 @@
     <div class="container">
         <div class="main">
             <h1 class="text-center mb-4">{{ __('app.main.welcome_in_club') }} {{ config('app.name', 'Club') }}</h1>
-            <div id="carouselExample" class="carousel slide">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{{ asset('images/stadium/stadium1.webp') }}" class=" w-100 h-50 rounded object-fit-cover" alt="{{ __('app.stadium') }}">
@@ -16,11 +16,11 @@
                         <img src="{{ asset('images/stadium/stadium3.webp') }}" class="d-block w-100 h-50 rounded object-fit-cover" alt="{{ __('app.stadium') }}">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">{{ __('pagination.previous') }}</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">{{ __('pagination.next') }}</span>
                 </button>
