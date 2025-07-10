@@ -10,9 +10,9 @@
             @foreach($stadiums as $stadium)
                 <div class="row mb-5 align-items-center">
                     <div class="col-md-6 {{ $loop->iteration % 2 === 0 ? 'order-md-2' : '' }}">
-                        <img src="{{ Storage::url($stadium->image) }}"
-                             class="img-fluid rounded shadow-sm"
-                             alt="{{ __('app.image') . $stadium->name }}">
+                        <div class="overflow-hidden rounded shadow-sm mb-3 mb-md-0" style="height: 300px;">
+                            <img src="{{ Storage::url($stadium->image) }}" class="w-100 h-100 object-fit-cover" alt="{{ __('app.image') . ' ' . $stadium->name }}">
+                        </div>
                     </div>
                     <div class="col-md-6 {{ $loop->iteration % 2 === 0 ? 'order-md-1' : '' }}">
                         <h3 class="mt-3 mt-md-0">{{ $stadium->name }}</h3>
