@@ -5,13 +5,13 @@ tickets.forEach(ticket => {
         button.addEventListener('click', function (){
             const ticketCard = this.closest('.ticket')
 
-            if (!ticketCard) return alert("Nie znaleziono biletu.")
+            if (!ticketCard) return alert(window.trans.ticketNotFound)
 
             const printWindow = window.open('', '', 'width=800,height=600')
             printWindow.document.write(`
                 <html>
                     <head>
-                        <title>Bilet</title>
+                        <title>${window.trans.ticket}</title>
                         <link rel="stylesheet" href="${cssUrl}">
                         <style>
                             @media print {

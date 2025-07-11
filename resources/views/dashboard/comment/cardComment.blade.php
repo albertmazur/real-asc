@@ -3,7 +3,7 @@
             @if ($comment->user)
                 {{ $comment->user->first_name }} {{ $comment->user->last_name }}
             @else
-                {{ __("app.deleted_user") }}
+                {{ __('app.deleted_user') }}
             @endif
         </p>
     <div class="card-body">

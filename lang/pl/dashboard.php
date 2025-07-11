@@ -24,6 +24,7 @@ return [
         'canceled' => "Anulowany",
         'purchased' => "Zakupiony",
         'returned' => "Zwrócony",
+        'ticket_not_found' => "Nie znaleziono biletu."
     ],
     'comment' => [
         'my' => "Moje komentarze",

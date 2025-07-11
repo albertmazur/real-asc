@@ -24,6 +24,7 @@ return [
         'canceled' => "Canceled",
         'purchased' => "Purchased",
         'returned' => "Returned",
+        'ticket_not_found' => "Ticket not found."
     ],
     'comment' => [
         'my' => "My comments",

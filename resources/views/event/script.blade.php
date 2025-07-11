@@ -6,18 +6,18 @@
 
     async function setupStripe(){
         const elements = stripe.elements()
-        const cardNumber = elements.create("cardNumber")
-        const cardExpiry = elements.create("cardExpiry")
-        const cardCvc = elements.create("cardCvc")
+        const cardNumber = elements.create('cardNumber')
+        const cardExpiry = elements.create('cardExpiry')
+        const cardCvc = elements.create('cardCvc')
 
         cardNumber.mount('#card-number')
         cardExpiry.mount('#card-expiry')
         cardCvc.mount('#card-cvc')
 
-        const form = document.getElementById("payment-form")
-        const submitButton = form.querySelector("button[type='submit']")
+        const form = document.getElementById('payment-form')
+        const submitButton = form.querySelector('button[type='submit']')
 
-        form.addEventListener("submit", async function(event) {
+        form.addEventListener('submit', async function(event) {
             event.preventDefault()
 
             submitButton.disabled = true

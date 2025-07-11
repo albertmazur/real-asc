@@ -24,6 +24,10 @@
     </div>
     <script>
         const cssUrl = @json(asset('css/app.css'));
+        window.trans = {
+            ticketNotFound: @json(__('app.ticket_not_found')),
+            ticket: @json(__('app.ticket')),
+        }
     </script>
     @vite(['resources/js/printTicket.js'])
 @endsection
