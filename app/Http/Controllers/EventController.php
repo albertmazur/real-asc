@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\ReasonSubmission;
 use App\Enums\UserRole;
+use App\Http\Requests\EventSearchRequest;
 use App\Models\Event;
 use App\Http\Requests\Store\StoreEventRequest;
 use App\Http\Requests\Update\UpdateEventRequest;
@@ -30,32 +31,35 @@ class EventController extends Controller
      * @return \Illuminate\Contracts\View\View
      */
 
-    private function viewList(Request $request, string $link)
+    private function viewList(EventSearchRequest $request, string $link)
     {
-        $name = $request->get('nameSearch');
-        $sort = $request->get('sortSearch') ?? 'name';
+        $data = $request->validated();
+        $value = $data['value'] ?? null;
+        $sortSearch = $data['sortSearch'] ?? 'name';
+        $sortDirection = $data['sortDirection'] ?? 'asc';
+        $facility = $data['facility'] ?? 0;
 
-        $resultPaginator = $this->eventRepository->filterBy($name, $sort, 10);
+        $resultPaginator = $this->eventRepository->filterBy($value, $sortSearch, $sortDirection, $facility, 10);
 
         $resultPaginator->appends([
-            'nameSearch' => $name,
-            'sortSearch' => $sort
+            'value' => $value,
+            'sortSearch' => $sortSearch,
+            'sortDirection' => $sortDirection
         ]);
 
         $viewData = [
             'events' => $resultPaginator,
-            'nameSearch' => $name,
-            'sortSearch' => $sort
+            'value' => $value,
+            'stadiums' => $this->stadiumRepository->all(),
+            'facility' => $facility,
+            'sortSearch' => $sortSearch,
+            'sortDirection' => $sortDirection
         ];
-        
-        if ($link === 'dashboard.admin.event.main') {
-            $viewData['stadiums'] = $this->stadiumRepository->all();
-        }
         
         return view($link, $viewData);
     }
 
-    public function index(Request $request)
+    public function index(EventSearchRequest $request)
     {
         return $this->viewList($request, 'event.list');
     }
@@ -83,7 +87,7 @@ class EventController extends Controller
             $data = $request->validated();
 
             $imagePath = null;
-            if ($request->hasFile('image')) {
+            if ($request->hasFile('image')){
                 $imagePath = $request->file('image')->store('events', 'public');
             }
 
@@ -102,7 +106,7 @@ class EventController extends Controller
         else abort(403);
     }
 
-    public function dashboard(Request $request)
+    public function dashboard(EventSearchRequest $request)
     {
         if(Gate::allows(UserRole::ADMIN->value, Auth::user()))
         {

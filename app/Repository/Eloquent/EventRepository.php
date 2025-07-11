@@ -66,10 +66,10 @@ class EventRepository implements Repository{
         return $this->eventModel->withCount('comments')->orderBy('comments_count', 'desc')->limit($limit)->get();
     }
 
-    public function filterBy(string $name = null, string $sort = 'name', int $limit): LengthAwarePaginator{
+    public function filterBy(string $value = null, string $sortSearch = 'name', string $sortDirection = 'asc', int $facility, int $limit): LengthAwarePaginator{
         $query = $this->eventModel;
 
-        if($sort === 'freeSet')
+        if($sortSearch === 'freeSet')
         {
             $query = $query->selectRaw('events.*, (stadiums.places - COUNT(tickets.id)) AS freeSet')
                 ->join('stadiums', 'events.stadium_id', '=', 'stadiums.id')
@@ -78,12 +78,14 @@ class EventRepository implements Repository{
                          ->where('tickets.state', '=', TicketStatus::PURCHASED->value);
                 })
                 ->groupBy('events.id', 'stadiums.places')
-                ->orderBy('freeSet');
+                ->orderBy('freeSet', $sortDirection);
         }
-        else $query = $query->orderBy($sort);
+        if($facility != 0) $query = $query->where('stadium_id', '=', $facility);
 
-        if($name) $query = $query->where('name', 'like', $name.'%');
+        if($value) $query = $query->where('name', 'like', $value.'%');
 
+        $query = $query->orderBy($sortSearch, $sortDirection);
+        
         return $query->paginate($limit);
     }
 }

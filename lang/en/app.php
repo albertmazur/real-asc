@@ -2,6 +2,8 @@
 
 return [
     'lp' => "Lp",
+    'asc' => "Rosnąco",
+    'desc' => "Malejąco",
     'name' => "Name",
     'name_user' => "Name user",
     'first_name' => "Fist name",

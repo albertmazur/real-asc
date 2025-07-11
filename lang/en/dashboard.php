@@ -4,6 +4,7 @@ return [
     'welcome' => "Welcome to the panel",
     'choose_topic' => "Choose a topic",
     'sort_choice' => "Choose what to sort by",
+    'sort_direction' => "Sort direction",
     'event' => [
         'add' => "Add event",
         'edit' => "Edit event",
