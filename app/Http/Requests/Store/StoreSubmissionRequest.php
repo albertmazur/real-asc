@@ -27,8 +27,8 @@ class StoreSubmissionRequest extends FormRequest
     {
         return [
             'reason' => ['required', 'string', Rule::enum(ReasonSubmission::class)],
-            'content' => ['string'],
-            'comment_id' => ['required', 'integer']
+            'description' => ['nullable', 'string'],
+            'comment_id' => ['required', 'integer', 'exists:comments,id']
         ];
     }
 

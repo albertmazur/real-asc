@@ -1,10 +1,36 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    const stripe = Stripe("{{ config('services.stripe.key') }}", {
-        locale: 'pl'
-    })
+    let countTickets = document.getElementById('countTickets')
+    if(countTickets !== null && countTickets !== 'undefined'){
+        countTickets.addEventListener('input', (e) => {
+            let price = parseFloat(document.getElementById('priceEvent').textContent)
+            let sumPrice = parseInt(e.target.value)*price
+            document.getElementById('sumPrice').textContent = sumPrice.toFixed(2)
+        })
+    }
 
+    let reportButtons = document.querySelectorAll('.reportButton')
+
+    if(reportButtons !== null && reportButtons !== 'undefined'){
+        reportButtons.forEach(element => {
+            element.addEventListener('click', (e) => {
+                let registrationCommentModal = document.getElementById('registrationCommentModal')
+                console.log(e.target.value)
+                if(registrationCommentModal !== null && registrationCommentModal !== 'undefined'){
+                    document.getElementById('comment_id').value = e.target.value
+                }
+            })
+        })
+    }
+
+    const form = document.getElementById('payment-form')
+    if(form) setupStripe()
+    
     async function setupStripe(){
+        const stripe = Stripe("{{ config('services.stripe.key') }}", {
+            locale: 'pl'
+        })
+
         const elements = stripe.elements()
         const cardNumber = elements.create('cardNumber')
         const cardExpiry = elements.create('cardExpiry')
@@ -14,8 +40,8 @@
         cardExpiry.mount('#card-expiry')
         cardCvc.mount('#card-cvc')
 
-        const form = document.getElementById('payment-form')
-        const submitButton = form.querySelector('button[type='submit']')
+        
+        const submitButton = form.querySelector("button[type='submit']")
 
         form.addEventListener('submit', async function(event) {
             event.preventDefault()
@@ -60,5 +86,4 @@
             })
         })
     }
-    setupStripe()
 </script>
