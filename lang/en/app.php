@@ -23,6 +23,7 @@ return [
     'buy' => "Buy",
     'sum' => "Sum",
     'ticket' => "Ticket",
+    'tickets' => "Tickets",
     'buy_ticket' => "Buy a ticket/s",
     'success_buy_ticket' => "Payment completed successfully!",
     'no_buy_ticket' => "Tickets are no longer available for purchase",

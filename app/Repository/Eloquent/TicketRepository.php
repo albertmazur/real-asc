@@ -31,12 +31,14 @@ class TicketRepository implements Repository{
             $ticket->qr_token = Str::uuid();
             $ticket->save();
         }
-
-        //for($i=0; $i<$count; $i++) $this->ticketModel->create(['user_id' => Auth::id(), 'event_id' => $event_id]);
     }
 
     public function get(int $id): Ticket{
         return $this->ticketModel->findOrFail($id);
+    }
+
+    public function getWithToken(string $token): Ticket{
+        return Ticket::where('qr_token', $token)->where('state', 'purchased')->firstOrFail();
     }
 
     public function myTickets(int $sortEventSearch, string $how = 'All'): Collection{

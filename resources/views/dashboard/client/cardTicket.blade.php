@@ -8,6 +8,11 @@
                 <p class="card-text text-muted mb-1">{{ __('app.date_purchase') }}: <strong>{{ $ticket->dateBuy }} {{ $ticket->timeBuy }}</strong></p>
                 <p class="card-text mb-1">{{ __('dashboard.ticket.' . $ticket->state) }}</p>
                 <p class="card-text h6">{{ __('app.price') }}: <strong>{{ $ticket->event->price }}</strong></p>
+                @if ($ticket->used_at)
+                    <p class="text-danger">{{ __('ticket.used_at', ['date' => $ticket->used_at]) }}</p>
+                @else
+                    <p class="text-success">{{ __('ticket.not_used') }}</p>
+                @endif
             </div>
 
             <div class="col-md-4 text-center">

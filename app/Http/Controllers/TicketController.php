@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\TicketStatus;
 use App\Enums\UserRole;
+use App\Http\Requests\VerifyTicketRequest;
 use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\Ticket;
@@ -35,7 +36,7 @@ class TicketController extends Controller
         $tickets = $this->ticketRepository->myTickets($sortEventSearch, TicketStatus::PURCHASED->value);
 
         foreach ($tickets as $ticket) {
-            $ticket->qr_code = QrCode::size(150)->generate(route('ticket.validate', $ticket->qr_token));
+            $ticket->qr_code = QrCode::size(250)->generate( $ticket->qr_token);
         }
 
         return view('dashboard.client.ticket', [
@@ -176,7 +177,33 @@ class TicketController extends Controller
         return back()->with('success', __('app.success_buy_ticket'));
     }
 
-    public function validateQr(){
+    public function scanner(){
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()) || Gate::allows(UserRole::MODERATOR->value, Auth::user())){
+            return view('dashboard.admin.ticket.verify');
+        }
+        else abort(403);
+    }
 
+    public function verifyQr(VerifyTicketRequest $request){
+        if(Gate::allows(UserRole::ADMIN->value, Auth::user()) || Gate::allows(UserRole::MODERATOR->value, Auth::user())){
+            $ticket = $this->ticketRepository->getWithToken($request->validated()['token']);
+
+            if ($ticket->used_at) {
+                return response()->json([
+                    'success' => false,
+                    'message' => __('ticket.already_used', ['date' => $ticket->used_at])
+                ]);
+            }
+
+            $ticket->used_at = now();
+            $ticket->save();
+
+            return response()->json([
+                'success' => true,
+                'ticket_id' => $ticket->id,
+                'message' => 'Bilet poprawnie zweryfikowany i oznaczony jako użyty.'
+            ]);
+        }
+        else abort(403);
     }
 }

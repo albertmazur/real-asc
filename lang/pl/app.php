@@ -23,6 +23,7 @@ return [
     'buy' => "Kup",
     'sum' => "Suma",
     'ticket' => "Bilet",
+    'tickets' => "Bilety",
     'buy_ticket' => "Kup bilet/y",
     'success_buy_ticket' => "Płatność zakończona sukcesem!",
     'no_buy_ticket' => "Nie można już kupić biletów",

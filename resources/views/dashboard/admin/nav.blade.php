@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('comment.*') ? 'active' : '' }}" href="{{ route('comment.index') }}">{{ __('app.comments') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('comment.*') ? 'active' : '' }}" href="{{ route('ticket.scanner') }}">{{ __('app.ticket') }}</a>
+                </li>
             </ul>
         </div>
     </div>

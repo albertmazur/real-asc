@@ -179,4 +179,7 @@ return [
     'attributes' => [],
 
     'at_least_one_admin' => 'At least one administrator must remain in the system.',
+    
+    'token_required' => 'QR code is required.',
+    'token_invalid' => 'The QR code is invalid.',
 ];
