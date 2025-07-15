@@ -85,8 +85,18 @@ class EventRepository implements Repository{
 
         if($value) $query = $query->where('name', 'like', $value.'%');
         
-        if($filterData == 'past') $query = $query->where(DB::raw("date || ' ' || time"), '<', now());
-        if($filterData == 'future') $query = $query->where(DB::raw("date || ' ' || time"), '>', now());
+        $driver = DB::getDriverName();
+
+        if ($driver === 'sqlite') {
+            $expression = DB::raw("date || ' ' || time");
+        } elseif ($driver === 'pgsql') {
+            $expression = DB::raw("date || ' ' || time::text");
+        } else {
+            $expression = DB::raw("CONCAT(date, ' ', time)");
+        }
+
+        if($filterData == 'past') $query = $query->where($expression, '<', now());
+        if($filterData == 'future') $query = $query->where($expression, '>', now());
 
         $query = $query->orderBy($sortSearch, $sortDirection);
         
