@@ -34,7 +34,7 @@
                 <option value="freeSet" {{ $sortSearch == 'freeSet'? 'selected' : '' }}>{{ __('app.free_places') }}</option>
             </select>
             <select id="sortDirection" name="sortDirection" class="form-select" aria-label="{{ __('app.sort_direction') }}">
-                <option value="asc"  {{ $sortDirection == 'asc' ? 'selected' : '' }}>{{ __('app.asc') }}</option>
+                <option value="asc" {{ $sortDirection == 'asc' ? 'selected' : '' }}>{{ __('app.asc') }}</option>
                 <option value="desc" {{ $sortDirection == 'desc' ? 'selected' : '' }}>{{ __('app.desc') }}</option>
             </select>
         </div>
