@@ -150,27 +150,12 @@ class TicketController extends Controller
 
     public function backTicket(Request $request)
     {
-        if(Gate::allows(UserRole::USER->value, Auth::user()))
-        {
-            $id = $request->get('id');
-            $f = $this->ticketRepository->backTicket($id);
+        if (!Gate::allows(UserRole::USER->value, Auth::user())) abort(403);
 
-            $p = '';
-            $message = '';
-            if($f)
-            {
-                $p ='success';
-                $message = __('app.success_return_ticket');
-            }
-            else
-            {
-                $p = 'error';
-                $message = __('app.error_return_ticket');
-            }
+        $id = $request->get('id');
+        $success = $this->ticketRepository->backTicket($id);
 
-            return back()->with($p, $message);
-        }
-        else abort(403);
+        return back()->with($success ? 'success' : 'error', __($success ? 'app.success_return' : 'app.error_return'));
     }
 
     public function paymentStatus(){
@@ -191,7 +176,7 @@ class TicketController extends Controller
             if ($ticket->used_at) {
                 return response()->json([
                     'success' => false,
-                    'message' => __('ticket.already_used', ['date' => $ticket->used_at])
+                    'message' => __('dashboard.ticket.already_used', ['date' => $ticket->used_at])
                 ]);
             }
 
@@ -201,7 +186,7 @@ class TicketController extends Controller
             return response()->json([
                 'success' => true,
                 'ticket_id' => $ticket->id,
-                'message' => 'Bilet poprawnie zweryfikowany i oznaczony jako użyty.'
+                'message' => __('dashboard.ticket.ticket_verified')
             ]);
         }
         else abort(403);
