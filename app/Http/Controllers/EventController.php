@@ -38,13 +38,15 @@ class EventController extends Controller
         $sortSearch = $data['sortSearch'] ?? 'name';
         $sortDirection = $data['sortDirection'] ?? 'asc';
         $facility = $data['facility'] ?? 0;
+        $filterData = $data['filterData'] ?? null;
 
-        $resultPaginator = $this->eventRepository->filterBy($value, $sortSearch, $sortDirection, $facility, 10);
+        $resultPaginator = $this->eventRepository->filterBy($value, $sortSearch, $sortDirection, $facility, $filterData);
 
         $resultPaginator->appends([
             'value' => $value,
             'sortSearch' => $sortSearch,
-            'sortDirection' => $sortDirection
+            'sortDirection' => $sortDirection,
+            'filterData' => $filterData
         ]);
 
         $viewData = [
@@ -53,7 +55,8 @@ class EventController extends Controller
             'stadiums' => $this->stadiumRepository->all(),
             'facility' => $facility,
             'sortSearch' => $sortSearch,
-            'sortDirection' => $sortDirection
+            'sortDirection' => $sortDirection,
+            'filterData' => $filterData
         ];
         
         return view($link, $viewData);
@@ -163,9 +166,7 @@ class EventController extends Controller
             $data = $request->validated();
 
             $imagePath = null;
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('events', 'public');
-            }
+            if ($request->hasFile('image')) $imagePath = $request->file('image')->store('events', 'public');
 
             $this->eventRepository->update(
                 $data['id'],

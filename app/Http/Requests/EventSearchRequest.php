@@ -26,7 +26,8 @@ class EventSearchRequest extends FormRequest
             'value' => ['nullable', 'string'],
             'sortSearch' => ['nullable', 'string', Rule::in(['name', 'date', 'stadium', 'freeSet'])],
             'sortDirection' => ['nullable', 'string', Rule::in(['asc', 'desc'])],
-            'facility' => ['nullable', 'integer', 'exclude_if:facility,0', Rule::exists('stadiums', 'id')]
+            'facility' => ['nullable', 'integer', 'exclude_if:facility,0', Rule::exists('stadiums', 'id')],
+            'filterData' => ['nullable', Rule::in(['past', 'future'])]
         ];
     }
 }

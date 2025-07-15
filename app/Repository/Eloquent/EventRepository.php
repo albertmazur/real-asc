@@ -2,12 +2,13 @@
 
 namespace App\Repository\Eloquent;
 
-use App\Enums\TicketStatus;
-use App\Models\Event;
-use App\Repository\EventRepository as Repository;
 use Carbon\Carbon;
+use App\Models\Event;
+use App\Enums\TicketStatus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Repository\EventRepository as Repository;
 
 class EventRepository implements Repository{
     private Event $eventModel;
@@ -66,7 +67,7 @@ class EventRepository implements Repository{
         return $this->eventModel->withCount('comments')->orderBy('comments_count', 'desc')->limit($limit)->get();
     }
 
-    public function filterBy(string $value = null, string $sortSearch = 'name', string $sortDirection = 'asc', int $facility, int $limit): LengthAwarePaginator{
+    public function filterBy(string $value = null, string $sortSearch = 'name', string $sortDirection = 'asc', int $facility, string $filterData = null, int $limit = 10): LengthAwarePaginator{
         $query = $this->eventModel;
 
         if($sortSearch === 'freeSet')
@@ -83,6 +84,9 @@ class EventRepository implements Repository{
         if($facility != 0) $query = $query->where('stadium_id', '=', $facility);
 
         if($value) $query = $query->where('name', 'like', $value.'%');
+        
+        if($filterData == 'past') $query = $query->where(DB::raw("date || ' ' || time"), '<', now());
+        if($filterData == 'future') $query = $query->where(DB::raw("date || ' ' || time"), '>', now());
 
         $query = $query->orderBy($sortSearch, $sortDirection);
         
