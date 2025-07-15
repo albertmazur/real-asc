@@ -27,6 +27,7 @@ return [
         'xinvalid' => "❌ :message",
         'error' => "❌ An error occurred during verification.",
         'camera_error' => "❌ Error starting camera: :error",
+        'ticket_verified' => "The ticket has been successfully verified and marked as used.",
         'invalid_or_unpaid' => "The ticket is invalid or unpaid.",
         'already_used' => "The ticket has already been used on :date",
         'not_used' => "The ticket has not been used yet.",

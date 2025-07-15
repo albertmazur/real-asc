@@ -27,6 +27,7 @@ return [
         'xinvalid' => "❌ :message",
         'error' => "❌ Wystąpił błąd podczas weryfikacji.",
         'camera_error' => "❌ Błąd przy uruchamianiu kamery: :error",
+        'ticket_verified' => "Bilet poprawnie zweryfikowany i oznaczony jako użyty.",
         'invalid_or_unpaid' => "Bilet nieprawidłowy lub nieopłacony.",
         'already_used' => "Bilet został już użyty :date",
         'not_used' => "Bilet jeszcze nie został użyty.",
