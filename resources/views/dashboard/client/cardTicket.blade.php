@@ -9,9 +9,9 @@
                 <p class="card-text mb-1">{{ __('dashboard.ticket.' . $ticket->state) }}</p>
                 <p class="card-text h6">{{ __('app.price') }}: <strong>{{ $ticket->event->price }}</strong></p>
                 @if ($ticket->used_at)
-                    <p class="text-danger">{{ __('ticket.used_at', ['date' => $ticket->used_at]) }}</p>
+                    <p class="text-danger">{{ __('dashboard.ticket.used_at', ['date' => $ticket->used_at]) }}</p>
                 @else
-                    <p class="text-success">{{ __('ticket.not_used') }}</p>
+                    <p class="text-success">{{ __('dashboard.ticket.not_used') }}</p>
                 @endif
             </div>
 
