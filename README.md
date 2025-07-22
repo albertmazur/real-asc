@@ -8,10 +8,10 @@ Real ASC is a web application designed to manage a sports club. It allows users 
 
 ## Features
 - Manage stadiums (add, edit, delete)
-- Create and manage events
+- Manage events (add, edit, delete)
 - Manage users (add, edit, delete)
 - Comment on events
-- Role-based access control (admin, user)
+- Role-based access control (admin, moderator, user)
 - Payment system integrated with [Stripe](https://stripe.com/)
 
 ## Technologies
