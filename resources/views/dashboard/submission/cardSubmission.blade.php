@@ -2,7 +2,6 @@
     <h5 class="card-header">{{ __('app.submission') }}</h5>
     <div class="card-body">
         <div class="row">
-            <!-- Lewa kolumna: Informacje o zgłoszeniu -->
             <div class="col-md-6 mb-3">
                 <h6 class="text-muted">{{ __('dashboard.comment.' . $submission->reason) }}</h6>
                 <p class="mb-2">
@@ -11,7 +10,6 @@
                 </p>
             </div>
 
-            <!-- Prawa kolumna: Powiązany komentarz -->
             <div class="col-md-6">
                 @if ($submission->comment)
                     <p class="mb-2">
@@ -33,10 +31,17 @@
         <form method="POST" action="{{ route('submission.remove') }}" class="mt-3">
             @method('delete')
             @csrf
-            <input type="hidden" name="id" value="{{ $submission->id }}">
-            <button type="submit" class="btn btn-sm btn-danger">
-                {{ __('dashboard.comment.delete_comments_submission') }}
-            </button>
+            <div class="input-group">
+                <input type="hidden" name="id" value="{{ $submission->id }}">
+                <div class="form-floating">
+                    <select class="form-select" id="action" name="action" aria-label="{{ __('dashboard.submission.select_action') }}">
+                        <option value="only_submission">{{ __('dashboard.submission.delete_only_submission') }}</option>
+                        <option value="submission_and_comment">{{ __('dashboard.submission.delete_submission_and_comment') }}</option>
+                    </select>
+                    <label for="action">{{ __('dashboard.submission.action_label') }}</label>
+                </div>
+                <button type="submit" class="btn btn-danger px-4">{{ __('dashboard.submission.execute_action') }}</button>
+            </div>
         </form>
     </div>
 </div>

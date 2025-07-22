@@ -39,10 +39,17 @@
         <div class="mt-4 pt-4 bg-body shadow-sm rounded">
             <h4 class="text-center text-body mb-5">{{ __('app.main.most_commented_events') }}</h4>
             <div class="row g-4 justify-content-center px-3">
-                @foreach($mostComentEvent as $event)
+                @foreach($mostCommentEvent as $event)
                     @include('event.card')
                 @endforeach
             </div>
         </div>
     </div>
 @endsection
+@if(auth()->check())
+    Zalogowany jako: {{ auth()->user()->email }}
+@else
+    NIEzalogowany
+@endif
+
+Session ID: {{ session()->getId() }}

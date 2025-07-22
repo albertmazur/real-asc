@@ -55,19 +55,23 @@ class EventRepository implements Repository{
         return $this->eventModel->orderBy('name')->paginate($limit);
     }
 
-    public function all(): Collection{
+    public function all(): Collection
+    {
         return $this->eventModel->all();
     }
 
-    public function orderByData(int $limit): Collection{
+    public function orderByData(int $limit): Collection
+    {
         return $this->eventModel->where('date', '>', Carbon::today())->orderBy('date')->orderBy('time')->limit($limit)->get();
     }
 
-    public function mostComment(int $limit): Collection{
+    public function mostComment(int $limit): Collection
+    {
         return $this->eventModel->withCount('comments')->orderBy('comments_count', 'desc')->limit($limit)->get();
     }
 
-    public function filterBy(string $value = null, string $sortSearch = 'name', string $sortDirection = 'asc', int $facility, string $filterData = null, int $limit = 10): LengthAwarePaginator{
+    public function filterBy(string $value = null, string $sortSearch = 'name', string $direction = 'asc', int $facility, string $filterData = null, int $limit = 10): LengthAwarePaginator
+    {
         $query = $this->eventModel;
 
         if($sortSearch === 'freeSet')
@@ -78,15 +82,13 @@ class EventRepository implements Repository{
                     $join->on('events.id', '=', 'tickets.event_id')
                          ->where('tickets.state', '=', TicketStatus::PURCHASED->value);
                 })
-                ->groupBy('events.id', 'stadiums.places')
-                ->orderBy('freeSet', $sortDirection);
+                ->groupBy('events.id', 'stadiums.places');
         }
         if($facility != 0) $query = $query->where('stadium_id', '=', $facility);
 
         if($value) $query = $query->where('name', 'like', $value.'%');
         
         $driver = DB::getDriverName();
-
         if ($driver === 'sqlite') {
             $expression = DB::raw("date || ' ' || time");
         } elseif ($driver === 'pgsql') {
@@ -98,7 +100,7 @@ class EventRepository implements Repository{
         if($filterData == 'past') $query = $query->where($expression, '<', now());
         if($filterData == 'future') $query = $query->where($expression, '>', now());
 
-        $query = $query->orderBy($sortSearch, $sortDirection);
+        $query = $query->orderBy($sortSearch, $direction);
         
         return $query->paginate($limit);
     }

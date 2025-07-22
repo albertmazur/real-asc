@@ -4,11 +4,11 @@
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <form action="{{ route('ticket.history') }}" method="GET">
             <div class="mb-3">
-                <label for="sortEventSearch" class="form-label">{{ __('app.event') }}</label>
-                <select name="sortEventSearch" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
-                    <option @if($sortEventSearch == -2) selected @endif value="-2">{{ __('app.all') }}</option>
+                <label for="event" class="form-label">{{ __('app.event') }}</label>
+                <select name="event" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
+                    <option @if(!$event) selected @endif value="">{{ __('app.all') }}</option>
                     @foreach($events as $event)
-                        <option @if($sortEventSearch == $event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
+                        <option @if($event == $event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
                     @endforeach
                 </select>
             </div>

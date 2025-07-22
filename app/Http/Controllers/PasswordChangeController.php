@@ -2,27 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Update\ChangePasswordRequest;
 
 class PasswordChangeController extends Controller
 {
+    private UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function showForm()
     {
         return view('auth.password-change');
     }
 
-    public function update(Request $request)
+    public function update(ChangePasswordRequest $request)
     {
-        $request->validate([
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $data = $request->validated();
 
-        $user = Auth::user();
-        $user->password = Hash::make($request->new_password);
-        $user->force_password_change = false;
-        $user->save();
+        $this->userRepository->changePassword(Auth::user()->id, $data['password']);
 
         return redirect()->route('dashboard')->with('success', __('passwords.changed'));
     }

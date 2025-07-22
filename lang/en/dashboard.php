@@ -43,7 +43,6 @@ return [
         'add' => "Add comment",
         'delete' => "Delete comment",
         'deleted' => "Comment deleted",
-        'delete_comments_submission' => "Delete comment and submissions",
         'deleted_comments_submission' => "Deleted comment and submissions",
         'event_name' => "Event name",
         'content' => "Content",
@@ -55,7 +54,12 @@ return [
     'submission' => [
         'kind' => "Kind",
         'content' => "Content submission",
-        'not_comment' => "No comment available"
+        'not_comment' => "No comment available",
+        'select_action' => "Select action",
+        'delete_only_submission' => "Delete only submission",
+        'delete_submission_and_comment' => "Delete submission and comment",
+        'action_label' => "Action",
+        'execute_action' => "Execute",
     ],
     'user' => [
         'select' => "Select user",

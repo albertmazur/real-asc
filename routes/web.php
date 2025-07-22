@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\PasswordChangeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Route::get('/', [EventController::class, 'welcome'])->name('home');
 Route::get('/about',   [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'sendContact'])->name('contact.send');
-Route::get('/lang/{lang}', [HomeController::class, 'changeLanguage'])->name('lang.switch');
+Route::get('/lang/{language}', [HomeController::class, 'changeLanguage'])->name('lang.switch');
 
 Route::group([
     'prefix' => 'event',
@@ -33,7 +33,7 @@ Route::group([
     'as' => 'event.'
 ], function (){
     Route::get('index', [EventController::class, 'index'])->name('index');
-    Route::get('show/{eventId}', [EventController::class, 'show'])->name('show')->whereNumber('eventId');
+    Route::get('show/{eventId}', [EventController::class, 'show'])->whereNumber('eventId')->name('show');
 });
 
 Route::group([
@@ -73,7 +73,6 @@ Route::middleware(['auth', 'verified', 'force_password_change'])->group(function
         Route::delete('remove', [SubmissionController::class, 'destroy'])->name('remove');
     });
 
-
     Route::group([
         'prefix' => 'ticket',
         'namespace' => 'ticket',
@@ -95,7 +94,7 @@ Route::middleware(['auth', 'verified', 'force_password_change'])->group(function
     ], function (){
         Route::get('index', [StadiumController::class, 'index'])->name('index');
         Route::post('store', [StadiumController::class, 'store'])->name('store');
-        Route::get('{stadiumId}', [StadiumController::class, 'edit'])->name('edit');
+        Route::get('{stadiumId}', [StadiumController::class, 'edit'])->whereNumber('stadiumId')->name('edit');
         Route::put('update', [StadiumController::class, 'update'])->name('update');
     });
 
@@ -119,7 +118,7 @@ Route::middleware(['auth', 'verified', 'force_password_change'])->group(function
         // Admin
         Route::get('users', [UserController::class, 'index'])->name('users');
         Route::post('store', [UserController::class, 'store'])->name('store');
-        Route::get('edit', [UserController::class, 'edit'])->name('edit');
+        Route::get('edit/{userId}', [UserController::class, 'edit'])->whereNumber('userId')->name('edit');
         Route::put('update', [UserController::class, 'update'])->name('update');
         Route::delete('delete', [UserController::class, 'delete'])->name('delete');
         // Setting

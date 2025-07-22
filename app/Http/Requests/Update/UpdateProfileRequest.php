@@ -22,11 +22,12 @@ class UpdateProfileRequest extends FormRequest
             'id' => ['nullable', 'exists:users,id'],
             'first_name' => ['required', 'string', 'max:255', 'min:2'],
             'last_name' => ['required', 'string', 'max:255', 'min:2'],
-            'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user()->id)],
+            'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->input('id'))],
             'tel' => ['required', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/'],
             'language' => ['required', Rule::enum(Language::class)],
             'role' => ['nullable', Rule::enum(UserRole::class)],
-            'password' => ['nullable', 'min:8', 'confirmed']
+            'password' => ['nullable', 'min:8', 'confirmed'],
+            'change_password' => ['nullable', 'boolean']
         ];
     }
 
@@ -39,24 +40,19 @@ class UpdateProfileRequest extends FormRequest
     }
 
     public function withValidator($validator)
-{
-    $validator->after(function (Validator $validator) {
-        $currentUser = $this->user();
+    {
+        $validator->after(function (Validator $validator) {
+            $editedUser = User::find($this->input('id'));
 
-        $isRemovingAdmin = (
-            $currentUser->role === UserRole::ADMIN->value &&
-            $this->input('role') !== UserRole::ADMIN->value
-        );
+            if ($editedUser && $editedUser->role === UserRole::ADMIN->value && $this->input('role') !== UserRole::ADMIN->value)
+            {
+                $adminCount = User::where('role', UserRole::ADMIN->value)->where('id', '!=', $editedUser->id)->count();
 
-        if ($isRemovingAdmin) {
-            $adminCount = User::where('role', UserRole::ADMIN->value)
-                ->where('id', '!=', $currentUser->id)
-                ->count();
-
-            if ($adminCount < 1) {
-                $validator->errors()->add('role', __('validation.at_least_one_admin'));
+                if ($adminCount < 1)
+                {
+                    $validator->errors()->add('role', __('validation.at_least_one_admin'));
+                }
             }
-        }
-    });
-}
+        });
+    }
 }

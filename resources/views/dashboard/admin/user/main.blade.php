@@ -34,7 +34,7 @@
                         <td>{{ $user->role }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->tel }}</td>
-                        <td class="d-flex flex-column flex-md-row justify-content-start align-items-center gap-2">
+                        <td class="d-flex flex-column flex-md-row justify-content-center gap-2">
                             <a class="btn btn-secondary" href="{{ route('user.edit', ['userId' => $user->id]) }}">
                                 {{ __('app.edit') }}
                             </a>

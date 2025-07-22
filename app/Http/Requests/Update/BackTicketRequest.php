@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Store;
+namespace App\Http\Requests\Update;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommentRequest extends FormRequest
+class BackTicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return $this->user()->can('isUser', 'role');
     }
 
     /**
@@ -25,8 +24,7 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'string'],
-            'event_id' => ['required', 'integer']
+            'id' => ['required', 'exists:tickets,id']
         ];
     }
 }

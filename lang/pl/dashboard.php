@@ -43,7 +43,6 @@ return [
         'add' => "Dodaj komentarz",
         'delete' => "Usuń komentarz",
         'deleted' => "Usunięto komentarz",
-        'delete_comments_submission' => "Usuń komentarz i zgłoszenie",
         'deleted_comments_submission' => "Usunięto komentarz i zgłoszenie",
         'event_name' => "Nazwa wydarzenia",
         'content' => "Treść",
@@ -55,7 +54,12 @@ return [
     'submission' => [
         'kind' => "Rodzaj",
         'content' => "Treść zgłoszenia",
-        'not_comment' => "Komentarz już nie jest dostępny"
+        'not_comment' => "Komentarz już nie jest dostępny",
+        'select_action' => "Wybierz akcję",
+        'delete_only_submission' => "Usuń tylko zgłoszenie",
+        'delete_submission_and_comment' => "Usuń zgłoszenie i komentarz",
+        'action_label' => "Akcja",
+        'execute_action' => "Wykonaj",
     ],
     'user' => [
         'select' => "Wybierz użytkownika",

@@ -5,8 +5,8 @@
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <form action="{{ route('stadium.index') }}" method="EGT">
             <div class="mb-3">
-                <label for="nameSearch" class="form-label">{{ __('app.find') }}</label>
-                <input type="text" id="nameSearch" name="nameSearch" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $nameSearch ?? '' }}">
+                <label for="name" class="form-label">{{ __('app.find') }}</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $name ?? '' }}">
             </div>
             <button type="submit" class="btn btn-primary me-auto">{{ __('app.find') }}</button>
         </form>

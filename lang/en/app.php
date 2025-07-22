@@ -79,6 +79,7 @@ return [
     'details' => "Details",
     'return' => "Return",
     'all' => "All",
+    'save' => "Save",
     'save_update' => "Changes saved",
     'close' => "Close",
     'nav_toggle' => "Toggle navigation",

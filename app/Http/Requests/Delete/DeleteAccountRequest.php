@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Update;
+namespace App\Http\Requests\Delete;
 
 use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;

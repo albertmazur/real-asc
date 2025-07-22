@@ -12,4 +12,5 @@ interface SubmissionRepository{
     public function filterBy(string $contentSearch = null, string $sortSearch): Collection;
     public function allPaginated(int $limit): LengthAwarePaginator;
     public function all(): Collection;
+    public function deleteWithComment(int $id, bool $deleteComment);
 }

@@ -79,6 +79,7 @@ return [
     'details' => "Szczegóły",
     'return' => "Zwróć",
     'all' => "Wszystkie",
+    'save' => "Zapisz",
     'save_update' => "Zapisano zmiany",
     'close' => "Zamknij",
     'nav_toggle' => "Przełącz nawigację",

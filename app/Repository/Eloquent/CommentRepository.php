@@ -23,12 +23,16 @@ class CommentRepository implements Repository{
         $comment->user_id = Auth::id();
         $comment->event_id = $event_id;
         $comment->save();
-        //Comment::factory()->create(['content' => $content, 'user_id' => Auth::id(), 'event_id' => $event_id]);
     }
 
-    public function get(int $id): Comment{
-
+    public function get(int $id): Comment
+    {
         return $this->commentModel->findOrFail($id);
+    }
+
+    public function delete(int $id): bool
+    {
+        $this->commentModel->deleteOrFail($id);
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator
@@ -36,16 +40,18 @@ class CommentRepository implements Repository{
         return $this->commentModel->orderBy('date')->orderBy('time')->paginate($limit);
     }
 
-    public function all(): Collection{
+    public function all(): Collection
+    {
         return $this->commentModel->all();
     }
 
-    public function filterBy(string $contentSearch = null, int $sortWhoSearch, int $sortEventSearch): Collection{
+    public function filterBy(int $who, string $content = null, int $event = null): Collection
+    {
         $query = $this->commentModel;
 
-        if($sortWhoSearch != -2) $query =$query->where('user_id', '=', $sortWhoSearch);
-        if($sortEventSearch != -2) $query =$query->where('event_id', '=', $sortEventSearch);
-        if($contentSearch) $query =$query->where('content', 'like', $contentSearch.'%');
+        if($who) $query = $query->where('user_id', '=', $who);
+        if($event) $query = $query->where('event_id', '=', $event);
+        if($content) $query = $query->where('content', 'like', $content.'%');
 
         return $query->get();
     }

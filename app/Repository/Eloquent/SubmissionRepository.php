@@ -43,4 +43,10 @@ class SubmissionRepository implements Repository{
         if($sortSearch!='All') $query = $query->where('reason', '=', $sortSearch);
         return $query->get();
     }
+
+    public function deleteWithComment(int $id, bool $deleteComment){
+        $submission = $this->submissionModel->get( $id);
+        if($deleteComment) $submission->comment->delete();
+        $submission->delete();
+    }
 }

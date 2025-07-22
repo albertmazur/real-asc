@@ -8,7 +8,7 @@ class VerifyTicketRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('isAdminOrModerator', 'role');
     }
 
     public function rules(): array
