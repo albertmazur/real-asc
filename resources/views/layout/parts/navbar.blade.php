@@ -21,7 +21,7 @@
             <ul class="navbar-nav">
                 <li class="nav-link">
                     <input type="checkbox" class="dark-mode" id="dark-mode">
-                    <label for="dark-mode" class="dark-mode-label">
+                    <label for="dark-mode" class="dark-mode-label" aria-label="{{ __('app.dark_mode') }}">
                         <i class="bi bi-moon"></i>
                         <i class="bi bi-sun"></i>
                         <span class="ball"></span>

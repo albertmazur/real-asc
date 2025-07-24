@@ -86,6 +86,7 @@ return [
     'setting' => "Setting",
     'dashboard' => "Dashboard",
     '3D_secure' => "3D Secure authorization required",
+    'dark_mode' => "Dark mode",
     'lang' => "Language",
     'langs' => [
         'en' => "English",
@@ -141,5 +142,10 @@ return [
     'reset' => [
         'reset_password' => "Reset password",
         'link' => "Send password reset link"
-    ]
+    ],
+    'social_media' => [
+        'x' => "X",
+        'instagram' => "Instagram",
+        'facebook' => "Facebook"
+    ],
 ];

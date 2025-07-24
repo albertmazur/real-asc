@@ -86,6 +86,7 @@ return [
     'setting' => "Ustawienia",
     'dashboard' => "Panel",
     '3D_secure' => "Wymagana autoryzacja 3D Secure",
+    'dark_mode' => "Tryb ciemny",
     'lang' => "Język",
     'langs' => [
         'en' => "Angielski",
@@ -141,5 +142,10 @@ return [
     'reset' => [
         'reset_password' => "Zresetuj hasło",
         'link' => "Wyślij link z resetem hasła"
+    ],
+    'social_media' => [
+        'x' => "X",
+        'instagram' => "Instagram",
+        'facebook' => "Facebook"
     ],
 ];
