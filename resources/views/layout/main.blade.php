@@ -46,10 +46,3 @@
         </div>
     </div>
 @endsection
-@if(auth()->check())
-    Zalogowany jako: {{ auth()->user()->email }}
-@else
-    NIEzalogowany
-@endif
-
-Session ID: {{ session()->getId() }}
