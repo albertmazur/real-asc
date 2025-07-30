@@ -18,6 +18,7 @@
         </div>
     </nav>
 
+    @include('layout.parts.errors')
     @hasSection('dashboard.content')
         @yield('dashboard.content')
     @else

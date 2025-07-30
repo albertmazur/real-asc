@@ -1,7 +1,6 @@
 @extends('dashboard.main')
 
 @section('dashboard.content')
-    @include('layout.parts.errors')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <form action="{{ route('stadium.index') }}" method="EGT">
             <div class="mb-3">
