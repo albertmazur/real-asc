@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('content')
+    @include('layout.parts.errors')
     <div class="container mt-5">
         <h1 class="mt-5">{{ __('app.contact.title') }}</h1>
         <p>{{ __('app.contact.intro') }}</p>

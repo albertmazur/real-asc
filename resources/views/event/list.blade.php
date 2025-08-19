@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('content')
+    @include('layout.parts.errors')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         @include('event.form-search', ['route' => 'event.index'])   
     </div>
