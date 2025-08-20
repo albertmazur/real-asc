@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Enums\UserRole;
 use App\Models\Comment;
 use App\Repository\CommentRepository as Repository;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -32,7 +33,18 @@ class CommentRepository implements Repository{
 
     public function delete(int $id): bool
     {
-        $this->commentModel->deleteOrFail($id);
+        $comment = $this->commentModel->findOrFail($id);
+        $user = auth()->user();
+
+        if ($user->role === UserRole::ADMIN->value || $user->role === UserRole::MODERATOR->value) {
+            return $comment->delete();
+        }
+
+        if ($user->id === $comment->user_id) {
+            return $comment->delete();
+        }
+
+        return false;
     }
 
     public function allPaginated(int $limit): LengthAwarePaginator
@@ -45,7 +57,7 @@ class CommentRepository implements Repository{
         return $this->commentModel->all();
     }
 
-    public function filterBy(int $who, string $content = null, int $event = null): Collection
+    public function filterBy(?int $who, ?string $content, ?int $event): Collection
     {
         $query = $this->commentModel;
 

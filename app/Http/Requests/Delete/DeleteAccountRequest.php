@@ -2,42 +2,27 @@
 
 namespace App\Http\Requests\Delete;
 
-use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
 class DeleteAccountRequest extends FormRequest
 {
-    public function authorize()
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
     {
-        return auth()->check();
+        return $this->user()->can('isAdmin', 'role');
     }
 
-    public function rules()
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
     {
         return [
-            'password' => 'required',
-            'confirm_delete' => 'accepted'
-        ];
-    }
-
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if(!Hash::check($this->input('password'), auth()->user()->password)) {
-                $validator->errors()->add('password', __('settings.invalid_password'));
-            }
-            if(auth()->user()->role == UserRole::ADMIN->value) {
-                $validator->errors()->add('password', __('settings.invalid_password'));
-            }
-        });
-    }
-
-    public function messages()
-    {
-        return [
-            'password.required' => __('validation.password_required'),
-            'confirm_delete.accepted' => __('validation.confirm_delete_required')
+            'userId' => ['required', 'integer', 'exists:users,id', 'not_in:' . $this->user()->id]
         ];
     }
 }

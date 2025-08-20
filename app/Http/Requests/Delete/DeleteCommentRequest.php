@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Delete;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteCommentRequest extends FormRequest
@@ -11,7 +12,7 @@ class DeleteCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('isAdmin', 'role');
+        return Auth::check();
     }
 
     /**

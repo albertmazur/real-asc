@@ -27,7 +27,7 @@ class UserRepository implements Repository{
 
     public function delete(int $id)
     {
-        $user = $this->userModel->get($id);
+        $user = $this->userModel->findOrFail($id);
         return $user->delete();
     }
 

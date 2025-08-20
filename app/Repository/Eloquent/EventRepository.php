@@ -18,7 +18,7 @@ class EventRepository implements Repository{
         $this->eventModel = $event;
     }
 
-    public function add(string $name, string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
+    public function add(string $name, ?string $description, string $date, string $time, float $price, int $stadium_id, ?string $imagePath)
     {
         $event = new Event;
         $event->name = $name;
@@ -32,7 +32,7 @@ class EventRepository implements Repository{
         $event->save();
     }
 
-    public function update(int $id, string $name, ?string $description = null, string $date, string $time, float $price, int $stadium_id, $imagePath = null)
+    public function update(int $id, string $name, ?string $description, string $date, string $time, float $price, int $stadium_id, ?string $imagePath)
     {
         $event = $this->eventModel->findOrFail($id);
         $event->name = $name;
@@ -70,7 +70,7 @@ class EventRepository implements Repository{
         return $this->eventModel->withCount('comments')->orderBy('comments_count', 'desc')->limit($limit)->get();
     }
 
-    public function filterBy(string $value = null, string $sortSearch = 'name', string $direction = 'asc', int $facility, string $filterData = null, int $limit = 10): LengthAwarePaginator
+    public function filterBy(?string $value, string $sortSearch = 'name', string $direction = 'asc', int $facility, ?string $filterData, int $limit = 10): LengthAwarePaginator
     {
         $query = $this->eventModel;
 
@@ -102,6 +102,15 @@ class EventRepository implements Repository{
 
         $query = $query->orderBy($sortSearch, $direction);
         
-        return $query->paginate($limit);
+        $paginate = $query->paginate($limit);
+
+        $paginate->appends([
+            'value' => $value,
+            'sortSearch' => $sortSearch,
+            'direction' => $direction,
+            'filterData' => $filterData
+        ]);
+
+        return $paginate;
     }
 }

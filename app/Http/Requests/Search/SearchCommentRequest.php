@@ -12,7 +12,7 @@ class SearchCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return $this->user()->can('isAdminOrModerator', 'role');
     }
 
     /**
@@ -25,7 +25,7 @@ class SearchCommentRequest extends FormRequest
         return [
             'content' => ['nullable', 'string'],
             'event' => ['nullable', 'integer', 'exists:events,id'],
-            'user' => ['nullable', 'integer', 'exists:users,id']
+            'who' => ['nullable', 'integer', 'exists:users,id']
         ];
     }
 }
