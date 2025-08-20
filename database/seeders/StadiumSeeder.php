@@ -15,6 +15,6 @@ class StadiumSeeder extends Seeder
      */
     public function run()
     {
-        Stadium::factory()->create();
+        Stadium::factory()->count(2)->create();
     }
 }

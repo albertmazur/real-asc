@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Event::class);
+            $table->foreignIdFor(Event::class)->references('id')->on('events')->onDelete('cascade');;
         });
     }
 

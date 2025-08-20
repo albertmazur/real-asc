@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('tel');
             $table->enum('role', array_column(UserRole::cases(), 'value'))->default(UserRole::USER->value);
             $table->enum('language', array_column(Language::cases(), 'value'))->default(Language::PL->value);
+            $table->boolean('force_password_change')->default(false);
         });
     }
 
@@ -35,7 +36,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table)
         {
             $table->renameColumn('first_name', 'name');
-            $table->dropColumn(['last_name', 'tel', 'role', 'language']);
+            $table->dropColumn(['last_name', 'tel', 'role', 'language', 'force_password_change']);
         });
     }
 };

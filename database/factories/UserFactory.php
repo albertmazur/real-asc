@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Language;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,10 +21,12 @@ class UserFactory extends Factory
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
-            'tel' => fake()->phoneNumber(),
+            'tel' => fake()->unique()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => fake()->randomElement([UserRole::MODERATOR->value, UserRole::USER->value])
+            'role' => fake()->randomElement([UserRole::MODERATOR->value, UserRole::USER->value]),
+            'language' => fake()->randomElement(Language::cases()),
+            'force_password_change' => fake()->boolean(),
         ];
     }
 

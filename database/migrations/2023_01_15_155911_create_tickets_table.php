@@ -19,12 +19,13 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table)
         {
             $table->id();
-            $table->string('number');
+            $table->string('qr_token')->unique()->nullable();
             $table->date('dateBuy');
             $table->time('timeBuy');
             $table->string('stripe_payment_id');
             $table->enum('state', array_column(TicketStatus::cases(), 'value'));
             $table->foreignIdFor(User::class);
+            $table->timestamp('used_at')->nullable();
             $table->foreignIdFor(Event::class);
             $table->timestamps();
         });

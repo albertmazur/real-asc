@@ -23,7 +23,9 @@ class StadiumFactory extends Factory
             'city' => fake()->city(),
             'street' => fake()->streetName(),
             'numberBuilding' => fake()->numberBetween(10, 300),
-            'places' => fake()->numberBetween(2000, 9000)
+            'places' => fake()->numberBetween(2000, 9000),
+            'description' => fake()->text(),
+            'image' => fake()->imageUrl(640, 480, 'stadium', true, 'Stadium', false)
         ];
     }
 }
