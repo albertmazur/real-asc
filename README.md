@@ -8,18 +8,18 @@ Real ASC is a web application designed to manage a sports club. It allows users 
 
 ## Features
 - Manage stadiums (add, edit, delete)
-- Create and manage events
+- Manage events (add, edit, delete)
 - Manage users (add, edit, delete)
 - Comment on events
-- Role-based access control (admin, user)
-- Payment system integrated with [Stripe](https://stripe.com/)
+- Role-based access control (admin, moderator, user)
+- Payment system integrated
 
 ## Technologies
-- [PHP 8.2](https://www.php.net/)
-- [Laravel 10](https://laravel.com/)
-- [Bootstrap 5](https://getbootstrap.com/)
-- [MySQL](https://www.mysql.com/) (or other supported databases)
-- [Stripe](https://stripe.com/) for payments
+- PHP 8.2 (https://www.php.net)
+- Laravel 10 (https://laravel.com)
+- Bootstrap 5 (https://getbootstrap.com)
+- MySQL (https://www.mysql.com) (or other supported databases)
+- Stripe (https://stripe.com) for payments
 
 ## Installation & Setup
 
@@ -57,11 +57,12 @@ php artisan storage:link
 ```
 
 ### Start the Application
+Run the application using Laravel Herd or the command below.
 ```bash
 php artisan serve
 ```
 
-The application will be available at: `http://localhost`
+The application will be available at: `http://localhost:8000`
 
 ## Payment System
 The application integrates with [Stripe](https://stripe.com/) to handle event payments. Ensure you have a valid Stripe API key configured in your `.env` file:
