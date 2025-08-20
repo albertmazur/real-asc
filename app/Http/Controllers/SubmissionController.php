@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Delete\DeleteSubmissionRequest;
-use App\Http\Requests\Store\StoreSubmissionRequest;
 use App\Repository\SubmissionRepository;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\Delete\DeleteSubmissionRequest;
+use App\Http\Requests\Search\SearchSubmissionRequest;
+use App\Http\Requests\Store\StoreSubmissionRequest;
 
 class SubmissionController extends Controller
 {
@@ -17,21 +16,21 @@ class SubmissionController extends Controller
         $this->submissionRepository = $submissionRepository;
     }
 
-    public function index(Request $request)
+    public function index(SearchSubmissionRequest $request)
     {
-        $this->authorize('isAdminOrModerator', 'role');
+        $data = $request->validated();
 
-        $contentSearch = $request->get('contentSearch');
-        $sortSearch = $request->get('sortSearch') ?? 'All';
+        $content = $data['content'] ?? null;
+        $reason = $data['reason'] ?? 'All';
 
         return view('dashboard.submission.submission', [
-            'submissions' => $this->submissionRepository->filterBy($contentSearch, $sortSearch),
-            'nameSearch' => $contentSearch,
-            'sortSearch' => $sortSearch
+            'submissions' => $this->submissionRepository->filterBy($content, $reason),
+            'content' => $content,
+            'reason' => $reason
         ]);
     }
 
-    public function store(StoreSubmissionRequest $request): RedirectResponse
+    public function store(StoreSubmissionRequest $request)
     {
         $data = $request->validated();
 
@@ -43,9 +42,8 @@ class SubmissionController extends Controller
     public function destroy(DeleteSubmissionRequest $request)
     {
         $date = $request->validated();
-        $action = $date['action'];
 
-        $deleteComment = $action === 'submission_and_comment';
+        $deleteComment = $date['action'] === 'submission_and_comment';
         $this->submissionRepository->deleteWithComment($date['id'], $deleteComment);
 
         return back()->with('success', __('dashboard.comment.deleted_comments_submission'));

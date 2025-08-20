@@ -27,22 +27,24 @@
             @yield('headerTable')
             <tbody>
                 @foreach($users as $user)
-                    <tr>
+                    <tr style="height: 55px;">
                         <td>{{ $loop->iteration+($users->currentPage()-1)*$loop->count }}</td>
                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                         <td>{{ $user->role }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->tel }}</td>
-                        <td class="d-flex flex-column flex-md-row justify-content-center gap-2">
-                            <a class="btn btn-secondary" href="{{ route('user.edit', ['userId' => $user->id]) }}">
-                                {{ __('app.edit') }}
-                            </a>
-                            <form action="{{ route('user.delete') }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <input type="hidden" name="userId" value="{{ $user->id }}" />
-                                <button type="button" class="btn btn-danger button-delete-user" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">{{ __('app.remove') }}</button>
-                            </form>
+                        <td>
+                            @if ($user->id != Auth::id())
+                                <div class="d-flex flex-column flex-md-row justify-content-center gap-2">
+                                    <a class="btn btn-secondary" href="{{ route('user.edit', ['userId' => $user->id]) }}">{{ __('app.edit') }}</a>
+                                    <form action="{{ route('user.delete') }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="hidden" name="userId" value="{{ $user->id }}" />
+                                        <button type="submit" class="btn btn-danger button-delete-user">{{ __('app.remove') }}</button>
+                                    </form>
+                                </div>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

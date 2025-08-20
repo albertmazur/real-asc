@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactFormRequest;
-use App\Http\Requests\SetLanguageRequest;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactFormRequest;
 
 class HomeController extends Controller
 {
@@ -23,20 +22,17 @@ class HomeController extends Controller
     public function sendContact(ContactFormRequest $request)
     {
         $data = $request->validated();
+
         Mail::to(config('mail.from.address'))->send(new ContactMail($data));
+
         return back()->with('success', __('app.contact.thanks'));
     }
 
-    public function changeLanguage(SetLanguageRequest $request)
+    public function changeLanguage(string $language)
     {
-        $lang = $request->validated()['language'];
-        $user = Auth::user();
-        if(Auth::check() && $user->language != $lang)
-        {
-            $user->language = $lang;
-            $user->save();
-        }
-        session()->put('language', $lang);
+        Auth::user()->setLanguage($language);
+        session()->put('language', $language);
+
         return back();
     }
 }

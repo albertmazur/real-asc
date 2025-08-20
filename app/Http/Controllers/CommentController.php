@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
+use App\Repository\CommentRepository;
+use App\Http\Requests\Store\StoreCommentRequest;
 use App\Http\Requests\Delete\DeleteCommentRequest;
 use App\Http\Requests\Search\SearchCommentRequest;
-use App\Http\Requests\Search\SearchMyCommentRequest;
-use App\Http\Requests\Store\StoreCommentRequest;
 use App\Http\Requests\Update\UpdateCommentRequest;
-use App\Models\Event;
-use App\Models\User;
-use App\Repository\CommentRepository;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Search\SearchMyCommentRequest;
 
 class CommentController extends Controller
 {
@@ -23,10 +23,9 @@ class CommentController extends Controller
 
     public function index(SearchCommentRequest $request)
     {
-        $this->authorize('isAdminOrModerator', 'role');
         $data = $request->validated();
 
-        $content = $data['content'];
+        $content = $data['content']  ?? null;
         $who = $data['who'] ?? null;
         $event = $data['event'] ?? null;
 
@@ -58,11 +57,19 @@ class CommentController extends Controller
 
     public function destroy(DeleteCommentRequest $request)
     {
-        $data = $request->validated();
-
-        $this->commentRepository->delete($data['id']);
-
-        return back()->with('success', __('dashboard.comment.deleted'));
+        $id = $request->validated()['id'];
+        
+        if($this->commentRepository->delete($id)){
+            $data = [
+                'success' => __('dashboard.comment.deleted'),
+            ];
+        }
+        else{
+            $data = [
+                'error' => __('dashboard.comment.delete_error'),
+            ];
+        }
+        return back()->with($data);
     }
 
     public function myComments(SearchMyCommentRequest $request)

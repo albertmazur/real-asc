@@ -5,23 +5,23 @@
         <form action="{{ route('comment.index') }}" method="GET">
             <div class="mb-3">
                 <label for="content" class="form-label">{{ __('app.find') }}</label>
-                <input type="text" id="content" name="content" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $nameSearch ?? '' }}">
+                <input type="text" id="content" name="content" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $content ?? '' }}">
             </div>
             <div class="mb-3">
-                <label for="sortWhoSearch" class="form-label">{{ __('app.user') }}</label>
-                <select name="sortWhoSearch" class="form-select" aria-label="{{ __('dashboard.user.select') }}">
-                    <option @if($sortWhoSearch == -2) selected @endif value="-2">{{ __('app.all') }}</option>
+                <label for="who" class="form-label">{{ __('app.user') }}</label>
+                <select id="who" name="who" class="form-select" aria-label="{{ __('dashboard.user.select') }}">
+                    <option @if($who) selected @endif value="">{{ __('app.all') }}</option>
                     @foreach($users as $user)
-                        <option @if($sortWhoSearch == $user->id) selected @endif value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                        <option @if($who == $user->id) selected @endif value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-3">
                 <label for="event" class="form-label">{{ __('app.event') }}</label>
-                <select name="event" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
+                <select id="event" name="event" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
                     <option @if(!$event) selected @endif value="">{{ __('app.all') }}</option>
-                    @foreach($events as $event)
-                        <option @if($event == $event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
+                    @foreach($events as $e)
+                        <option @if($event == $e->id) selected @endif value="{{ $e->id }}">{{ $e->name }}</option>
                     @endforeach
                 </select>
             </div>

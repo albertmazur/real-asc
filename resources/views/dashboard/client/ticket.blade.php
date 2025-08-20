@@ -7,8 +7,8 @@
                 <label for="event" class="form-label">{{ __('app.event') }}</label>
                 <select name="event" class="form-select" aria-label="{{ __('dashboard.event.select') }}">
                     <option @if(!$event) selected @endif value="">{{ __('app.all') }}</option>
-                    @foreach($events as $event)
-                        <option @if($event == $event->id) selected @endif value="{{ $event->id }}">{{ $event->name }}</option>
+                    @foreach($events as $e)
+                        <option @if($event == $e->id) selected @endif value="{{ $e->id }}">{{ $e->name }}</option>
                     @endforeach
                 </select>
             </div>

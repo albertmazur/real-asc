@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\StadiumRepository;
 use App\Http\Requests\Search\SearchStadiumRequest;
 use App\Http\Requests\Store\StoreStadiumRequest;
 use App\Http\Requests\Update\UpdateStadiumRequest;
-use App\Repository\StadiumRepository;
 
 class StadiumController extends Controller
 {
@@ -45,12 +45,20 @@ class StadiumController extends Controller
             $imagePath = $request->file('image')->store('stadium', 'public');
         }
 
-        $this->stadiumRepository->add($date['name'], $date['description'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'], $imagePath);
+        $this->stadiumRepository->add(
+            $date['name'],
+            $date['description'],
+            $date['city'],
+            $date['street'],
+            $date['numberBuilding'],
+            $date['places'],
+            $imagePath
+        );
 
         return back()->with('success', __('dashboard.stadium.added'));
     }
 
-    public function edit(string $stadiumId)
+    public function edit(int $stadiumId)
     {
         $this->authorize('isAdmin', 'role');
 
@@ -68,7 +76,16 @@ class StadiumController extends Controller
             $imagePath = $request->file('image')->store('stadium', 'public');
         }
 
-        $this->stadiumRepository->update($date['id'], $date['name'], $date['description'], $date['city'], $date['street'], $date['numberBuilding'], $date['places'], $imagePath);
+        $this->stadiumRepository->update(
+            $date['id'],
+            $date['name'],
+            $date['description'],
+            $date['city'],
+            $date['street'],
+            $date['numberBuilding'],
+            $date['places'],
+            $imagePath
+        );
 
         return redirect()->route('stadium.index')->with('success', __('app.save_changes'));
     }

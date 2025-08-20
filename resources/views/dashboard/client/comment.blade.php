@@ -5,7 +5,7 @@
         <form action="{{ route('comment.my') }}" method="GET">
             <div class="mb-3">
                 <label for="content" class="form-label">{{ __('app.find') }}</label>
-                <input type="text" id="content" name="content" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $nameSearch ?? '' }}">
+                <input type="text" id="content" name="content" class="form-control" placeholder="{{ __('app.enter_description') }}" value="{{ $content ?? '' }}">
             </div>
             <div class="mb-3">
                 <label for="eventId" class="form-label">{{ __('app.event') }}</label>

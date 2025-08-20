@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketStatus;
-use App\Http\Requests\Search\SearchTicketRequest;
-use App\Http\Requests\Store\StoreTicketRequest;
-use App\Http\Requests\Update\BackTicketRequest;
-use App\Http\Requests\VerifyTicketRequest;
 use App\Repository\EventRepository;
 use App\Repository\TicketRepository;
-use Laravel\Cashier\Exceptions\IncompletePayment;
+use App\Http\Requests\VerifyTicketRequest;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Requests\Store\StoreTicketRequest;
+use App\Http\Requests\Update\BackTicketRequest;
+use App\Http\Requests\Search\SearchTicketRequest;
+use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class TicketController extends Controller
 {
@@ -45,7 +45,7 @@ class TicketController extends Controller
     {
         $data = $request->validated();
 
-        $amount = $this->eventRepository->get($data['event_id'])->price * 100;
+        $amount = $this->eventRepository->get($data['event_id'])->getAccount();
         try
         {
             $paymentIntent = auth()->user()->charge($amount, $data['payment_method']);
@@ -60,15 +60,12 @@ class TicketController extends Controller
 
     public function history(SearchTicketRequest $request)
     {
-        $this->authorize('isUser', 'role');
-        
         $event = $request->validated()['event'] ?? null;
-        $tickets = $this->ticketRepository->myTickets($event);
 
         return view('dashboard.client.historyTicket', [
             'event' => $event,
             'events' => $this->eventRepository->all(),
-            'tickets' => $tickets,
+            'tickets' => $this->ticketRepository->myTickets($event),
             'option' => false
         ]);
     }

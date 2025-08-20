@@ -30,13 +30,13 @@
             @foreach($event->commentsSort() as $comment)
                 <div class="card m-2">
                     <div class="card-body">
-                            <h5 class="card-title">
-                                @if ($comment->user) 
-                                    {{ $comment->user->first_name }} {{ $comment->user->last_name }} 
-                                @else 
-                                    {{ __('app.deleted_user') }} 
-                                @endif
-                            </h5>
+                        <h5 class="card-title">
+                            @if ($comment->user) 
+                                {{ $comment->user->first_name }} {{ $comment->user->last_name }} 
+                            @else 
+                                {{ __('app.deleted_user') }} 
+                            @endif
+                        </h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ $comment->date }} {{ $comment->time }}</h6>
                         <p class="card-text">{{ $comment->content }}</p>
                         <button class="reportButton btn btn-danger" data-bs-toggle="modal" data-bs-target="#registrationCommentModal" value="{{ $comment->id }}">{{ __('app.submission_comment') }}</button>

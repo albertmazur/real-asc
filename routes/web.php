@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Language;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -25,7 +26,7 @@ Route::get('/', [EventController::class, 'welcome'])->name('home');
 Route::get('/about',   [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'sendContact'])->name('contact.send');
-Route::get('/lang/{language}', [HomeController::class, 'changeLanguage'])->name('lang.switch');
+Route::get('/lang/{language}', [HomeController::class, 'changeLanguage'])->whereIn('language', array_map(fn($c) => $c->value, Language::cases()))->name('lang.switch');
 
 Route::group([
     'prefix' => 'event',

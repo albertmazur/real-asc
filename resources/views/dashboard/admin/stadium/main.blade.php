@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $loop->iteration+($stadiums->currentPage()-1)*$loop->count }}</td>
                         <td>{{ $stadium->name }}</td>
-                        <td>{{ $stadium->city }}, ul.{{ $stadium->street }} {{ $stadium->numberBuilding }}</td>
+                        <td>{{ $stadium->city }}, {{__('app.st')}} {{ $stadium->street }} {{ $stadium->numberBuilding }}</td>
                         <td>{{ $stadium->places }}</td>
                         <td><a class="btn btn-secondary" role="button" href="{{ route('stadium.edit', ['stadiumId' => $stadium->id]) }}">{{ __('app.edit') }}</a></td>
                     </tr>

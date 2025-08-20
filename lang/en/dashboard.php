@@ -43,6 +43,7 @@ return [
         'add' => "Add comment",
         'delete' => "Delete comment",
         'deleted' => "Comment deleted",
+        'delete_error' => "Error deleting comment",
         'deleted_comments_submission' => "Deleted comment and submissions",
         'event_name' => "Event name",
         'content' => "Content",

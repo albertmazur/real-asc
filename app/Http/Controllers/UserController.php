@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Delete\DeleteAccountRequest;
-use App\Http\Requests\SetLanguageRequest;
+use App\Repository\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Store\StoreUserRequest;
 use App\Http\Requests\Update\ChangeEmailRequest;
-use App\Http\Requests\Update\ChangePasswordRequest;
+use App\Http\Requests\Delete\DeleteAccountRequest;
 use App\Http\Requests\Update\UpdateProfileRequest;
-use App\Repository\UserRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Update\ChangePasswordRequest;
+use App\Http\Requests\Delete\DeleteMyAccountRequest;
 
 class UserController extends Controller
 {
@@ -44,20 +43,17 @@ class UserController extends Controller
         return redirect()->route('user.users')->with('success', __('dashboard.user.added'));
     }
 
-    public function edit(Request $request){
+    public function edit(int $userId){
         $this->authorize('isAdmin', 'role');
-        
-        $data = $request->validate([
-            'userId' => ['required', 'exists:App\Models\User,id']
-        ]);
+        if($userId == Auth::id()) abort(404);
+
         return view('dashboard.admin.user.edit', [
-            'user' => $this->userRepository->get($data['userId'])
+            'user' => $this->userRepository->get($userId)
         ]);
     }
 
     public function update(UpdateProfileRequest $request)
     {
-        $this->authorize('isAdmin', 'role');
         $data = $request->validated();
 
         $this->userRepository->update(
@@ -81,14 +77,10 @@ class UserController extends Controller
         return redirect()->route('user.users')->with('success', __('dashboard.user.update'));
     }
 
-    public function delete(Request $request)
+    public function delete(DeleteAccountRequest $request)
     {
-        $this->authorize('isAdmin', 'role');
-        $data = $request->validate([
-            'userId' => ['required', 'exists:App\Models\User,id']
-        ]);
-
-        $this->userRepository->delete($data['userId']);
+        $userId = $request->validated()['userId'];
+        $this->userRepository->delete($userId);
 
         return redirect()->route('user.users')->with('success', __('dashboard.user.update'));
     }
@@ -105,22 +97,24 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request)
     {
-        $this->authorize('isUser', 'role');
+        $data = $request->validated();
+        $language = $data['language'];
 
-        $firstName = $request->input('first_name');
-        $lastName = $request->input('last_name');
-        $tel = $request->input('tel');
-        $language = $request->input('language');
+        $this->userRepository->update(
+            Auth::id(),
+            $data['first_name'],
+            $data['last_name'],
+            $data['tel'],
+            $language
+        );
 
-        $this->userRepository->update(Auth::id(), $firstName, $lastName, $tel, $language);
         session()->put('language', $language);
-
         return back()->with('success', __('settings.profile_updated', [], $language));
     }
 
     public function changeEmail(ChangeEmailRequest $request)
     {
-        $email = $request->input('email');
+        $email = $request->validated()['email'];
         $this->userRepository->changeEmail(Auth::id(), $email);
         return back()->with('success', __('settings.email_changed'));
     }
@@ -128,23 +122,17 @@ class UserController extends Controller
     public function changePassword(ChangePasswordRequest $request)
     {
         $data = $request->validated();
+        
         $this->userRepository->changePassword(Auth::id(), $data['password']);
         Auth::logoutOtherDevices($data['current_password']);
+
         return back()->with('success', __('settings.password_changed'));
     }
 
-    public function setLanguage(SetLanguageRequest $request)
+    public function deleteAccount(DeleteMyAccountRequest $request)
     {
-        $user = Auth::user();
-        $user->language = $request->input('language');
-        $user->save();
+        $request->validated();
 
-        session()->put('language', $request->input('language'));
-        return back()->with('success', __('settings.language_updated'));
-    }
-
-    public function deleteAccount(DeleteAccountRequest $request)
-    {
         Auth::logout();
         $this->userRepository->delete(Auth::id());
 

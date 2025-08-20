@@ -43,6 +43,7 @@ return [
         'add' => "Dodaj komentarz",
         'delete' => "Usuń komentarz",
         'deleted' => "Usunięto komentarz",
+        'delete_error' => "Błąd podczas usuwania komentarza",
         'deleted_comments_submission' => "Usunięto komentarz i zgłoszenie",
         'event_name' => "Nazwa wydarzenia",
         'content' => "Treść",

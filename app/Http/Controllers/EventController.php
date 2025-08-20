@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ReasonSubmission;
+use Carbon\Carbon;
 use App\Enums\UserRole;
-use App\Http\Requests\Search\SearchEventRequest;
-use App\Http\Requests\Store\StoreEventRequest;
-use App\Http\Requests\Update\UpdateEventRequest;
+use App\Enums\ReasonSubmission;
 use App\Repository\EventRepository;
 use App\Repository\StadiumRepository;
-use Carbon\Carbon;
+use App\Http\Requests\Store\StoreEventRequest;
+use App\Http\Requests\Search\SearchEventRequest;
+use App\Http\Requests\Update\UpdateEventRequest;
 
 class EventController extends Controller
 {
@@ -36,36 +36,27 @@ class EventController extends Controller
 
         $value = $data['value'] ?? null;
         $sortSearch = $data['sortSearch'] ?? 'name';
-        $sortDirection = $data['sortDirection'] ?? 'asc';
+        $direction = $data['direction'] ?? 'asc';
         $facility = $data['facility'] ?? 0;
         $filterData = $data['filterData'] ?? null;
 
         $resultPaginator = $this->eventRepository->filterBy(
             $value,
             $sortSearch,
-            $sortDirection,
+            $direction,
             $facility,
             $filterData
         );
-
-        $resultPaginator->appends([
-            'value' => $value,
-            'sortSearch' => $sortSearch,
-            'sortDirection' => $sortDirection,
-            'filterData' => $filterData
-        ]);
-
-        $viewData = [
+        
+        return view($link, [
             'events' => $resultPaginator,
             'value' => $value,
             'stadiums' => $this->stadiumRepository->all(),
             'facility' => $facility,
             'sortSearch' => $sortSearch,
-            'sortDirection' => $sortDirection,
+            'direction' => $direction,
             'filterData' => $filterData
-        ];
-        
-        return view($link, $viewData);
+        ]);
     }
 
     public function index(SearchEventRequest $request)

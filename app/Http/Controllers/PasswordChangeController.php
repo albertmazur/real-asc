@@ -24,7 +24,7 @@ class PasswordChangeController extends Controller
     {
         $data = $request->validated();
 
-        $this->userRepository->changePassword(Auth::user()->id, $data['password']);
+        $this->userRepository->changePassword(Auth::id(), $data['password']);
 
         return redirect()->route('dashboard')->with('success', __('passwords.changed'));
     }
