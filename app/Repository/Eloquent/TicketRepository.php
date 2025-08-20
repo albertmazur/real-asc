@@ -41,10 +41,10 @@ class TicketRepository implements Repository{
         return Ticket::where('qr_token', $token)->where('state', 'purchased')->firstOrFail();
     }
 
-    public function myTickets(int $sortEventSearch, string $how = 'All'): Collection{
+    public function myTickets(?int $event, string $how = 'All'): Collection{
         $query = $this->ticketModel->where('user_id', '=', Auth::id());
 
-        if($sortEventSearch != -2) $query = $query->where('event_id', '=', $sortEventSearch);
+        if($event) $query = $query->where('event_id', '=', $event);
 
         if($how == 'bought') $query = $query->where('state', '=', 'bought');
         if($how == 'returned') $query = $query->where('state', '=', 'returned');

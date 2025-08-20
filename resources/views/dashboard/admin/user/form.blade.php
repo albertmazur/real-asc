@@ -25,13 +25,13 @@
                 <input type="checkbox" id="change_password" value="1" name="change_password" class="form-check-input">
             </div>
             <label class="input-group-text">{{ __('dashboard.user.new_password') }}</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" min="8">
         </div>
     </div>
 
     <div class="mb-3">
         <label for="password_confirmation" class="form-label">{{ __('app.register.confirm_password') }}</label>
-        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" min="8">
     </div>
     
 

@@ -1,8 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-    @include('layout.parts.errors')
-
     <div class="container mt-4">
         <h1 class="mb-4">{{ __('app.club_facilities') }}</h1>
 

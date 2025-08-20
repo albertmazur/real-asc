@@ -12,7 +12,6 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
         'dateBuy',
         'timeBuy',
         'event_id',
@@ -26,7 +25,6 @@ class Ticket extends Model
 
         static::creating(function ($model)
         {
-            $model->number = fake()->randomNumber();
             $mytime = Carbon::now();
             $model->dateBuy = $mytime->toDate();
             $model->timeBuy = $mytime->toDateTimeString();

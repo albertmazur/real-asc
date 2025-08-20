@@ -44,4 +44,15 @@ class Event extends Model
     {
         return $this->stadium->places - $this->tickets->where('state', '=', TicketStatus::PURCHASED->value)->count();
     }
+
+    public function getAccount()
+    {
+        return $this->price * 100;
+    }
+
+    public function getFormattedPriceAttribute(): string
+    {
+        return number_format($this->price, 2, '.', '');
+
+    }
 }

@@ -1,12 +1,11 @@
 @extends('dashboard.main')
 
 @section('dashboard.content')
-    @include('layout.parts.errors')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         <form action="{{ route('stadium.index') }}" method="EGT">
             <div class="mb-3">
-                <label for="nameSearch" class="form-label">{{ __('app.find') }}</label>
-                <input type="text" id="nameSearch" name="nameSearch" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $nameSearch ?? '' }}">
+                <label for="name" class="form-label">{{ __('app.find') }}</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="{{ __('app.enter_name') }}" value="{{ $name ?? '' }}">
             </div>
             <button type="submit" class="btn btn-primary me-auto">{{ __('app.find') }}</button>
         </form>
@@ -30,7 +29,7 @@
                     <tr>
                         <td>{{ $loop->iteration+($stadiums->currentPage()-1)*$loop->count }}</td>
                         <td>{{ $stadium->name }}</td>
-                        <td>{{ $stadium->city }}, ul.{{ $stadium->street }} {{ $stadium->numberBuilding }}</td>
+                        <td>{{ $stadium->city }}, {{__('app.st')}} {{ $stadium->street }} {{ $stadium->numberBuilding }}</td>
                         <td>{{ $stadium->places }}</td>
                         <td><a class="btn btn-secondary" role="button" href="{{ route('stadium.edit', ['stadiumId' => $stadium->id]) }}">{{ __('app.edit') }}</a></td>
                     </tr>

@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactFormRequest;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Auth;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ContactFormRequest;
 
 class HomeController extends Controller
 {
-    public function about(){
+    public function about()
+    {
         return view('layout.about');
     }
 
-    public function contact(){
+    public function contact()
+    {
         return view('layout.contact');
     }
 
@@ -21,23 +23,16 @@ class HomeController extends Controller
     {
         $data = $request->validated();
 
-        Mail::to(config('mail.from.address'))
-            ->send(new ContactMail($data));
+        Mail::to(config('mail.from.address'))->send(new ContactMail($data));
 
         return back()->with('success', __('app.contact.thanks'));
     }
 
-
-
-    public function changeLanguage($lang)
+    public function changeLanguage(string $language)
     {
-        $user = Auth::user();
-        if(Auth::check() && $user->language != $lang)
-        {
-            $user->language = $lang;
-            $user->save();
-        }
-        session()->put('language', $lang);
+        Auth::user()->setLanguage($language);
+        session()->put('language', $language);
+
         return back();
     }
 }

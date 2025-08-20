@@ -19,7 +19,7 @@ class StadiumRepository implements Repository{
         return $this->stadiumModel->findOrFail($id);
     }
 
-    public function add(string $name, string $description = null, string $city, string $street, string $numberBuilding, int $places, $imagePath = null)
+    public function add(string $name, ?string $description, string $city, string $street, string $numberBuilding, int $places, ?string $imagePath)
     {
         $this->stadiumModel->create([
             'name' => $name,
@@ -32,7 +32,7 @@ class StadiumRepository implements Repository{
         ]);
     }
 
-    public function update(int $id, string $name, string $description = null, string $city, string $street, string $numberBuilding, int $places, $imagePath = null)
+    public function update(int $id, string $name, ?string $description, string $city, string $street, string $numberBuilding, int $places, ?string $imagePath)
     {
         $stadium = $this->stadiumModel->findOrFail($id);
         $stadium->name = $name;
@@ -45,7 +45,6 @@ class StadiumRepository implements Repository{
         $stadium->save();
     }
 
-
     public function allPaginated(int $limit): LengthAwarePaginator
     {
         return $this->stadiumModel->orderBy('date')->orderBy('time')->paginate($limit);
@@ -55,7 +54,7 @@ class StadiumRepository implements Repository{
         return $this->stadiumModel->all();
     }
 
-    public function filterBy(string $name = null, int $limit): LengthAwarePaginator
+    public function filterBy(?string $name, int $limit): LengthAwarePaginator
     {
         $query = $this->stadiumModel;
         if($name) $query = $query->where('name', 'like', $name.'%');

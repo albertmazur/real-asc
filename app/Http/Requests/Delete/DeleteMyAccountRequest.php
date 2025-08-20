@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Update;
+namespace App\Http\Requests\Delete;
 
 use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
-class DeleteAccountRequest extends FormRequest
+class DeleteMyAccountRequest extends FormRequest
 {
     public function authorize()
     {

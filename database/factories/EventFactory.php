@@ -20,7 +20,7 @@ class EventFactory extends Factory
         return [
             'name' => fake()->company(),
             'description' => fake()->text(),
-            'date' => fake()->dateTimeThisDecade('+4 years'),
+            'date' => fake()->dateTimeBetween('-2 years', '+2 years')->format('Y-m-d'),
             'time' => fake()->time(),
             'price' =>fake()->randomFloat(2, 20, 200),
             'stadium_id' => Stadium::factory()

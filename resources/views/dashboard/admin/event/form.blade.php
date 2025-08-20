@@ -7,7 +7,7 @@
 
     <div class="mb-3">
         <label for="stadium_id" class="form-label">{{ __('app.stadium') }}</label>
-        <select name="stadium_id" class="form-select" aria-label="{{ __('dashboard.stadium.choose') }}">
+        <select name="stadium_id" class="form-select" aria-label="{{ __('dashboard.stadium.choose') }}" required>
             @foreach($stadiums as $stadium)
                 <option value="{{ $stadium->id }}" @if(isset($event) && $stadium->id == $event->stadium_id) selected @endif>{{ $stadium->name }}</option>
             @endforeach
@@ -16,7 +16,7 @@
 
     <div class="mb-3">
         <label for="name" class="form-label">{{ __('app.name') }}</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ $event->name ?? '' }}">
+        <input type="text" class="form-control" id="name" name="name" value="{{ $event->name ?? '' }}" required>
     </div>
 
     <div class="mb-3">
@@ -44,7 +44,7 @@
         <input type="file" class="form-control" id="image" name="image" accept="image/*">
         @if(isset($event) && $event->image)
             <div class="mt-2">
-                <img src="{{ assert($event->image) }}" alt="{{ $event->name }}" style="max-width: 200px;">
+                <img src="{{ Storage::url($event->image) }}" alt="{{ $event->name }}" style="max-width: 200px;">
                 <small class="d-block">{{ __('app.current_image') }}</small>
             </div>
         @endif

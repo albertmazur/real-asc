@@ -182,4 +182,9 @@ return [
     
     'token_required' => 'QR code is required.',
     'token_invalid' => 'The QR code is invalid.',
+
+    'current_password_required' => "Current password is required.",
+    'new_password_required' => "New password is required.",
+    'password_confirmed' => "Passwords do not match.",
+    'password_different' => "The new password must be different from the current one.",
 ];

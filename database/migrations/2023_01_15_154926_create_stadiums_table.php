@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('street');
             $table->string('numberBuilding');
             $table->integer('places');
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

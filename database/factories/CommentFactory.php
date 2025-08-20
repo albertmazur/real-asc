@@ -19,7 +19,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'content' => fake()->text,
+            'content' => fake()->text(),
             'date' => fake()->date(),
             'time' => fake()->time(),
             'user_id' => User::factory(),

@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 interface SubmissionRepository{
     public function get(int $id): Submission;
     public function add(string $reason, string $content, int $comment_id);
-    public function filterBy(string $contentSearch = null, string $sortSearch): Collection;
+    public function filterBy(?string $content, string $reason): Collection;
     public function allPaginated(int $limit): LengthAwarePaginator;
     public function all(): Collection;
+    public function deleteWithComment(int $id, bool $deleteComment);
 }

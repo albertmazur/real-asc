@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Search;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class EventSearchRequest extends FormRequest
+class SearchEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class EventSearchRequest extends FormRequest
         return [
             'value' => ['nullable', 'string'],
             'sortSearch' => ['nullable', 'string', Rule::in(['name', 'date', 'stadium', 'freeSet'])],
+            'direction' => ['nullable', 'string', Rule::in(['asc', 'desc'])],
             'sortDirection' => ['nullable', 'string', Rule::in(['asc', 'desc'])],
             'facility' => ['nullable', 'integer', 'exclude_if:facility,0', Rule::exists('stadiums', 'id')],
             'filterData' => ['nullable', Rule::in(['past', 'future'])]

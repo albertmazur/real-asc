@@ -5,8 +5,6 @@ namespace App\Repository\Eloquent;
 use App\Enums\UserRole;
 use App\Models\User;
 use App\Notifications\AccountCreatedNotification;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use App\Repository\UserRepository as Repository;
 
 class UserRepository implements Repository{
@@ -29,7 +27,7 @@ class UserRepository implements Repository{
 
     public function delete(int $id)
     {
-        $user = $this->userModel->get($id);
+        $user = $this->userModel->findOrFail($id);
         return $user->delete();
     }
 
@@ -50,7 +48,7 @@ class UserRepository implements Repository{
         $user->notify(new AccountCreatedNotification($password, $language));
     }
 
-    public function update(int $id, string $first_name, string $last_name, string $tel, string $language = 'pl', string $role = UserRole::USER->value)
+    public function update(int $id, string $first_name, string $last_name, string $tel, string $language = 'pl', string $role = UserRole::USER->value, bool $change_password)
     {
         $user = $this->userModel->findOrFail($id);
         $user->first_name = $first_name;
@@ -58,6 +56,7 @@ class UserRepository implements Repository{
         $user->tel = $tel;
         $user->language = $language;
         $user->role = $role;
+        $user->force_password_change = $change_password;
 
         return $user->save();
     }
@@ -66,10 +65,8 @@ class UserRepository implements Repository{
     {
         $user = $this->userModel->findOrFail($id);
         $user->password = bcrypt($password);
-        $update = $user->save();
-
-        Auth::logoutOtherDevices($password);
-        return $update;
+        $user->force_password_change = false;
+        return $user->save();
     }
 
     public function changeEmail(int $id, string $email)

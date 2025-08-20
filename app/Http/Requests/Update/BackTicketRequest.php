@@ -4,7 +4,7 @@ namespace App\Http\Requests\Update;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTicketRequest extends FormRequest
+class BackTicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateTicketRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('isUser', 'role');
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateTicketRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => ['required', 'exists:tickets,id']
         ];
     }
 }

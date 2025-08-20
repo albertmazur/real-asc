@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->string('content');
             $table->enum('reason', array_column(ReasonSubmission::cases(), 'value'));
-            $table->foreignIdFor(Comment::class);
+            $table->foreignIdFor(Comment::class)->references('id')->on('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }

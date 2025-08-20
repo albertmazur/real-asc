@@ -182,4 +182,9 @@ return [
 
     'token_required' => 'Nie podano kodu QR.',
     'token_invalid' => 'Kod QR jest nieprawidłowy.',
+
+    'current_password_required' => "Aktualne hasło jest wymagane.",
+    'new_password_required' => "Nowe hasło jest wymagane.",
+    'password_confirmed' => "Hasła nie są zgodne.",
+    'password_different' => "Nowe hasło musi różnić się od obecnego.",
 ];

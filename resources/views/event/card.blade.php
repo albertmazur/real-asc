@@ -8,7 +8,7 @@
             </div>
         @endif
     </a>
-    <div class="card-body d-flex align-items-end flex-column">
+    <div class="card-body d-flex flex-column">
         <h2 class="card-title">{{ $event->name }}</h2>
         <p class="card-text">
             {{ __('app.date') }}: {{ $event->date }} {{ $event->time }}<br>

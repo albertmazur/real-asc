@@ -1,7 +1,6 @@
 @extends('dashboard.main')
 
 @section('dashboard.content')
-    @include('layout.parts.errors')
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
         @include('event.form-search', ['route' => 'event.dashboard'])   
     </div>
@@ -27,7 +26,7 @@
                         <td>{{ $event->name }}</td>
                         <td>{{ $event->date }} {{ $event->time }}</td>
                         <td>{{ $event->freePlaces() }}</td>
-                        <td>{{ $event->price }}</td>
+                        <td>{{ $event->formatted_price }}</td>
                         <td>
                             <a class="btn btn-info" role="button" href="{{ route('event.edit', ['eventId' => $event->id]) }}">{{ __('app.edit') }}</a>
                             <a class="btn btn-secondary" role="button" href="{{ route('event.show', ['eventId' => $event->id]) }}">{{ __('app.details') }}</a>

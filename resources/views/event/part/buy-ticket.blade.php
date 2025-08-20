@@ -4,7 +4,7 @@
             <div class="ticket-info mb-4">
                 <h4 class="text-primary mb-3">{{ __('app.buy_ticket') }}</h4>
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h5 class="fw-bold mb-0">{{ __('app.price') }}: <span id="priceEvent" class="text-primary">{{ $event->price }}</span> zł</h5>
+                    <h5 class="fw-bold mb-0">{{ __('app.price') }}: <span id="priceEvent" class="text-primary">{{ $event->formatted_price }}</span> zł</h5>
                     <span class="badge bg-info text-body">{{ __('app.free_places') }}: {{ $event->freePlaces() }}</span>
                 </div>
                 <hr class="my-3">

@@ -17,7 +17,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return $this->user()->can('isAdmin', 'role');
     }
 
     /**
@@ -31,7 +31,7 @@ class StoreUserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255', 'min:2'],
             'last_name' => ['required', 'string', 'max:255', 'min:2'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'tel' => ['nullable', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/'],
+            'tel' => ['nullable', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/', 'unique:users,tel'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'change_password' => ['nullable', 'boolean'],
             'role' => ['required', Rule::enum(UserRole::class)],

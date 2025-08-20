@@ -53,8 +53,17 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Comment::class);
     }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function setLanguage(string $language)
+    {
+        if($this->language != $language){
+            $this->language = $language;
+            $this->save();
+        }
     }
 }
