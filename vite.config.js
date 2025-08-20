@@ -8,7 +8,9 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/darkMode.js',
-                'resources/js/modalUser.js'
+                'resources/js/modalUser.js',
+                'resources/js/printTicket.js',
+                'resources/js/scannerQr.js'
             ],
             refresh: true,
         }),
