@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Search;
 
+use App\Enums\ReasonSubmission;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SearchSubmissionRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class SearchSubmissionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('isAdminOrModerator', 'role');
     }
 
     /**
@@ -22,7 +24,8 @@ class SearchSubmissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'content' => ['nullable', 'string'],
+            'reason' => ['nullable', 'string', Rule::enum(ReasonSubmission::class)]
         ];
     }
 }

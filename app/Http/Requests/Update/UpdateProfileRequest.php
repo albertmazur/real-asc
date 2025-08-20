@@ -13,7 +13,7 @@ class UpdateProfileRequest extends FormRequest
 {
     public function authorize()
     {
-        return auth()->check();
+        return $this->user()->can('isAdmin', 'role');
     }
 
     public function rules()
@@ -23,7 +23,7 @@ class UpdateProfileRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255', 'min:2'],
             'last_name' => ['required', 'string', 'max:255', 'min:2'],
             'email' => ['nullable', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->input('id'))],
-            'tel' => ['required', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/'],
+            'tel' => ['required', 'string', 'max:20', 'regex:/^\+?[0-9\- ]{7,20}$/', Rule::unique('users', 'tel')->ignore($this->input('id'))],
             'language' => ['required', Rule::enum(Language::class)],
             'role' => ['nullable', Rule::enum(UserRole::class)],
             'password' => ['nullable', 'min:8', 'confirmed'],
